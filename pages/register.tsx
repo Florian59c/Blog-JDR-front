@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import axios from "axios";
+import { useRouter } from "next/router";
 
 export default function Register() {
   const [pseudo, setPseudo] = useState('');
@@ -10,6 +11,7 @@ export default function Register() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isConnected, setIsConnected] = useState(false);
   const [error, setError] = useState('');
+  const router = useRouter();
 
   const checkConnection = async () => {
     try {
@@ -29,6 +31,7 @@ export default function Register() {
     <div>
       {isConnected ? (
         <div>
+          {/* transformer en composant et ajouter les styles */}
           <p>déja connecté</p>
         </div>
       ) : (
@@ -36,6 +39,33 @@ export default function Register() {
           <h1>register page</h1>
           <div>
             <form
+              onSubmit={async (e) => {
+                e.preventDefault();
+                setError('');
+                try {
+                  const response = await axios.post(
+                    `${process.env.NEXT_PUBLIC_SERVER_URL}user/createUser`,
+                    { pseudo, email, password, confirmPassword }
+                  );
+                  if (response.data === 'ok') {
+                    try {
+                      await axios.post(
+                        `${process.env.NEXT_PUBLIC_SERVER_URL}auth/login`,
+                        { email, password }, // Corps de la requête
+                        { withCredentials: true } // Nécessaire pour inclure les cookies
+                      );
+                    } catch (error) {
+                      console.error(error);
+                    } finally {
+                      router.push('/');
+                    }
+                  } else {
+                    setError(response.data);
+                  }
+                } catch (error) {
+                  console.error(error);
+                }
+              }}
             >
               <div>
                 <label htmlFor="pseudo">
@@ -58,8 +88,8 @@ export default function Register() {
               <div>
                 <button type="submit" >Se créer un compte</button>
               </div>
-              {/* {error && <p>{error}</p>} */}
             </form>
+            {error && <p>{error}</p>}
           </div>
         </div>
       )}
