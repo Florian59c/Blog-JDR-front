@@ -9,7 +9,7 @@ const muiThemes = createTheme({
             styleOverrides: {
                 root: {
                     marginBottom: '1rem', // Applique une marge par défaut
-                    width: '30vw',
+                    width: '100%',
                     // boxShadow: '-1px 1px 5px #EEE',
                     '& .MuiInput-underline:before': {
                         borderBottomColor: '#000', // Couleur avant focus

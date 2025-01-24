@@ -1,6 +1,6 @@
 .formsContainer {
     margin: 5rem 10rem 1rem 10rem;
-    padding: 1rem;
+    padding: 2rem;
     box-shadow: 5px 5px 5px grey;
     background-color: white;
 
@@ -16,9 +16,29 @@
     margin-bottom: 2rem;
 }
 
+.buttonContainer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2rem;
+}
+
 .inputs {
     display: flex;
     flex-direction: column;
     /* width: 100%; */
     align-items: center;
+}
+
+.link {
+    color: #031B49;
+    font-weight: bold;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.formsContainer :global(p) {
+    margin-top: 5rem;
+    text-align: center;
 }

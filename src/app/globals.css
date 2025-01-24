@@ -23,3 +23,26 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+.button-style {
+  color: #FFF;
+  padding: 1rem;
+  border: 2px solid #FFF;
+  border-radius: 2rem;
+  width: 20rem;
+  cursor: pointer;
+}
+
+.button-style:hover {
+  border-color: #031B49;
+}
+
+.button-color-validate {
+  background-color: #031B49;
+}
+
+.error-message {
+  color: #AF1E22;
+  text-align: center;
+  margin: 0.5rem 0;
+}

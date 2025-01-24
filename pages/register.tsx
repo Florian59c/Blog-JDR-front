@@ -5,6 +5,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import styles from "../styles/register.module.css"
 import TextField from '@mui/material/TextField';
+import Link from "next/link";
 
 export default function Register() {
   const [pseudo, setPseudo] = useState('');
@@ -95,12 +96,13 @@ export default function Register() {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
               </div>
-              <div>
-                <button type="submit" >Se créer un compte</button>
+              {error && <p className="error-message">{error}</p>}
+              <div className={styles.buttonContainer}>
+                <button type="submit" className="button-style button-color-validate">Se créer un compte</button>
               </div>
             </form>
-            {error && <p>{error}</p>}
           </div>
+          <p>Vous avez déjà un compte ? <Link href="/login" className={styles.link}>Connectez-vous</Link></p>
         </div>
       )}
     </div>
