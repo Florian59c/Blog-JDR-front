@@ -3,6 +3,8 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import axios from "axios";
 import { useRouter } from "next/router";
+import styles from "../styles/register.module.css"
+import TextField from '@mui/material/TextField';
 
 export default function Register() {
   const [pseudo, setPseudo] = useState('');
@@ -35,8 +37,8 @@ export default function Register() {
           <p>déja connecté</p>
         </div>
       ) : (
-        <div>
-          <h1>register page</h1>
+        <div className={styles.formsContainer}>
+          <h1>Formulaire de création de compte</h1>
           <div>
             <form
               onSubmit={async (e) => {
@@ -67,23 +69,31 @@ export default function Register() {
                 }
               }}
             >
-              <div>
-                <label htmlFor="pseudo">
-                  <p>Pseudo : </p>
-                  <input type="text" id='pseudo' value={pseudo} onChange={(e) => setPseudo(e.target.value)} />
-                </label>
-                <label htmlFor="email">
-                  <p>Adresse Email : </p>
-                  <input type="email" id='email' value={email} onChange={(e) => setEmail(e.target.value)} />
-                </label>
-                <label htmlFor="password">
-                  <p>Mot de passe : </p>
-                  <input type="password" id='password' value={password} onChange={(e) => setPassword(e.target.value)} />
-                </label>
-                <label htmlFor="confirmPassword">
-                  <p>Confirmer le mot de passe : </p>
-                  <input type="password" id='confirmPassword' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
-                </label>
+              <div className={styles.inputs}>
+                <TextField
+                  label="Pseudo"
+                  type="text"
+                  value={pseudo}
+                  onChange={(e) => setPseudo(e.target.value)}
+                />
+                <TextField
+                  label="Adresse Email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <TextField
+                  label="Mot de passe"
+                  type="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <TextField
+                  label="Confirmer le mot de passe"
+                  type="Password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
               </div>
               <div>
                 <button type="submit" >Se créer un compte</button>

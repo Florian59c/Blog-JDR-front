@@ -31,6 +31,12 @@ export default function login(req: NextRequest) {
   return (
     <div>
       <h1>login page</h1>
+      {/* <TextField
+        label="Mot de passe"
+        type="Password"
+        autoComplete="current-password"
+      /> */}
+      {/* utiliser auto complete pour aller chercher les infos stocké dans le navigateur */}
       <div>
         <form
           onSubmit={async (e) => {
