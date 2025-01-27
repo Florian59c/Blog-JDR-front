@@ -70,7 +70,7 @@ export default function Register() {
                 }
               }}
             >
-              <div className={styles.inputs}>
+              <div className="inputs">
                 <TextField
                   label="Pseudo"
                   type="text"
@@ -97,12 +97,12 @@ export default function Register() {
                 />
               </div>
               {error && <p className="error-message">{error}</p>}
-              <div className={styles.buttonContainer}>
+              <div className="buttonContainer">
                 <button type="submit" className="button-style button-color-validate">Se créer un compte</button>
               </div>
             </form>
           </div>
-          <p>Vous avez déjà un compte ? <Link href="/login" className={styles.link}>Connectez-vous</Link></p>
+          <p>Vous avez déjà un compte ? <Link href="/login" className="link">Connectez-vous</Link></p>
         </div>
       )}
     </div>

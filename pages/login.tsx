@@ -1,4 +1,6 @@
+import { TextField } from "@mui/material";
 import axios from "axios";
+import Link from "next/link";
 import { NextRequest } from "next/server";
 import { useEffect, useState } from "react";
 
@@ -30,24 +32,17 @@ export default function login(req: NextRequest) {
           <p>déja connecté</p>
         </div>
       ) : (
-        <div>
-          <h1>login page</h1>
-          {/* <TextField
-        label="Mot de passe"
-        type="Password"
-        autoComplete="current-password"
-      /> */}
-          {/* utiliser auto complete pour aller chercher les infos stocké dans le navigateur */}
+        <div className="formsContainer">
+          <h1>Formulaire de connexion</h1>
           <div>
             <form
               onSubmit={async (e) => {
                 e.preventDefault(); // Empêche le rechargement de la page
                 setError('');
-
                 try {
                   const response = await axios.post(
                     `${process.env.NEXT_PUBLIC_SERVER_URL}auth/login`,
-                    { email, password }, // Corps de la requête
+                    { email, password },
                     { withCredentials: true } // Nécessaire pour inclure les cookies
                   );
                   setError(response.data);
@@ -61,22 +56,29 @@ export default function login(req: NextRequest) {
                 }
               }}
             >
-              <div>
-                <label htmlFor="email">
-                  <p>Adresse Email : </p>
-                  <input type="email" id='email' value={email} onChange={(e) => setEmail(e.target.value)} />
-                </label>
-                <label htmlFor="password">
-                  <p>Mot de passe : </p>
-                  <input type="password" id='password' value={password} onChange={(e) => setPassword(e.target.value)} />
-                </label>
+              <div className="inputs">
+                <TextField
+                  label="Adresse Email"
+                  type="email"
+                  autoComplete="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <TextField
+                  label="Mot de passe"
+                  type="Password"
+                  autoComplete="current-password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
               </div>
-              <div>
-                <button type="submit" >Se connecter</button>
+              {error && <p className="error-message">{error}</p>}
+              <div className="buttonContainer">
+                <button type="submit" className="button-style button-color-validate">Se connecter</button>
               </div>
-              {error && <p className='error'>{error}</p>}
             </form>
           </div>
+          <p>Vous n’avez pas de compte ? <Link href="/register" className="link">Inscrivez-vous</Link></p>
         </div>
       )}
     </div>
