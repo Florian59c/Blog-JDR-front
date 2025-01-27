@@ -45,6 +45,28 @@ a {
   text-align: center;
 }
 
+.formsContainer .inputs {
+  display: flex;
+  flex-direction: column;
+  /* width: 100%; */
+  align-items: center;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.link {
+  color: #031B49;
+  font-weight: bold;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
 /* styles des bouttons */
 
 .button-style {
