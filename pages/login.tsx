@@ -77,17 +77,6 @@ export default function login(req: NextRequest) {
               {error && <p className='error'>{error}</p>}
             </form>
           </div>
-
-          <div>
-            <h1>logout</h1>
-            <button onClick={async () => {
-              await axios.post(
-                `${process.env.NEXT_PUBLIC_SERVER_URL}auth/logout`, {}, { withCredentials: true });
-            }}>
-              Se déconnecter
-            </button>
-          </div>
-
         </div>
       )}
     </div>
