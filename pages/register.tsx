@@ -38,7 +38,7 @@ export default function Register() {
           <p>déja connecté</p>
         </div>
       ) : (
-        <div className={styles.formsContainer}>
+        <div className="formsContainer">
           <h1>Formulaire de création de compte</h1>
           <div>
             <form
