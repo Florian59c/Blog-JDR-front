@@ -1,6 +1,7 @@
 import { TextField } from "@mui/material";
 import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { NextRequest } from "next/server";
 import { useEffect, useState } from "react";
 
@@ -9,6 +10,7 @@ export default function login(req: NextRequest) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const router = useRouter();
 
   const checkConnection = async () => {
     try {
@@ -45,7 +47,11 @@ export default function login(req: NextRequest) {
                     { email, password },
                     { withCredentials: true } // Nécessaire pour inclure les cookies
                   );
-                  setError(response.data);
+                  if (response.data === 'ok') {
+                    router.push('/');
+                  } else {
+                    setError(response.data);
+                  }
                 } catch (err) {
                   if (axios.isAxiosError(err)) {
                     // Si l'erreur provient d'Axios
