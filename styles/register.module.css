@@ -1,0 +1,21 @@
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    /* width: 100%; */
+    align-items: center;
+}
+
+.link {
+    color: #031B49;
+    font-weight: bold;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
