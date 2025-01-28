@@ -26,7 +26,7 @@ a {
 
 /* styles communs aux formulaires */
 
-.formsContainer {
+.blockContainer {
   background-color: white;
   margin: 5rem 0.5rem 1rem 0.5rem;
   padding: 3rem 0.5rem 3rem 0.5rem;
@@ -34,18 +34,18 @@ a {
   border-radius: 10px;
 }
 
-.formsContainer h1 {
+.blockContainer h1 {
   text-align: center;
   color: #000;
   margin-bottom: 2rem;
 }
 
-.formsContainer p {
+.blockContainer p {
   margin-top: 2rem;
   text-align: center;
 }
 
-.formsContainer .inputs {
+.blockContainer .inputs {
   display: flex;
   flex-direction: column;
   /* width: 100%; */
@@ -99,16 +99,16 @@ a {
 
   /* styles communs aux formulaires */
 
-  .formsContainer {
+  .blockContainer {
     margin: 5rem 10rem 1rem 10rem;
     padding: 4rem;
   }
 
-  .formsContainer h1 {
+  .blockContainer h1 {
     margin-bottom: 3rem;
   }
 
-  .formsContainer p {
+  .blockContainer p {
     margin-top: 3rem;
   }
 }
@@ -118,16 +118,16 @@ a {
 
   /* styles communs aux formulaires */
 
-  .formsContainer {
+  .blockContainer {
     margin: 5rem 15rem 1rem 15rem;
     padding: 4rem 10rem 4rem 10rem;
   }
 
-  .formsContainer h1 {
+  .blockContainer h1 {
     margin-bottom: 5rem;
   }
 
-  .formsContainer p {
+  .blockContainer p {
     margin-top: 5rem;
   }
 }
@@ -137,16 +137,16 @@ a {
 
   /* styles communs aux formulaires */
 
-  .formsContainer {
+  .blockContainer {
     margin: 5rem 20rem 1rem 20rem;
     padding: 4rem 15rem 4rem 15rem;
   }
 
-  .formsContainer h1 {
+  .blockContainer h1 {
     margin-bottom: 8rem;
   }
 
-  .formsContainer p {
+  .blockContainer p {
     margin-top: 8rem;
   }
 }

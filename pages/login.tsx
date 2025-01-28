@@ -32,7 +32,7 @@ export default function login(req: NextRequest) {
       {isConnected ? (
         <IsConnectedError />
       ) : (
-        <div className="formsContainer">
+        <div className="blockContainer">
           <h1>Formulaire de connexion</h1>
           <div>
             <form

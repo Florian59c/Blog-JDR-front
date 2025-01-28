@@ -33,7 +33,7 @@ export default function Register() {
       {isConnected ? (
         <IsConnectedError />
       ) : (
-        <div className="formsContainer">
+        <div className="blockContainer">
           <h1>Formulaire de création de compte</h1>
           <div>
             <form
