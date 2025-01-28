@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
 import axios from "axios";
 import { useRouter } from "next/router";
-import styles from "../styles/register.module.css"
 import TextField from '@mui/material/TextField';
 import Link from "next/link";
+import IsConnectedError from "../components/isConnectedError";
 
 export default function Register() {
   const [pseudo, setPseudo] = useState('');
@@ -33,10 +31,7 @@ export default function Register() {
   return (
     <div>
       {isConnected ? (
-        <div>
-          {/* transformer en composant et ajouter les styles */}
-          <p>déja connecté</p>
-        </div>
+        <IsConnectedError />
       ) : (
         <div className="formsContainer">
           <h1>Formulaire de création de compte</h1>

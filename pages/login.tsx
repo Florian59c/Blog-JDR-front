@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { NextRequest } from "next/server";
 import { useEffect, useState } from "react";
+import IsConnectedError from "../components/isConnectedError";
 
 export default function login(req: NextRequest) {
   const [isConnected, setIsConnected] = useState(false);
@@ -29,10 +30,7 @@ export default function login(req: NextRequest) {
   return (
     <div>
       {isConnected ? (
-        <div>
-          {/* transformer en composant et ajouter les styles */}
-          <p>déja connecté</p>
-        </div>
+        <IsConnectedError />
       ) : (
         <div className="formsContainer">
           <h1>Formulaire de connexion</h1>
