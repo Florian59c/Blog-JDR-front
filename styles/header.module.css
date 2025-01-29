@@ -1,0 +1,71 @@
+.displayPC {
+    display: none;
+}
+
+.header {
+    background-color: #031B49;
+    color: #FFF;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    width: 5rem;
+}
+
+.menu {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.buttons :global(h1) {
+    font-size: 1.2rem;
+    margin: 0.2rem;
+}
+
+
+/* Tablette et pc */
+@media (min-width: 768px) {
+    .displayMobile {
+        display: none;
+    }
+
+    .displayPC {
+        display: contents;
+    }
+
+    .header {
+        margin-bottom: 2rem;
+        padding: 1rem;
+    }
+
+    .logoContainer {
+        flex: 10%;
+    }
+
+    .logo {
+        width: 10rem;
+    }
+
+    .container .buttons {
+        flex: 1;
+    }
+
+    .buttons :global(a) {
+        flex: 1;
+        margin: 0;
+    }
+
+    .buttons :global(h1) {
+        padding: 0.5rem;
+        text-align: center;
+        font-size: 1.5VW;
+    }
+}
