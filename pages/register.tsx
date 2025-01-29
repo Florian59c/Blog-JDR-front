@@ -97,7 +97,7 @@ export default function Register() {
               </div>
             </form>
           </div>
-          <p>Vous avez déjà un compte ? <Link href="/login" className="link">Connectez-vous</Link></p>
+          <p className="redirect-message">Vous avez déjà un compte ? <Link href="/login" className="link">Connectez-vous</Link></p>
         </div>
       )}
     </div>

@@ -37,10 +37,10 @@ a {
 .blockContainer h1 {
   text-align: center;
   color: #000;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
-.blockContainer p {
+.blockContainer .redirect-message {
   margin-top: 2rem;
   text-align: center;
 }
@@ -86,7 +86,14 @@ a {
   background-color: #031B49;
 }
 
-/* gestion d'erreurs */
+/* gestion de message et d'erreurs */
+
+.confirmMessage {
+  text-align: center;
+  margin-top: 1rem;
+  color: #031B49;
+  font-weight: bold;
+}
 
 .error-message {
   color: #AF1E22;
@@ -105,10 +112,10 @@ a {
   }
 
   .blockContainer h1 {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
   }
 
-  .blockContainer p {
+  .blockContainer .redirect-message {
     margin-top: 3rem;
   }
 }
@@ -124,10 +131,10 @@ a {
   }
 
   .blockContainer h1 {
-    margin-bottom: 5rem;
+    margin-bottom: 3rem;
   }
 
-  .blockContainer p {
+  .blockContainer .redirect-message {
     margin-top: 5rem;
   }
 }
@@ -143,10 +150,10 @@ a {
   }
 
   .blockContainer h1 {
-    margin-bottom: 8rem;
+    margin-bottom: 5rem;
   }
 
-  .blockContainer p {
+  .blockContainer .redirect-message {
     margin-top: 8rem;
   }
 }
