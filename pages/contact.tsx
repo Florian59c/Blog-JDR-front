@@ -1,8 +1,9 @@
 import { TextField } from "@mui/material";
+import axios from "axios";
 import { useState } from "react";
 
 export default function Contact() {
-    const [email, setEmail] = useState('');
+    const [from, setFrom] = useState('');
     const [subject, setSubject] = useState('');
     const [content, setContent] = useState('');
     const [error, setError] = useState('');
@@ -18,6 +19,19 @@ export default function Contact() {
                         setconfirmMessage('');
                         setError('');
                         // la fonction pour envoyer le mail depuis le back ICI
+                        try {
+                            const response = await axios.post(
+                                `${process.env.NEXT_PUBLIC_SERVER_URL}mailer/send`,
+                                { from, subject, content }
+                            );
+                            if (response.data) {
+                                setconfirmMessage('Le mail a bien été envoyé');
+                            } else {
+                                setError("Une erreur est survenue lors de l'envoi du mail");
+                            }
+                        } catch (error) {
+                            console.error(error);
+                        }
                     }}
                 >
                     <div className="inputs">
@@ -26,8 +40,8 @@ export default function Contact() {
                             type="email"
                             autoComplete="email"
                             variant="outlined"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            value={from}
+                            onChange={(e) => setFrom(e.target.value)}
                         />
                         <TextField
                             label="Ajouter un objet"
