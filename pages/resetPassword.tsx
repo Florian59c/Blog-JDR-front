@@ -1,3 +1,4 @@
+import { TextField } from '@mui/material';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -8,38 +9,58 @@ export default function ResetPassword() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
-
-    async function reset() {
-        if (password !== confirmPassword) {
-            setError("Les mots de passe ne correspondent pas");
-            return;
-        }
-
-        const response = await axios.post(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}auth/resetPassword`,
-            { token, password }
-        );
-
-        setError("ok");
-    };
+    const [confirmMessage, setconfirmMessage] = useState('');
 
     return (
-        <div>
-            <h2>Réinitialisation du mot de passe</h2>
-            <input
-                type="password"
-                placeholder="Nouveau mot de passe"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <input
-                type="password"
-                placeholder="Confirmez le mot de passe"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-            <button onClick={reset}>Réinitialiser</button>
-            {error}
-        </div>
+        <div className="blockContainer">
+            <h1>Réinitialisation de votre mot de passe</h1>
+            <div>
+                <form
+                    onSubmit={async (e) => {
+                        e.preventDefault(); // Empêche le rechargement de la page
+                        setconfirmMessage('');
+                        setError('');
+                        try {
+                            if (password !== confirmPassword) {
+                                setError("Les mots de passe ne correspondent pas");
+                            } else {
+                                const response = await axios.post(
+                                    `${process.env.NEXT_PUBLIC_SERVER_URL}auth/resetPassword`,
+                                    { token, password }
+                                );
+                                if (response.data === "ok") {
+                                    router.push('/login');
+                                } else {
+                                    setError(response.data);
+                                }
+                            }
+                        } catch (error) {
+                            console.error(error);
+                            setError('Une erreur inconnue s\'est produite');
+                        }
+                    }}
+                >
+                    <div className="inputs">
+                        <TextField
+                            label="Nouveau mot de passe"
+                            type="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <TextField
+                            label="Confirmez le nouveau mot de passe"
+                            type="Password"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                        />
+                    </div>
+                    {error && <p className="error-message">{error}</p>}
+                    <div className="buttonContainer">
+                        <button type="submit" className="button-style button-color-validate">Réinitialiser le mot de passe</button>
+                    </div>
+                </form>
+                <p className="confirmMessage">{confirmMessage}</p>
+            </div>
+        </div >
     );
 }
