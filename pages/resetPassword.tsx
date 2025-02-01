@@ -16,11 +16,11 @@ export default function ResetPassword() {
         }
 
         const response = await axios.post(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}auth/reset-password`,
+            `${process.env.NEXT_PUBLIC_SERVER_URL}auth/resetPassword`,
             { token, password }
         );
 
-        setError(response.data);
+        setError("ok");
     };
 
     return (
