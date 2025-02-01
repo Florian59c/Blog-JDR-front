@@ -82,7 +82,10 @@ export default function login(req: NextRequest) {
               </div>
             </form>
           </div>
-          <p className="redirect-message">Vous n’avez pas de compte ? <Link href="/register" className="link">Inscrivez-vous</Link></p>
+          <div className="redirect-message">
+            <p >Vous n’avez pas de compte ? <Link href="/register" className="link">Inscrivez-vous</Link></p>
+            <p >Vous avez oublié votre mot de passe ? <Link href="/forgotPassword" className="link">Réinitialisez-le</Link></p>
+          </div>
         </div>
       )}
     </div>
