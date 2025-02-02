@@ -15,8 +15,13 @@
     align-items: center;
 }
 
+.logoContainer {
+    font-size: 0;
+    line-height: 0;
+}
+
 .logo {
-    width: 5rem;
+    max-height: 50px;
 }
 
 .menu {
@@ -50,10 +55,6 @@
         flex: 10%;
     }
 
-    .logo {
-        width: 10rem;
-    }
-
     .container .buttons {
         flex: 1;
     }
@@ -64,8 +65,21 @@
     }
 
     .buttons :global(h1) {
-        padding: 0.5rem;
         text-align: center;
-        font-size: 1.5VW;
+        font-size: 1.2VW;
+    }
+}
+
+/* Petit écran d'ordinateur */
+@media (min-width: 1280px) {
+    .logo {
+        max-height: 75px;
+    }
+}
+
+/* Grand écran d'ordinateur */
+@media (min-width: 1920px) {
+    .logo {
+        max-height: 100px;
     }
 }
