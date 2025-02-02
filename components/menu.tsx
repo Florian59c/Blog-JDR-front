@@ -35,8 +35,8 @@ export default function Menu() {
 
     return (
         <>
-            <Link href="/yourHeroStory">
-                <h1>L'histoire dont vous êtes le héros </h1>
+            <Link href="/yourHeroStories">
+                <h1>Histoires dont vous êtes le héros</h1>
             </Link>
             <Link href="/news">
                 <h1>Nouvelles</h1>
