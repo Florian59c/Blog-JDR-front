@@ -59,7 +59,7 @@ a {
 }
 
 .link {
-  color: #031B49;
+  color: #0D3C36;
   font-weight: bold;
 }
 
@@ -79,11 +79,11 @@ a {
 }
 
 .button-style:hover {
-  border-color: #031B49;
+  border-color: #0D3C36;
 }
 
 .button-color-validate {
-  background-color: #031B49;
+  background-color: #0D3C36;
 }
 
 /* gestion de message et d'erreurs */
@@ -91,7 +91,7 @@ a {
 .confirmMessage {
   text-align: center;
   margin-top: 1rem;
-  color: #031B49;
+  color: #0D3C36;
   font-weight: bold;
 }
 
