@@ -2,10 +2,10 @@ import styles from '../styles/profile.module.css';
 import { TextField } from "@mui/material";
 import axios from "axios";
 import classNames from 'classnames';
-import { NextApiRequest } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import DeleteAccount from "../modals/deleteAccount";
 
 export default function Profile() {
     const [isConnected, setIsConnected] = useState(false);
@@ -14,6 +14,7 @@ export default function Profile() {
     const [error, setError] = useState('');
     const [confirmMessage, setconfirmMessage] = useState('');
     const router = useRouter();
+    const [isOpen, setIsOpen] = useState(false);
 
     const checkConnection = async () => {
         try {
@@ -113,10 +114,14 @@ export default function Profile() {
                         <p className="confirmMessage">{confirmMessage}</p>
                     </div>
                     <div className={classNames(styles.btn, styles.btnDelete)}>
-                        <button className="button-style button-color-error">
+                        <button
+                            className="button-style button-color-error"
+                            onClick={() => setIsOpen(true)}
+                        >
                             Supprimer mon compte
                         </button>
                     </div>
+                    {isOpen && <DeleteAccount setIsOpen={setIsOpen} />}
                 </div>
             ) : (
                 <div className="blockContainer">
