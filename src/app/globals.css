@@ -78,12 +78,20 @@ a {
   cursor: pointer;
 }
 
-.button-style:hover {
+.button-color-validate {
+  background-color: #0D3C36;
+}
+
+.button-color-validate:hover {
   border-color: #0D3C36;
 }
 
-.button-color-validate {
-  background-color: #0D3C36;
+.button-color-error {
+  background-color: #AF1E22;
+}
+
+.button-color-error:hover {
+  border-color: #AF1E22;
 }
 
 /* gestion de message et d'erreurs */

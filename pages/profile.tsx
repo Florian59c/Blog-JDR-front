@@ -1,6 +1,7 @@
 import styles from '../styles/profile.module.css';
 import { TextField } from "@mui/material";
 import axios from "axios";
+import classNames from 'classnames';
 import { NextApiRequest } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -50,7 +51,7 @@ export default function Profile() {
         <div>
             {isConnected ? (
                 <div className="blockContainer">
-                    <div className={styles.singleButton}>
+                    <div className={classNames(styles.btn, styles.btnLogout)}>
                         <button
                             className="button-style button-color-validate"
                             onClick={async () => {
@@ -110,6 +111,11 @@ export default function Profile() {
                             </div>
                         </form>
                         <p className="confirmMessage">{confirmMessage}</p>
+                    </div>
+                    <div className={classNames(styles.btn, styles.btnDelete)}>
+                        <button className="button-style button-color-error">
+                            Supprimer mon compte
+                        </button>
                     </div>
                 </div>
             ) : (

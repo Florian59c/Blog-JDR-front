@@ -1,4 +1,12 @@
-.singleButton {
-    text-align: center;
+.btn {
+    display: flex;
+    justify-content: center;
+}
+
+.btnLogout {
     margin-bottom: 5rem;
+}
+
+.btnDelete {
+    margin-top: 5rem;
 }
