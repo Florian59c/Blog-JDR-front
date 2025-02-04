@@ -74,7 +74,7 @@ a {
   padding: 1rem;
   border: 2px solid #FFF;
   border-radius: 2rem;
-  width: 20rem;
+  width: 15rem;
   cursor: pointer;
 }
 
@@ -125,6 +125,12 @@ a {
 
   .blockContainer .redirect-message {
     margin-top: 3rem;
+  }
+
+  /* styles des bouttons */
+
+  .button-style {
+    width: 20rem;
   }
 }
 
