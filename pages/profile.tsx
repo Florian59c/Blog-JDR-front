@@ -3,7 +3,7 @@ import axios from "axios";
 import { NextApiRequest } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Profile() {
     const [isConnected, setIsConnected] = useState(false);
@@ -12,6 +12,27 @@ export default function Profile() {
     const [error, setError] = useState('');
     const [confirmMessage, setconfirmMessage] = useState('');
     const router = useRouter();
+
+    async function getCurrentUser() {
+        try {
+            const response = await axios.post(
+                `${process.env.NEXT_PUBLIC_SERVER_URL}user/getCurrentUser`,
+                {},
+                {
+                    withCredentials: true,
+                }
+            )
+            setPseudo(response.data.pseudo);
+            setEmail(response.data.email);
+        } catch (error) {
+            console.error(error);
+            setError("Une erreur est survenue lors de l'affichage de vos informations personnelles")
+        }
+    }
+
+    useEffect(() => {
+        getCurrentUser();
+    }, []);
 
     return (
         <div>
