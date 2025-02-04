@@ -1,3 +1,4 @@
+import styles from '../styles/profile.module.css';
 import { TextField } from "@mui/material";
 import axios from "axios";
 import { NextApiRequest } from "next";
@@ -49,17 +50,19 @@ export default function Profile() {
         <div>
             {isConnected ? (
                 <div className="blockContainer">
-                    <h1>Page de profil</h1>
-                    <div>
-                        <h1>logout</h1>
-                        <button onClick={async () => {
-                            await axios.post(
-                                `${process.env.NEXT_PUBLIC_SERVER_URL}auth/logout`, {}, { withCredentials: true });
-                            router.push('/login');
-                        }}>
+                    <div className={styles.singleButton}>
+                        <button
+                            className="button-style button-color-validate"
+                            onClick={async () => {
+                                await axios.post(
+                                    `${process.env.NEXT_PUBLIC_SERVER_URL}auth/logout`, {}, { withCredentials: true });
+                                router.push('/');
+                            }}
+                        >
                             Se déconnecter
                         </button>
                     </div>
+                    <h1>Mon profil</h1>
                     <div>
                         <form
                             onSubmit={async (e) => {
