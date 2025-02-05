@@ -70,7 +70,6 @@ a {
 /* styles des bouttons */
 
 .button-style {
-  color: #FFF;
   padding: 1rem;
   border: 2px solid #FFF;
   border-radius: 2rem;
@@ -79,6 +78,7 @@ a {
 }
 
 .button-color-validate {
+  color: #FCF5C9;
   background-color: #0D3C36;
 }
 
@@ -87,6 +87,7 @@ a {
 }
 
 .button-color-error {
+  color: #FFF;
   background-color: #AF1E22;
 }
 
