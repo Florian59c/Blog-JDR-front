@@ -1,0 +1,85 @@
+.displayPC {
+    display: none;
+}
+
+.header {
+    background-color: #0D3C36;
+    color: #FCF5C9;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logoContainer {
+    font-size: 0;
+    line-height: 0;
+}
+
+.logo {
+    max-height: 50px;
+}
+
+.menu {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.buttons :global(h1) {
+    font-size: 1.2rem;
+    margin: 0.2rem;
+}
+
+
+/* Tablette et pc */
+@media (min-width: 768px) {
+    .displayMobile {
+        display: none;
+    }
+
+    .displayPC {
+        display: contents;
+    }
+
+    .header {
+        margin-bottom: 2rem;
+        padding: 1rem;
+    }
+
+    .logoContainer {
+        flex: 10%;
+    }
+
+    .container .buttons {
+        flex: 1;
+    }
+
+    .buttons :global(a) {
+        flex: 1;
+        margin: 0;
+    }
+
+    .buttons :global(h1) {
+        text-align: center;
+        font-size: 1.2VW;
+    }
+}
+
+/* Petit écran d'ordinateur */
+@media (min-width: 1280px) {
+    .logo {
+        max-height: 75px;
+    }
+}
+
+/* Grand écran d'ordinateur */
+@media (min-width: 1920px) {
+    .logo {
+        max-height: 100px;
+    }
+}

@@ -1,0 +1,33 @@
+.text {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.text :global(h1) {
+    margin-bottom: 0.5rem;
+}
+
+.text :global(p) {
+    font-weight: bold;
+}
+
+/* Tablette */
+@media (min-width: 768px) {
+    .text {
+        margin-bottom: 2rem;
+    }
+}
+
+/* Petit écran d'ordinateur */
+@media (min-width: 1280px) {
+    .text {
+        margin-bottom: 3rem;
+    }
+}
+
+/* Grand écran d'ordinateur */
+@media (min-width: 1920px) {
+    .text {
+        margin-bottom: 5rem;
+    }
+}
