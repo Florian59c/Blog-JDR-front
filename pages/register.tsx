@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import TextField from '@mui/material/TextField';
 import Link from "next/link";
 import IsConnectedError from "../components/isConnectedError";
+import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 
 export default function Register() {
   const [pseudo, setPseudo] = useState('');
@@ -90,6 +91,15 @@ export default function Register() {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
+                <div className="checkbox">
+                  <Checkbox />
+                  <p>J'accepte les <a
+                    href="https://drive.google.com/file/d/1kW-Ztlw_R6uufBCiz8m51YLgXBRc6w-R/view?usp=drive_link"
+                    className="link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >Conditions Générales d'Utilisation</a>*</p>
+                </div>
               </div>
               {error && <p className="error-message">{error}</p>}
               <div className="buttonContainer">
