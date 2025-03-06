@@ -12,6 +12,7 @@ export default function Register() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isConnected, setIsConnected] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
 
@@ -41,28 +42,32 @@ export default function Register() {
               onSubmit={async (e) => {
                 e.preventDefault();
                 setError('');
-                try {
-                  const response = await axios.post(
-                    `${process.env.NEXT_PUBLIC_SERVER_URL}user/createUser`,
-                    { pseudo, email, password, confirmPassword }
-                  );
-                  if (response.data === 'ok') {
-                    try {
-                      await axios.post(
-                        `${process.env.NEXT_PUBLIC_SERVER_URL}auth/login`,
-                        { email, password }, // Corps de la requête
-                        { withCredentials: true } // Nécessaire pour inclure les cookies
-                      );
-                    } catch (error) {
-                      console.error(error);
-                    } finally {
-                      router.push('/');
+                if (isChecked === true) {
+                  try {
+                    const response = await axios.post(
+                      `${process.env.NEXT_PUBLIC_SERVER_URL}user/createUser`,
+                      { pseudo, email, password, confirmPassword }
+                    );
+                    if (response.data === 'ok') {
+                      try {
+                        await axios.post(
+                          `${process.env.NEXT_PUBLIC_SERVER_URL}auth/login`,
+                          { email, password }, // Corps de la requête
+                          { withCredentials: true } // Nécessaire pour inclure les cookies
+                        );
+                      } catch (error) {
+                        console.error(error);
+                      } finally {
+                        router.push('/');
+                      }
+                    } else {
+                      setError(response.data);
                     }
-                  } else {
-                    setError(response.data);
+                  } catch (error) {
+                    console.error(error);
                   }
-                } catch (error) {
-                  console.error(error);
+                } else {
+                  setError("L'approbation des conditions générales d'utilisation est obligatoire");
                 }
               }}
             >
@@ -92,7 +97,7 @@ export default function Register() {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
                 <div className="checkbox">
-                  <Checkbox />
+                  <Checkbox checked={isChecked} onChange={(event) => { setIsChecked(event.target.checked) }} />
                   <p>J'accepte les <a
                     href="https://drive.google.com/file/d/1kW-Ztlw_R6uufBCiz8m51YLgXBRc6w-R/view?usp=drive_link"
                     className="link"
