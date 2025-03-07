@@ -46,7 +46,7 @@ export default function login(req: NextRequest) {
                     { withCredentials: true } // Nécessaire pour inclure les cookies
                   );
                   if (response.data === 'ok') {
-                    router.push('/');
+                    router.push('/profile');
                   } else {
                     setError(response.data);
                   }

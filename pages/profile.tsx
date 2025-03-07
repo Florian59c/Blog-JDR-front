@@ -58,7 +58,7 @@ export default function Profile() {
                             onClick={async () => {
                                 await axios.post(
                                     `${process.env.NEXT_PUBLIC_SERVER_URL}auth/logout`, {}, { withCredentials: true });
-                                router.push('/');
+                                router.push('/login');
                             }}
                         >
                             Se déconnecter

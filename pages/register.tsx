@@ -42,32 +42,28 @@ export default function Register() {
               onSubmit={async (e) => {
                 e.preventDefault();
                 setError('');
-                if (isChecked === true) {
-                  try {
-                    const response = await axios.post(
-                      `${process.env.NEXT_PUBLIC_SERVER_URL}user/createUser`,
-                      { pseudo, email, password, confirmPassword, checkCGU: isChecked }
-                    );
-                    if (response.data === 'ok') {
-                      try {
-                        await axios.post(
-                          `${process.env.NEXT_PUBLIC_SERVER_URL}auth/login`,
-                          { email, password }, // Corps de la requête
-                          { withCredentials: true } // Nécessaire pour inclure les cookies
-                        );
-                      } catch (error) {
-                        console.error(error);
-                      } finally {
-                        router.push('/');
-                      }
-                    } else {
-                      setError(response.data);
+                try {
+                  const response = await axios.post(
+                    `${process.env.NEXT_PUBLIC_SERVER_URL}user/createUser`,
+                    { pseudo, email, password, confirmPassword, checkCGU: isChecked }
+                  );
+                  if (response.data === 'ok') {
+                    try {
+                      await axios.post(
+                        `${process.env.NEXT_PUBLIC_SERVER_URL}auth/login`,
+                        { email, password }, // Corps de la requête
+                        { withCredentials: true } // Nécessaire pour inclure les cookies
+                      );
+                      router.push('/profile');
+                    } catch (error) {
+                      console.error(error);
+                      router.push('/login');
                     }
-                  } catch (error) {
-                    console.error(error);
+                  } else {
+                    setError(response.data);
                   }
-                } else {
-                  setError("L'approbation des conditions générales d'utilisation est obligatoire");
+                } catch (error) {
+                  console.error(error);
                 }
               }}
             >
