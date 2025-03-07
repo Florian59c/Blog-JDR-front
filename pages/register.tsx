@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import TextField from '@mui/material/TextField';
 import Link from "next/link";
 import IsConnectedError from "../components/isConnectedError";
-import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
+import { Checkbox } from "@mui/material";
 
 export default function Register() {
   const [pseudo, setPseudo] = useState('');
@@ -42,32 +42,33 @@ export default function Register() {
               onSubmit={async (e) => {
                 e.preventDefault();
                 setError('');
-                if (isChecked === true) {
-                  try {
-                    const response = await axios.post(
-                      `${process.env.NEXT_PUBLIC_SERVER_URL}user/createUser`,
-                      { pseudo, email, password, confirmPassword, checkCGU: isChecked }
-                    );
-                    if (response.data === 'ok') {
-                      try {
-                        await axios.post(
-                          `${process.env.NEXT_PUBLIC_SERVER_URL}auth/login`,
-                          { email, password }, // Corps de la requête
-                          { withCredentials: true } // Nécessaire pour inclure les cookies
-                        );
-                      } catch (error) {
-                        console.error(error);
-                      } finally {
-                        router.push('/');
-                      }
-                    } else {
-                      setError(response.data);
+                try {
+                  const response = await axios.post(
+                    `${process.env.NEXT_PUBLIC_SERVER_URL}user/createUser`,
+                    { pseudo, email, password, confirmPassword, checkCGU: isChecked }
+                  );
+                  if (response.data === 'ok') {
+                    try {
+                      await axios.post(
+                        `${process.env.NEXT_PUBLIC_SERVER_URL}auth/login`,
+                        { email, password }, // Corps de la requête
+                        { withCredentials: true } // Nécessaire pour inclure les cookies
+                      );
+                    } catch (error) {
+                      console.error(error);
+                    } finally {
+                      router.push('/');
                     }
-                  } catch (error) {
-                    console.error(error);
+                  } else {
+                    setError(response.data);
                   }
-                } else {
-                  setError("L'approbation des conditions générales d'utilisation est obligatoire");
+                } catch (error) {
+                  console.error(error);
+                  if (axios.isAxiosError(error)) {
+                    setError(error.response?.data?.message || 'Une erreur est survenue lors de la création du compte');
+                  } else {
+                    setError('Une erreur inconnue s\'est produite');
+                  }
                 }
               }}
             >
@@ -106,12 +107,12 @@ export default function Register() {
                   >Conditions Générales d'Utilisation</a>*</p>
                 </div>
               </div>
-              {error && <p className="error-message">{error}</p>}
               <div className="buttonContainer">
                 <button type="submit" className="button-style button-color-validate">Se créer un compte</button>
               </div>
             </form>
           </div>
+          {error && <p className="error-message">{error}</p>}
           <p className="redirect-message">Vous avez déjà un compte ? <Link href="/login" className="link">Connectez-vous</Link></p>
         </div>
       )}

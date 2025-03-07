@@ -47,7 +47,11 @@ export default function ForgotPassword() {
                                 }
                             } catch (error) {
                                 console.error(error);
-                                setError('Une erreur inconnue s\'est produite');
+                                if (axios.isAxiosError(error)) {
+                                    setError(error.response?.data?.message || 'Une erreur est survenue lors de l\'envoi du mail');
+                                } else {
+                                    setError('Une erreur inconnue s\'est produite');
+                                }
                             }
                         }}
                     >
@@ -60,11 +64,11 @@ export default function ForgotPassword() {
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
-                        {error && <p className="error-message">{error}</p>}
                         <div className="buttonContainer">
                             <button type="submit" className="button-style button-color-validate">Envoyer le mail</button>
                         </div>
                     </form>
+                    {error && <p className="error-message">{error}</p>}
                     <p className="confirmMessage">{confirmMessage}</p>
                 </div>
             )}
