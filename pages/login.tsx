@@ -79,8 +79,8 @@ export default function login(req: NextRequest) {
               <div className="buttonContainer">
                 <button type="submit" className="button-style button-color-validate">Se connecter</button>
               </div>
-              {error && <p className="error-message">{error}</p>}
             </form>
+            {error && <p className="error-message">{error}</p>}
           </div>
           <div className="redirect-message">
             <p >Vous n’avez pas de compte ? <Link href="/register" className="link">Inscrivez-vous</Link></p>
