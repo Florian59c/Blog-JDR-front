@@ -56,6 +56,16 @@ const muiThemes = createTheme({
                 },
             ]
         },
+        MuiCheckbox: {
+            styleOverrides: {
+                root: {
+                    color: '#000', // Couleur des contours de la case à cocher
+                    '&.Mui-checked': {
+                        color: '#0D3C36', // Couleur quand la case est cochée
+                    },
+                },
+            },
+        },
     },
 });
 

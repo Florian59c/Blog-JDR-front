@@ -18,7 +18,6 @@ export default function Contact() {
                         e.preventDefault();
                         setconfirmMessage('');
                         setError('');
-                        // la fonction pour envoyer le mail depuis le back ICI
                         try {
                             const response = await axios.post(
                                 `${process.env.NEXT_PUBLIC_SERVER_URL}mailer/send`,
@@ -31,6 +30,11 @@ export default function Contact() {
                             }
                         } catch (error) {
                             console.error(error);
+                            if (axios.isAxiosError(error)) {
+                                setError(error.response?.data?.message || 'Une erreur est survenue lors de l\'envoi du mail');
+                            } else {
+                                setError('Une erreur inconnue s\'est produite');
+                            }
                         }
                     }}
                 >
@@ -61,11 +65,11 @@ export default function Contact() {
                             onChange={(e) => setContent(e.target.value)}
                         />
                     </div>
-                    {error && <p className="error-message">{error}</p>}
                     <div className="buttonContainer">
                         <button type="submit" className="button-style button-color-validate">Envoyer l'email</button>
                     </div>
                 </form>
+                {error && <p className="error-message">{error}</p>}
                 <p className="confirmMessage">{confirmMessage}</p>
             </div>
         </div>

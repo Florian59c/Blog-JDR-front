@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import TextField from '@mui/material/TextField';
 import Link from "next/link";
 import IsConnectedError from "../components/isConnectedError";
+import { Checkbox } from "@mui/material";
 
 export default function Register() {
   const [pseudo, setPseudo] = useState('');
@@ -11,6 +12,7 @@ export default function Register() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isConnected, setIsConnected] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
 
@@ -43,7 +45,7 @@ export default function Register() {
                 try {
                   const response = await axios.post(
                     `${process.env.NEXT_PUBLIC_SERVER_URL}user/createUser`,
-                    { pseudo, email, password, confirmPassword }
+                    { pseudo, email, password, confirmPassword, checkCGU: isChecked }
                   );
                   if (response.data === 'ok') {
                     try {
@@ -62,6 +64,11 @@ export default function Register() {
                   }
                 } catch (error) {
                   console.error(error);
+                  if (axios.isAxiosError(error)) {
+                    setError(error.response?.data?.message || 'Une erreur est survenue lors de la création du compte');
+                  } else {
+                    setError('Une erreur inconnue s\'est produite');
+                  }
                 }
               }}
             >
@@ -90,13 +97,22 @@ export default function Register() {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
+                <div className="checkbox">
+                  <Checkbox checked={isChecked} onChange={(event) => { setIsChecked(event.target.checked) }} />
+                  <p>J'accepte les <a
+                    href="https://drive.google.com/file/d/1kW-Ztlw_R6uufBCiz8m51YLgXBRc6w-R/view?usp=drive_link"
+                    className="link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >Conditions Générales d'Utilisation</a>*</p>
+                </div>
               </div>
-              {error && <p className="error-message">{error}</p>}
               <div className="buttonContainer">
                 <button type="submit" className="button-style button-color-validate">Se créer un compte</button>
               </div>
             </form>
           </div>
+          {error && <p className="error-message">{error}</p>}
           <p className="redirect-message">Vous avez déjà un compte ? <Link href="/login" className="link">Connectez-vous</Link></p>
         </div>
       )}

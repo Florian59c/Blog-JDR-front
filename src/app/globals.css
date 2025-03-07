@@ -67,6 +67,16 @@ a {
   text-decoration: underline;
 }
 
+/* styles des checkbox */
+
+.checkbox {
+  text-align: center;
+}
+
+.checkbox .link {
+  text-decoration: underline;
+}
+
 /* styles des bouttons */
 
 .button-style {
@@ -107,7 +117,7 @@ a {
 .error-message {
   color: #AF1E22;
   text-align: center;
-  margin: 0.5rem 0;
+  margin: 1rem 0;
 }
 
 /* Tablette */
@@ -126,6 +136,17 @@ a {
 
   .blockContainer .redirect-message {
     margin-top: 3rem;
+  }
+
+  /* styles des checkbox */
+
+  .checkbox {
+    display: flex;
+    align-items: center;
+  }
+
+  .checkbox p {
+    padding-left: 0.5rem;
   }
 
   /* styles des bouttons */

@@ -46,14 +46,14 @@ export default function login(req: NextRequest) {
                     { withCredentials: true } // Nécessaire pour inclure les cookies
                   );
                   if (response.data === 'ok') {
-                    router.push('/');
+                    router.push('/profile');
                   } else {
                     setError(response.data);
                   }
-                } catch (err) {
-                  if (axios.isAxiosError(err)) {
-                    // Si l'erreur provient d'Axios
-                    setError(err.response?.data?.message || 'Erreur lors de la connexion');
+                } catch (error) {
+                  if (axios.isAxiosError(error)) {
+                    // Si l'erreur provient d'Axios ou des dto
+                    setError(error.response?.data?.message || 'Une erreur est survenue lors de la connexion');
                   } else {
                     setError('Une erreur inconnue s\'est produite');
                   }
@@ -76,11 +76,11 @@ export default function login(req: NextRequest) {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              {error && <p className="error-message">{error}</p>}
               <div className="buttonContainer">
                 <button type="submit" className="button-style button-color-validate">Se connecter</button>
               </div>
             </form>
+            {error && <p className="error-message">{error}</p>}
           </div>
           <div className="redirect-message">
             <p >Vous n’avez pas de compte ? <Link href="/register" className="link">Inscrivez-vous</Link></p>

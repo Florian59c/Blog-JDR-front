@@ -36,7 +36,11 @@ export default function ResetPassword() {
                             }
                         } catch (error) {
                             console.error(error);
-                            setError('Une erreur inconnue s\'est produite');
+                            if (axios.isAxiosError(error)) {
+                                setError(error.response?.data?.message || 'Une erreur est survenue lors de la modification du mot de passe');
+                            } else {
+                                setError('Une erreur inconnue s\'est produite');
+                            }
                         }
                     }}
                 >
@@ -54,11 +58,11 @@ export default function ResetPassword() {
                             onChange={(e) => setConfirmPassword(e.target.value)}
                         />
                     </div>
-                    {error && <p className="error-message">{error}</p>}
                     <div className="buttonContainer">
                         <button type="submit" className="button-style button-color-validate">Réinitialiser le mot de passe</button>
                     </div>
                 </form>
+                {error && <p className="error-message">{error}</p>}
                 <p className="confirmMessage">{confirmMessage}</p>
             </div>
         </div >
