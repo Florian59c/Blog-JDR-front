@@ -46,7 +46,7 @@ export default function Register() {
                   try {
                     const response = await axios.post(
                       `${process.env.NEXT_PUBLIC_SERVER_URL}user/createUser`,
-                      { pseudo, email, password, confirmPassword }
+                      { pseudo, email, password, confirmPassword, checkCGU: isChecked }
                     );
                     if (response.data === 'ok') {
                       try {
