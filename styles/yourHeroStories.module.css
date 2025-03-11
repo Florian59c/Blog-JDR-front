@@ -1,0 +1,105 @@
+.container h1 {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.errorMessage {
+    text-align: center;
+    margin-top: 10rem;
+}
+
+.heroStoryContainer {
+    margin-bottom: 2rem;
+    margin-right: 0.5rem;
+    padding: 1rem;
+    background-color: #FFF;
+    border-top-right-radius: 10px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.title {
+    font-weight: bold;
+}
+
+.title,
+.date,
+.tag {
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.documents img {
+    height: 30px;
+    margin: 0 0.5rem;
+}
+
+.commentContainer hr {
+    margin: 1rem 0 2rem 0;
+}
+
+.icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icons a {
+    display: flex;
+    align-items: center;
+}
+
+.icons img {
+    cursor: pointer;
+}
+
+/* Tablette */
+@media (min-width: 768px) {
+
+    .heroStoryContainer {
+        margin-right: 5rem;
+    }
+
+    .documents {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .documents p,
+    .documents img {
+        margin: 5px 0;
+        box-sizing: border-box;
+    }
+
+    .title {
+        text-align: left;
+        width: 80%;
+    }
+
+    .date {
+        width: 60%;
+    }
+
+    .tag {
+        width: 60%;
+    }
+
+    .icons img {
+        margin: 0 0.5rem;
+    }
+}
+
+/* Petit écran d'ordinateur */
+@media (min-width: 1280px) {
+
+    .heroStoryContainer {
+        margin-right: 10rem;
+    }
+}
+
+/* Grand écran d'ordinateur */
+@media (min-width: 1920px) {
+
+    .heroStoryContainer {
+        margin-right: 20rem;
+    }
+}
