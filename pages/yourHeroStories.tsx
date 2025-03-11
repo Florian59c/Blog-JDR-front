@@ -59,19 +59,21 @@ export default function yourHeroStories() {
                                         })}
                                     </p>
                                     <p className={styles.tag}>{heroStory.tag}</p>
-                                    <a href={heroStory.link} target="_blank" rel="noopener noreferrer">
-                                        <img src={Eye.src} alt="Visionner le document" />
-                                    </a>
-                                    <img
-                                        src={Download.src}
-                                        alt="Télécharger le document"
-                                        onClick={() => handleDownload(heroStory)}
-                                    />
-                                    <img
-                                        src={Comment.src}
-                                        alt="Afficher ou cacher les commentaires"
-                                        onClick={() => toggleComment(heroStory.id)}
-                                    />
+                                    <div className={styles.icons}>
+                                        <a href={heroStory.link} target="_blank" rel="noopener noreferrer">
+                                            <img src={Eye.src} alt="Visionner le document" />
+                                        </a>
+                                        <img
+                                            src={Download.src}
+                                            alt="Télécharger le document"
+                                            onClick={() => handleDownload(heroStory)}
+                                        />
+                                        <img
+                                            src={Comment.src}
+                                            alt="Afficher ou cacher les commentaires"
+                                            onClick={() => toggleComment(heroStory.id)}
+                                        />
+                                    </div>
                                 </div>
                                 <div className={styles.commentContainer}>
                                     {visibleComments[heroStory.id] &&
