@@ -6,6 +6,7 @@ import Eye from "../assets/img/eye.png";
 import Download from "../assets/img/download-arrow.png";
 import Comment from "../assets/img/comment.png";
 import CommentForm from '../components/commentForm';
+import CommentList from '../components/commentList';
 
 export default function yourHeroStories() {
     const pageType = "hero";
@@ -81,8 +82,8 @@ export default function yourHeroStories() {
                                     {visibleComments[heroStory.id] &&
                                         <div>
                                             <hr />
-                                            <CommentForm postId={heroStory.id} pageType={pageType} />
-                                            <p>Listes des commentaires pour {heroStory.title}</p>
+                                            <CommentForm id={heroStory.id} pageType={pageType} />
+                                            <CommentList id={heroStory.id} pageType={pageType} />
                                         </div>
                                     }
                                 </div>
