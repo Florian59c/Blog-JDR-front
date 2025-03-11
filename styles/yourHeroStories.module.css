@@ -48,6 +48,10 @@
     align-items: center;
 }
 
+.icons img {
+    cursor: pointer;
+}
+
 /* Tablette */
 @media (min-width: 768px) {
 

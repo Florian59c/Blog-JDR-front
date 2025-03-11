@@ -5,8 +5,10 @@ import { HeroStoryInterface } from "../interfaces/HeroStoryInterface";
 import Eye from "../assets/img/eye.png";
 import Download from "../assets/img/download-arrow.png";
 import Comment from "../assets/img/comment.png";
+import CommentForm from '../components/commentForm';
 
 export default function yourHeroStories() {
+    const pageType = "hero";
     const [heroStories, setHeroStories] = useState<HeroStoryInterface[]>([]);
     const [visibleComments, setVisibleComments] = useState<Record<number, boolean>>({}); // Stocke un état pour chaque heroStory.id
 
@@ -79,6 +81,7 @@ export default function yourHeroStories() {
                                     {visibleComments[heroStory.id] &&
                                         <div>
                                             <hr />
+                                            <CommentForm postId={heroStory.id} pageType={pageType} />
                                             <p>Listes des commentaires pour {heroStory.title}</p>
                                         </div>
                                     }
