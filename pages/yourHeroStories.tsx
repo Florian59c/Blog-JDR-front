@@ -7,6 +7,7 @@ import Download from "../assets/img/download-arrow.png";
 import Comment from "../assets/img/comment.png";
 import CommentForm from '../components/commentForm';
 import CommentList from '../components/commentList';
+import { Tooltip } from '@mui/material';
 
 export default function yourHeroStories() {
     const pageType = "hero";
@@ -63,19 +64,25 @@ export default function yourHeroStories() {
                                     </p>
                                     <p className={styles.tag}>{heroStory.tag}</p>
                                     <div className={styles.icons}>
-                                        <a href={heroStory.link} target="_blank" rel="noopener noreferrer">
-                                            <img src={Eye.src} alt="Visionner le document" />
-                                        </a>
-                                        <img
-                                            src={Download.src}
-                                            alt="Télécharger le document"
-                                            onClick={() => handleDownload(heroStory)}
-                                        />
-                                        <img
-                                            src={Comment.src}
-                                            alt="Afficher ou cacher les commentaires"
-                                            onClick={() => toggleComment(heroStory.id)}
-                                        />
+                                        <Tooltip title="Visionner" placement="top" arrow>
+                                            <a href={heroStory.link} target="_blank" rel="noopener noreferrer">
+                                                <img src={Eye.src} alt="Visionner le document" />
+                                            </a>
+                                        </Tooltip>
+                                        <Tooltip title="Télécharger" placement="top" arrow>
+                                            <img
+                                                src={Download.src}
+                                                alt="Télécharger le document"
+                                                onClick={() => handleDownload(heroStory)}
+                                            />
+                                        </Tooltip>
+                                        <Tooltip title="Afficher ou cacher les commentaires" placement="top" arrow>
+                                            <img
+                                                src={Comment.src}
+                                                alt="Afficher ou cacher les commentaires"
+                                                onClick={() => toggleComment(heroStory.id)}
+                                            />
+                                        </Tooltip>
                                     </div>
                                 </div>
                                 <div className={styles.commentContainer}>
