@@ -53,8 +53,8 @@ export default function yourHeroStories() {
                 <div>
                     {heroStories.map((heroStory) => {
                         return (
-                            <div className={styles.heroStoryContainer}>
-                                <div key={heroStory.id} className={styles.documents}>
+                            <div key={heroStory.id} className={styles.heroStoryContainer}>
+                                <div className={styles.documents}>
                                     <p className={styles.title}>{heroStory.title}</p>
                                     <p className={styles.date}>
                                         Ajouté le {new Date(heroStory.date).toLocaleDateString()} à {new Date(heroStory.date).toLocaleTimeString("fr-FR", {
