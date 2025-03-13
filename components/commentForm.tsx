@@ -4,7 +4,7 @@ import { CommentPropsInterface } from "../interfaces/CommentPropsInterface";
 import axios from "axios";
 import { TextField } from "@mui/material";
 
-export default function CommentForm({ id, pageType }: CommentPropsInterface) {
+export default function CommentForm({ id, pageType, onCommentAdded }: CommentPropsInterface & { onCommentAdded: () => void }) {
     const [content, setContent] = useState('');
     const [error, setError] = useState('');
     const [confirmMessage, setconfirmMessage] = useState('');
@@ -23,6 +23,7 @@ export default function CommentForm({ id, pageType }: CommentPropsInterface) {
                             { withCredentials: true } // Nécessaire pour inclure les cookies
                         );
                         if (response.data === "ok") {
+                            onCommentAdded(); // Déclenche la mise à jour de CommentList
                             setconfirmMessage('Votre commentaire a bien été créé');
                         } else {
                             setError(response.data);
