@@ -16,12 +16,26 @@ export default function CommentList({ id, pageType, refreshComments }: CommentPr
                 `${process.env.NEXT_PUBLIC_SERVER_URL}comment/getCommentsByPost`,
                 { postType: pageType, postId: id }
             )
-            console.log(response.data);
-
             setComments(response.data);
         } catch (error) {
             console.error(error);
             setError("Une erreur est survenue lors de l'affichage des commentaires")
+        }
+    }
+
+    async function reportComment(commentId: number) {
+        try {
+            const response = await axios.post(
+                `${process.env.NEXT_PUBLIC_SERVER_URL}comment/reportComment`,
+                { commentId },
+                {
+                    withCredentials: true,
+                }
+            )
+            alert(response.data);
+        } catch (error) {
+            console.error(error);
+            alert("Une erreur est survenue lors du signalement du commentaire");
         }
     }
 
@@ -48,7 +62,7 @@ export default function CommentList({ id, pageType, refreshComments }: CommentPr
                                                 })}
                                     </p>
                                     <Tooltip title="Signaler le commentaire" placement="top" arrow>
-                                        <img src={Exclamation.src} alt="Signaler le commentaire" />
+                                        <img src={Exclamation.src} alt="Signaler le commentaire" onClick={() => { reportComment(comment.id) }} />
                                     </Tooltip>
                                 </div>
                                 <p className={styles.content}>{comment.content}</p>

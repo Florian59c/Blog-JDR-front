@@ -23,7 +23,6 @@ export default function yourHeroStories() {
         try {
             const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}hero/getAllHeroWithNewDate`,);
             setHeroStories(response.data);
-            console.log(response.data);
         } catch (error) {
             console.error('Error checking connection:', error);
         }
