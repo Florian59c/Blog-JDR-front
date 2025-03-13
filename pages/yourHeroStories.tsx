@@ -13,12 +13,16 @@ export default function yourHeroStories() {
     const pageType = "hero";
     const [heroStories, setHeroStories] = useState<HeroStoryInterface[]>([]);
     const [visibleComments, setVisibleComments] = useState<Record<number, boolean>>({}); // Stocke un état pour chaque heroStory.id
+    const [refreshComments, setRefreshComments] = useState(0);
+
+    function handleCommentAdded() {
+        setRefreshComments((prev) => prev + 1); // Incrémente l'état pour forcer le rafraîchissement
+    }
 
     async function getHeroStories() {
         try {
             const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}hero/getAllHeroWithNewDate`,);
             setHeroStories(response.data);
-            console.log(response.data);
         } catch (error) {
             console.error('Error checking connection:', error);
         }
@@ -53,8 +57,8 @@ export default function yourHeroStories() {
                 <div>
                     {heroStories.map((heroStory) => {
                         return (
-                            <div className={styles.heroStoryContainer}>
-                                <div key={heroStory.id} className={styles.documents}>
+                            <div key={heroStory.id} className={styles.heroStoryContainer}>
+                                <div className={styles.documents}>
                                     <p className={styles.title}>{heroStory.title}</p>
                                     <p className={styles.date}>
                                         Ajouté le {new Date(heroStory.date).toLocaleDateString()} à {new Date(heroStory.date).toLocaleTimeString("fr-FR", {
@@ -89,8 +93,8 @@ export default function yourHeroStories() {
                                     {visibleComments[heroStory.id] &&
                                         <div>
                                             <hr />
-                                            <CommentForm id={heroStory.id} pageType={pageType} />
-                                            <CommentList id={heroStory.id} pageType={pageType} />
+                                            <CommentForm id={heroStory.id} pageType={pageType} onCommentAdded={handleCommentAdded} />
+                                            <CommentList id={heroStory.id} pageType={pageType} refreshComments={refreshComments} />
                                         </div>
                                     }
                                 </div>

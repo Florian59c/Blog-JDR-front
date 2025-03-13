@@ -1,0 +1,34 @@
+.commentFormContainer {
+    margin-top: 1rem;
+}
+
+.commentButtonContainer {
+    text-align: center;
+}
+
+/* Tablette */
+@media (min-width: 768px) {
+
+    .commentFormContainer {
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+}
+
+/* Petit écran d'ordinateur */
+@media (min-width: 1280px) {
+
+    .commentFormContainer {
+        margin-left: 5rem;
+        margin-right: 5rem;
+    }
+}
+
+/* Grand écran d'ordinateur */
+@media (min-width: 1920px) {
+
+    .commentFormContainer {
+        margin-left: 10rem;
+        margin-right: 10rem;
+    }
+}
