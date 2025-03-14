@@ -53,6 +53,11 @@ export default function Profile() {
             {isConnected ? (
                 <div className="blockContainer">
                     <div className={classNames(styles.btn, styles.btnLogout)}>
+                        <Link href="/userComments">
+                            <button className="button-style button-color-validate">
+                                Voir mes commentaires
+                            </button>
+                        </Link>
                         <button
                             className="button-style button-color-validate"
                             onClick={async () => {
