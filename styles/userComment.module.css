@@ -1,0 +1,30 @@
+.return {
+    display: flex;
+    align-items: center;
+    margin-left: 0.5rem;
+    cursor: pointer;
+}
+
+.return img {
+    max-height: 1rem;
+    margin-right: 0.5rem;
+}
+
+.return p {
+    text-decoration: underline;
+}
+
+
+/* Tablette */
+@media (min-width: 768px) {
+
+    .return {
+        margin-left: 2rem;
+    }
+}
+
+/* Petit écran d'ordinateur */
+@media (min-width: 1280px) {}
+
+/* Grand écran d'ordinateur */
+@media (min-width: 1920px) {}
