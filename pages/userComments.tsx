@@ -39,7 +39,7 @@ export default function UserComments() {
     useEffect(() => {
         checkConnection();
         getCurrentUserComments();
-    }, []);
+    }, [isOpen]);
 
     return (
         <div>
