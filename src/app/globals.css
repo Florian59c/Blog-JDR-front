@@ -120,6 +120,35 @@ a {
   margin: 1rem 0;
 }
 
+/* affichage des commentaires */
+
+.comment-error-message {
+  text-align: center;
+  margin-top: 4rem;
+  font-weight: bold;
+}
+
+.comments-block {
+  background-color: white;
+  margin: 5rem 0.5rem 1rem 0.5rem;
+  padding: 3rem 0.5rem 3rem 0.5rem;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
+
+.comments-block h1 {
+  text-align: center;
+}
+
+.commentContainer {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #5F5F5F;
+  border-radius: 10px;
+  background-color: #fcfcfc;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
 /* Tablette */
 @media (min-width: 768px) {
 
@@ -153,6 +182,17 @@ a {
 
   .button-style {
     width: 20rem;
+  }
+
+  /* affichage des commentaires */
+
+  .comments-block {
+    margin: 2rem;
+    padding: 2rem;
+  }
+
+  .commentContainer {
+    margin-top: 2rem;
   }
 }
 

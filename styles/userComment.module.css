@@ -15,16 +15,34 @@
 }
 
 
+.buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+}
+
 /* Tablette */
 @media (min-width: 768px) {
 
-    .return {
+    .return,
+    .buttons {
         margin-left: 2rem;
     }
 }
 
 /* Petit écran d'ordinateur */
-@media (min-width: 1280px) {}
+@media (min-width: 1280px) {
+
+    .displayContent {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .buttons {
+        margin-top: 0;
+    }
+}
 
 /* Grand écran d'ordinateur */
 @media (min-width: 1920px) {}

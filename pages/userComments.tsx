@@ -4,17 +4,16 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Arrow from '../assets/img/return-arrow.png';
+import { CommentsInterface } from '../interfaces/CommentsInterface';
 
 export default function UserComments() {
     const [isConnected, setIsConnected] = useState(false);
-    const [pseudo, setPseudo] = useState('');
-    const [email, setEmail] = useState('');
-    const [error, setError] = useState('');
-    const [confirmMessage, setconfirmMessage] = useState('');
-    const router = useRouter();
-    const [isOpen, setIsOpen] = useState(false);
+    const [comments, setComments] = useState<CommentsInterface[]>([]);
+    // const [error, setError] = useState('');
+    // const [confirmMessage, setconfirmMessage] = useState('');
+    // const router = useRouter();
 
-    const checkConnection = async () => {
+    async function checkConnection() {
         try {
             const response = await axios.get('/api/checkIsConnected'); // Appeler l'API route
             setIsConnected(response.data.isConnected);
@@ -24,26 +23,23 @@ export default function UserComments() {
         }
     };
 
-    async function getCurrentUser() {
+    async function getCurrentUserComments() {
         try {
-            const response = await axios.post(
-                `${process.env.NEXT_PUBLIC_SERVER_URL}user/getCurrentUser`,
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}comment/getCurrentUserComments`,
                 {},
                 {
                     withCredentials: true,
-                }
-            )
-            setPseudo(response.data.pseudo);
-            setEmail(response.data.email);
+                });
+            setComments(response.data);
         } catch (error) {
-            console.error(error);
-            setError("Une erreur est survenue lors de l'affichage de vos informations personnelles")
+            console.error('Error checking connection:', error);
+            // setError(error);
         }
     }
 
     useEffect(() => {
         checkConnection();
-        getCurrentUser();
+        getCurrentUserComments();
     }, []);
 
     return (
@@ -54,8 +50,34 @@ export default function UserComments() {
                         <img src={Arrow.src} alt="flèche" />
                         <p>retourner sur la page de profil</p>
                     </Link>
-                    <div className="blockContainer">
-                        <h1>UserComments</h1>
+                    <div className='comments-block'>
+                        <h1>Mes commentaires</h1>
+                        {comments.length === 0 ? (
+                            <p className="comment-error-message">Vous n'avez pas écrit de commentaire</p>
+                        ) : (
+                            <div>
+                                {comments.map((comment) => {
+                                    return (
+                                        <div key={comment.id} className={`commentContainer ${styles.displayContent}`}>
+                                            <div className={styles.content}>
+                                                <p>Commentaire ajouté le {new Date(comment.creation_date)
+                                                    .toLocaleDateString()} à {new Date(comment.creation_date)
+                                                        .toLocaleTimeString("fr-FR", {
+                                                            hour: "2-digit",
+                                                            minute: "2-digit",
+                                                        })} :
+                                                </p>
+                                                <p>{comment.content}</p>
+                                            </div>
+                                            <div className={styles.buttons}>
+                                                <button className="button-style button-color-validate">Modifier</button>
+                                                <button className="button-style button-color-error">Supprimer</button>
+                                            </div>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        )}
                     </div>
                 </div>
             ) : (
