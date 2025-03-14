@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import DeleteAccount from "../modals/deleteAccount";
+import DeleteModale from "../modals/deleteModale";
 
 export default function Profile() {
     const [isConnected, setIsConnected] = useState(false);
@@ -130,7 +130,7 @@ export default function Profile() {
                             Supprimer mon compte
                         </button>
                     </div>
-                    {isOpen && <DeleteAccount setIsOpen={setIsOpen} />}
+                    {isOpen && <DeleteModale setIsOpen={setIsOpen} deleteType="user" id={0} />}
                 </div>
             ) : (
                 <div className="blockContainer">

@@ -1,17 +1,16 @@
 import styles from '../styles/userComment.module.css';
 import axios from "axios";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Arrow from '../assets/img/return-arrow.png';
 import { CommentsInterface } from '../interfaces/CommentsInterface';
+import DeleteModale from "../modals/deleteModale";
 
 export default function UserComments() {
     const [isConnected, setIsConnected] = useState(false);
     const [comments, setComments] = useState<CommentsInterface[]>([]);
-    // const [error, setError] = useState('');
-    // const [confirmMessage, setconfirmMessage] = useState('');
-    // const router = useRouter();
+    const [isOpen, setIsOpen] = useState(false);
+    const [deleteId, setDeleteId] = useState<number>(0);
 
     async function checkConnection() {
         try {
@@ -71,7 +70,12 @@ export default function UserComments() {
                                             </div>
                                             <div className={styles.buttons}>
                                                 <button className="button-style button-color-validate">Modifier</button>
-                                                <button className="button-style button-color-error">Supprimer</button>
+                                                <button
+                                                    className="button-style button-color-error"
+                                                    onClick={() => { setDeleteId(comment.id); setIsOpen(true) }}
+                                                >
+                                                    Supprimer
+                                                </button>
                                             </div>
                                         </div>
                                     )
@@ -79,6 +83,7 @@ export default function UserComments() {
                             </div>
                         )}
                     </div>
+                    {isOpen && <DeleteModale setIsOpen={setIsOpen} deleteType="comment" id={deleteId} />}
                 </div>
             ) : (
                 <div className="blockContainer">
