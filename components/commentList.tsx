@@ -46,12 +46,12 @@ export default function CommentList({ id, pageType, refreshComments }: CommentPr
     return (
         <div>
             {comments.length === 0 ? (
-                <p className={styles.errorMessage}>Ce post n'a pas de commentaire</p>
+                <p className="comment-error-message">Ce post n'a pas de commentaire</p>
             ) : (
                 <div className={styles.container}>
                     {comments.map((comment) => {
                         return (
-                            <div key={comment.id} className={styles.commentContainer}>
+                            <div key={comment.id} className="commentContainer">
                                 <div className={styles.commentHeader}>
                                     <p>
                                         Créé par <span className={styles.boldText}>{comment.user.pseudo}</span>, le {new Date(comment.creation_date)
