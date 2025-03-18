@@ -14,6 +14,10 @@
     text-decoration: underline;
 }
 
+.modifyButton {
+    display: flex;
+    justify-content: center;
+}
 
 .buttons {
     display: flex;
@@ -25,8 +29,7 @@
 /* Tablette */
 @media (min-width: 768px) {
 
-    .return,
-    .buttons {
+    .return {
         margin-left: 2rem;
     }
 }
@@ -39,8 +42,14 @@
         justify-content: space-between;
     }
 
+    .content {
+        width: 100%;
+    }
+
     .buttons {
         margin-top: 0;
+        margin-left: 2rem;
+        align-self: center;
     }
 }
 
