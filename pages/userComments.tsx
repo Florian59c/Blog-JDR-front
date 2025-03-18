@@ -14,6 +14,7 @@ export default function UserComments() {
     const [deleteId, setDeleteId] = useState<number>(0);
     const [content, setContent] = useState<{ [key: number]: string }>({});
     const [canModify, setCanModify] = useState<{ [key: number]: boolean }>({});
+    const [error, setError] = useState('');
 
     async function checkConnection() {
         try {
@@ -35,7 +36,7 @@ export default function UserComments() {
             setComments(response.data);
         } catch (error) {
             console.error('Error checking connection:', error);
-            // setError(error);
+            setContent([]);
         }
     }
 
@@ -55,7 +56,7 @@ export default function UserComments() {
                     <div className="comments-block">
                         <h1>Mes commentaires</h1>
                         {comments.length === 0 ? (
-                            <p className="comment-error-message">Vous n'avez pas écrit de commentaire</p>
+                            <p className="comment-error-message">Vous n'avez pas encore écrit de commentaire</p>
                         ) : (
                             <div>
                                 {comments.map((comment) => {
@@ -72,31 +73,29 @@ export default function UserComments() {
                                                 </p>
                                                 {isEditing ? (
                                                     <form
-                                                    // onSubmit={async (e) => {
-                                                    //     e.preventDefault(); // Empêche le rechargement de la page
-                                                    //     setError('');
-                                                    //     setconfirmMessage('');
-                                                    //     try {
-                                                    //         const response = await axios.post(
-                                                    //             `${process.env.NEXT_PUBLIC_SERVER_URL}comment/createComment`,
-                                                    //             { content, postType: pageType, postId: id },
-                                                    //             { withCredentials: true } // Nécessaire pour inclure les cookies
-                                                    //         );
-                                                    //         if (response.data === "ok") {
-                                                    //             onCommentAdded(); // Déclenche la mise à jour de CommentList
-                                                    //             setconfirmMessage('Votre commentaire a bien été créé');
-                                                    //         } else {
-                                                    //             setError(response.data);
-                                                    //         }
-                                                    //     } catch (error) {
-                                                    //         if (axios.isAxiosError(error)) {
-                                                    //             // Si l'erreur provient d'Axios ou des dto
-                                                    //             setError(error.response?.data?.message || 'Une erreur est survenue lors de la création du commentaire');
-                                                    //         } else {
-                                                    //             setError('Une erreur inconnue s\'est produite');
-                                                    //         }
-                                                    //     }
-                                                    // }}
+                                                        onSubmit={async (e) => {
+                                                            e.preventDefault();
+                                                            setError('');
+                                                            try {
+                                                                const response = await axios.post(
+                                                                    `${process.env.NEXT_PUBLIC_SERVER_URL}comment/modifyCommentByUser`,
+                                                                    { content: content[comment.id], commentId: comment.id },
+                                                                    { withCredentials: true }
+                                                                );
+                                                                if (response.data === "ok") {
+                                                                    setCanModify((prev) => ({ ...prev, [comment.id]: false }));
+                                                                    getCurrentUserComments(); // Rafraîchi les commentaires
+                                                                } else {
+                                                                    setError(response.data);
+                                                                }
+                                                            } catch (error) {
+                                                                if (axios.isAxiosError(error)) {
+                                                                    setError(error.response?.data?.message || 'Une erreur est survenue lors de la création du commentaire');
+                                                                } else {
+                                                                    setError('Une erreur inconnue s\'est produite');
+                                                                }
+                                                            }
+                                                        }}
                                                     >
                                                         <TextField
                                                             id="outlined-multiline-static"
@@ -114,6 +113,7 @@ export default function UserComments() {
                                                                 Modifier le commentaire
                                                             </button>
                                                         </div>
+                                                        {error && <p className="error-message">{error}</p>}
                                                     </form>
                                                 ) : (
                                                     <p>{comment.content}</p>
