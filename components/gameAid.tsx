@@ -1,7 +1,9 @@
+import DropDownJdr from "./dropDownJdr";
+
 export default function GameAid() {
     return (
         <div>
-            gameAid
+            <DropDownJdr></DropDownJdr>
         </div>
     );
 }
