@@ -66,6 +66,48 @@ const muiThemes = createTheme({
                 },
             },
         },
+        MuiFormControl: {
+            styleOverrides: {
+                root: ({ theme }) => ({
+                    margin: '8px 0',
+                    borderRadius: '8px',
+                    width: '90%',
+                    padding: '4px',
+
+                    [theme.breakpoints.up(480)]: { // Écrans ≥ 480px (petites tablettes)
+                        width: '350px',
+                    },
+                    [theme.breakpoints.up(768)]: { // Écrans ≥ 768px (tablettes classiques)
+                        width: '500px',
+                    },
+                    [theme.breakpoints.up(1024)]: { // Écrans ≥ 1024px (PC portable)
+                        width: '600px',
+                    },
+                }),
+            },
+        },
+        MuiOutlinedInput: {
+            styleOverrides: {
+                root: {
+                    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                        borderColor: "#0D3C36", // Bordure rouge au focus (clic)
+                    },
+                },
+            },
+        },
+        MuiMenuItem: {
+            styleOverrides: {
+                root: {
+                    "&.Mui-selected": {
+                        backgroundColor: "#0D3C36 !important", // Fond pour l'élément sélectionné
+                        color: "#FFF", // Texte blanc pour plus de lisibilité
+                    },
+                    "&.Mui-selected:hover": {
+                        backgroundColor: "#0D3C36 !important", // Fond au survol
+                    },
+                },
+            },
+        },
     },
 });
 
