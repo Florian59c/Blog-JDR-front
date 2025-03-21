@@ -56,7 +56,7 @@ export default function DropDownJdr({ onSelectedJdrChange }: DropDownJdrProps) {
                         },
                     }}
                 >
-                    <MenuItem value="none">aucun</MenuItem>
+                    <MenuItem value="none">tous les JDR</MenuItem>
                     {jdrNames.map((jdr) => (
                         <MenuItem key={jdr.id} value={jdr.name}>
                             {jdr.name}

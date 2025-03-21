@@ -2,3 +2,13 @@
     background-color: #FFF;
     min-height: 75vh;
 }
+
+.container h1 {
+    text-align: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.container h1:hover {
+    text-decoration: underline;
+}
