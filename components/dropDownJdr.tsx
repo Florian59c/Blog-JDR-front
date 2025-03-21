@@ -1,13 +1,18 @@
+import styles from '../styles/dropDownJdr.module.css';
 import * as React from 'react';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { JdrNamesInterface } from '../interfaces/JdrNamesInterface';
 
-export default function DropDownJdr() {
+interface DropDownJdrProps {
+    onSelectedJdrChange: (selectedJdr: string) => void;
+}
+
+export default function DropDownJdr({ onSelectedJdrChange }: DropDownJdrProps) {
     const [jdrNames, setJdrNames] = useState<JdrNamesInterface[]>([]);
     const [selectedJdr, setSelectedJdr] = useState<string>("none");
     const [error, setError] = useState('');
@@ -27,12 +32,14 @@ export default function DropDownJdr() {
     }, []);
 
     const handleChange = (event: SelectChangeEvent<string>) => {
-        setSelectedJdr(event.target.value);
+        const newSelectedJdr = event.target.value;
+        setSelectedJdr(newSelectedJdr);
+        onSelectedJdrChange(newSelectedJdr);  // Appeler la fonction du parent pour mettre à jour l'état
     };
 
     return (
-        <div>
-            <FormControl sx={{ m: 1, width: 300 }}>
+        <div className={styles.container}>
+            <FormControl>
                 <Select
                     labelId="jdr-select-label"
                     id="jdr-select"
@@ -40,8 +47,16 @@ export default function DropDownJdr() {
                     onChange={handleChange}
                     input={<OutlinedInput label="" />}
                     renderValue={(value) => value === "none" ? "Sélectionnez un JDR" : value}
+                    MenuProps={{
+                        PaperProps: {
+                            style: {
+                                maxHeight: 300,  // Limite la hauteur du menu à 300px
+                                overflow: 'auto',  // Active la barre de défilement
+                            },
+                        },
+                    }}
                 >
-                    <MenuItem value="none">Aucun</MenuItem>
+                    <MenuItem value="none">aucun</MenuItem>
                     {jdrNames.map((jdr) => (
                         <MenuItem key={jdr.id} value={jdr.name}>
                             {jdr.name}
@@ -50,7 +65,6 @@ export default function DropDownJdr() {
                 </Select>
             </FormControl>
             {error && <p style={{ color: "red" }}>{error}</p>}
-            <p>{selectedJdr}</p>
         </div>
     );
 }
