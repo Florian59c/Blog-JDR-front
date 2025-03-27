@@ -1,7 +1,10 @@
 .commentFormContainer {
+    margin-top: 1rem;
+}
+
+.commentForm {
     display: flex;
     justify-content: center;
-    margin-top: 1rem;
 }
 
 .commentButtonContainer {

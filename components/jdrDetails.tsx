@@ -1,4 +1,4 @@
-import styles from '../styles/scenario.module.css';
+import styles from '../styles/jdrDetails.module.css';
 import { useEffect, useState } from 'react';
 import DropDownJdr from './dropDownJdr';
 import axios from 'axios';
@@ -6,14 +6,17 @@ import { JdrInterface } from '../interfaces/JdrInterface';
 import CommentForm from './commentForm';
 import CommentList from './commentList';
 
-export default function Scenario() {
+interface JdrDetailsProps {
+    is_scenario: boolean;
+}
+
+export default function JdrDetails({ is_scenario }: JdrDetailsProps) {
     const pageType = "jdr";
     const [selectedJdr, setSelectedJdr] = useState<string>("none");
     const [sortedJdr, setSortedJdr] = useState<JdrInterface[]>([]);
     const [displayedJdrIds, setDisplayedJdrIds] = useState<number[]>([]); // Utiliser un tableau d'IDs
     const [error, setError] = useState('');
     const [refreshComments, setRefreshComments] = useState(0);
-    const is_scenario = true;
 
     const handleSelectedJdrChange = (newSelectedJdr: string) => {
         setSelectedJdr(newSelectedJdr);
@@ -23,22 +26,22 @@ export default function Scenario() {
         setRefreshComments((prev) => prev + 1); // Incrémente l'état pour forcer le rafraîchissement
     }
 
-    async function getsortedJdr() {
+    async function getsortedJdr(currentIsScenario = is_scenario) {
         try {
             const response = await axios.post(
                 `${process.env.NEXT_PUBLIC_SERVER_URL}jdr/getsortedJdr`,
-                { is_scenario, jdrName: selectedJdr === 'none' ? 'default' : selectedJdr }
-            )
+                { is_scenario: currentIsScenario, jdrName: selectedJdr === 'none' ? 'default' : selectedJdr }
+            );
             setSortedJdr(response.data);
         } catch (error) {
             console.error(error);
-            setError("Une erreur est survenue lors de l'affichage des JDR")
+            setError("Une erreur est survenue lors de l'affichage des JDR");
         }
     }
 
     useEffect(() => {
-        getsortedJdr();
-    }, [selectedJdr]);
+        getsortedJdr(is_scenario);
+    }, [selectedJdr, is_scenario]);
 
     const handleTitleClick = (id: number) => {
         setDisplayedJdrIds((prevIds) => {
