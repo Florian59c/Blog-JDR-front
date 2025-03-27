@@ -32,7 +32,7 @@ export default function Scenario() {
             setSortedJdr(response.data);
         } catch (error) {
             console.error(error);
-            setError("Une erreur est survenue lors de l'affichage de vos informations personnelles")
+            setError("Une erreur est survenue lors de l'affichage des JDR")
         }
     }
 
@@ -58,11 +58,11 @@ export default function Scenario() {
         <div className={styles.container}>
             <DropDownJdr onSelectedJdrChange={handleSelectedJdrChange} />
             {sortedJdr.length === 0 ? (
-                <p>Il n'y a pas de contenu {selectedJdr === 'none' ? '' : `pour ${selectedJdr}`}</p>
+                <p className={styles.unexist}>Il n'y a pas de contenu {selectedJdr === 'none' ? '' : `pour "${selectedJdr}"`}</p>
             ) : (
                 error === '' ? (
                     sortedJdr.map((jdr) => (
-                        <div key={jdr.id}>
+                        <div key={jdr.id} className={styles.test}>
                             <hr />
                             <h1 onClick={() => handleTitleClick(jdr.id)}>{jdr.title}</h1>
                             <p className={styles.date}>
@@ -80,14 +80,16 @@ export default function Scenario() {
                                     </div>
                                     <div>
                                         <CommentForm id={jdr.id} pageType={pageType} onCommentAdded={handleCommentAdded} />
-                                        <CommentList id={jdr.id} pageType={pageType} refreshComments={refreshComments} />
+                                        <div className={styles.comments}>
+                                            <CommentList id={jdr.id} pageType={pageType} refreshComments={refreshComments} />
+                                        </div>
                                     </div>
                                 </div>
                             )}
                         </div>
                     ))
                 ) : (
-                    <p>{error}</p>
+                    <p className='error-message'>{error}</p>
                 )
             )}
         </div>
