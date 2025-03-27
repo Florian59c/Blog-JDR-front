@@ -2,8 +2,10 @@ import styles from '../styles/deleteModale.module.css';
 import Cancel from '../assets/img/cancel.png';
 import { DeleteModaleInterface } from '../interfaces/DeleteModaleInterface';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
 export default function DeleteModale({ id, deleteType, setIsOpen }: DeleteModaleInterface) {
+    const router = useRouter();
 
     async function handleDelete(id: number, deleteType: string) {
         try {
@@ -26,11 +28,14 @@ export default function DeleteModale({ id, deleteType, setIsOpen }: DeleteModale
                 { withCredentials: true }
             );
 
-            if (response.data !== "ok") {
+            if (response.data === "ok") {
+                setIsOpen(false);
+                if (deleteType === "user") {
+                    router.push('/');
+                }
+            } else {
                 alert(response.data);
             }
-
-            setIsOpen(false);
         } catch (error) {
             console.error("Erreur lors de la suppression :", error);
             alert(error);
@@ -44,14 +49,14 @@ export default function DeleteModale({ id, deleteType, setIsOpen }: DeleteModale
                     <img src={Cancel.src} alt="Croix permettant de fermer la fenêtre" onClick={() => setIsOpen(false)} />
                 </div>
                 <div className={styles.text}>
-                    <p>Etes vous sûr de vouloir supprimer votre compte ?</p>
+                    <p>Etes vous sûr de vouloir effectuer la suppression ?</p>
                     <p className={styles.alert}>Attention ! La suppression est définitive !!</p>
                 </div>
                 <button
                     className="button-style button-color-error"
                     onClick={() => handleDelete(id, deleteType)}
                 >
-                    Supprimer mon compte
+                    Supprimer
                 </button>
             </div>
         </div>
