@@ -1,0 +1,98 @@
+.container {
+    background-color: #FFF;
+    min-height: 75vh;
+}
+
+.unexist {
+    text-align: center;
+    margin-top: 10rem;
+    font-size: 1.5rem;
+}
+
+.container hr {
+    margin-left: 0.3rem;
+    margin-right: 0.3rem;
+}
+
+.container h1 {
+    text-align: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.container h1:hover {
+    text-decoration: underline;
+}
+
+.date {
+    text-align: center;
+}
+
+.pdf {
+    display: flex;
+    justify-content: center;
+    margin: 0 2px;
+}
+
+.pdf iframe {
+    width: 100%;
+    height: 400px;
+}
+
+.comments {
+    margin: 0 5px;
+}
+
+.test {
+    padding-bottom: 2rem;
+}
+
+/* Petite Tablette ou grand téléphone */
+@media (min-width: 450px) {
+
+    .pdf iframe {
+        height: 600px;
+    }
+}
+
+/* Tablette */
+@media (min-width: 768px) {
+
+    .container hr {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+
+    .pdf {
+        margin: 0 20px;
+    }
+
+    .pdf iframe {
+        height: 800px;
+    }
+
+    .comments {
+        margin: 0 1.5rem;
+    }
+}
+
+/* Petit écran d'ordinateur */
+@media (min-width: 1280px) {
+
+    .container hr {
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+
+    .pdf {
+        margin: 0;
+    }
+
+    .pdf iframe {
+        width: 50%;
+    }
+
+    .comments {
+        margin: 0 5rem;
+    }
+}
