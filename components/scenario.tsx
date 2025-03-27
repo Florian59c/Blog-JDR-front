@@ -50,6 +50,10 @@ export default function Scenario() {
         });
     };
 
+    const formatDriveLink = (link: string) => {
+        return link.replace(/\/view\?.*$/, "/preview");
+    };
+
     return (
         <div className={styles.container}>
             <DropDownJdr onSelectedJdrChange={handleSelectedJdrChange} />
@@ -61,9 +65,19 @@ export default function Scenario() {
                         <div key={jdr.id}>
                             <hr />
                             <h1 onClick={() => handleTitleClick(jdr.id)}>{jdr.title}</h1>
+                            <p className={styles.date}>
+                                Ajouté le {new Date(jdr.date).toLocaleDateString()} à {new Date(jdr.date).toLocaleTimeString("fr-FR", {
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                })}
+                            </p>
                             {displayedJdrIds.includes(jdr.id) && ( // Affiche les détails si l'ID est dans le tableau
                                 <div>
-                                    {jdr.link}
+                                    <div className={styles.pdf}>
+                                        <iframe
+                                            src={formatDriveLink(jdr.link)}
+                                        />
+                                    </div>
                                     <div>
                                         <CommentForm id={jdr.id} pageType={pageType} onCommentAdded={handleCommentAdded} />
                                         <CommentList id={jdr.id} pageType={pageType} refreshComments={refreshComments} />
