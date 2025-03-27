@@ -1,5 +1,4 @@
-import GameAid from '../components/gameAid';
-import Scenario from '../components/scenario';
+import JdrDetails from '../components/jdrDetails';
 import styles from '../styles/jdr.module.css';
 import { useState } from 'react';
 
@@ -17,7 +16,7 @@ export default function JDR() {
                 </h1>
             </div>
             <div className={styles.container}>
-                {isScenario ? <Scenario></Scenario> : <GameAid></GameAid>}
+                <JdrDetails is_scenario={isScenario} />
             </div>
         </div >
     );
