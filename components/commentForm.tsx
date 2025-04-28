@@ -23,9 +23,9 @@ export default function CommentForm({ id, pageType, onCommentAdded }: CommentPro
                                 { content, postType: pageType, postId: id },
                                 { withCredentials: true } // Nécessaire pour inclure les cookies
                             );
-                            if (response.data === "ok") {
+                            if (response.status === 201 && response.data.message === 'Votre commentaire a bien été créé') {
                                 onCommentAdded(); // Déclenche la mise à jour de CommentList
-                                setconfirmMessage('Votre commentaire a bien été créé');
+                                setconfirmMessage(response.data.message);
                             } else {
                                 setError(response.data);
                             }
