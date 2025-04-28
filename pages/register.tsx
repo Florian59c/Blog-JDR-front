@@ -51,13 +51,13 @@ export default function Register() {
                     try {
                       await axios.post(
                         `${process.env.NEXT_PUBLIC_SERVER_URL}auth/login`,
-                        { email, password }, // Corps de la requête
-                        { withCredentials: true } // Nécessaire pour inclure les cookies
+                        { email, password },
+                        { withCredentials: true }
                       );
-                    } catch (error) {
-                      console.error(error);
-                    } finally {
-                      router.push('/');
+                      router.push('/profile');
+                    } catch (loginError) {
+                      console.error('Erreur lors de la connexion automatique', loginError);
+                      router.push('/login');
                     }
                   } else {
                     setError(response.data);
