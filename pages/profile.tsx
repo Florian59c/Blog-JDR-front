@@ -61,9 +61,18 @@ export default function Profile() {
                         <button
                             className="button-style button-color-validate"
                             onClick={async () => {
-                                await axios.post(
-                                    `${process.env.NEXT_PUBLIC_SERVER_URL}auth/logout`, {}, { withCredentials: true });
-                                router.push('/login');
+                                try {
+                                    await axios.post(
+                                        `${process.env.NEXT_PUBLIC_SERVER_URL}auth/logout`,
+                                        {},
+                                        { withCredentials: true }
+                                    );
+
+                                    router.push('/login');
+                                } catch (error) {
+                                    console.error('Erreur lors de la déconnexion :', error);
+                                    alert('Une erreur est survenue lors de la déconnexion. Veuillez réessayer.');
+                                }
                             }}
                         >
                             Se déconnecter
