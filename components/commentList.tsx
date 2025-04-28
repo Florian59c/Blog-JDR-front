@@ -17,9 +17,14 @@ export default function CommentList({ id, pageType, refreshComments }: CommentPr
                 { postType: pageType, postId: id }
             )
             setComments(response.data);
+            setError('');
         } catch (error) {
-            console.error(error);
-            setError("Une erreur est survenue lors de l'affichage des commentaires")
+            if (axios.isAxiosError(error)) {
+                setError(error.response?.data?.message || "Une erreur est survenue lors de l'affichage des commentaires");
+            } else {
+                console.error(error);
+                setError("Une erreur inconnue est survenue");
+            }
         }
     }
 
