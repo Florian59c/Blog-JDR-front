@@ -28,17 +28,21 @@ export default function DeleteModale({ id, deleteType, setIsOpen }: DeleteModale
                 { withCredentials: true }
             );
 
-            if (response.data === "ok") {
+            if (response.status === 201) {
                 setIsOpen(false);
                 if (deleteType === "user") {
                     router.push('/');
                 }
             } else {
-                alert(response.data);
+                alert(response.data.message || 'Erreur inconnue');
             }
         } catch (error) {
+            if (axios.isAxiosError(error)) {
+                alert(error.response?.data?.message || "Une erreur s'est produite lors de la suppression");
+            } else {
+                alert("Une erreur inconnue s'est produite");
+            }
             console.error("Erreur lors de la suppression :", error);
-            alert(error);
         }
     }
 
