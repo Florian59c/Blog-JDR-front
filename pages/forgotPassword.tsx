@@ -35,13 +35,15 @@ export default function ForgotPassword() {
                             e.preventDefault(); // Empêche le rechargement de la page
                             setconfirmMessage('');
                             setError('');
+
                             try {
                                 const response = await axios.post(
                                     `${process.env.NEXT_PUBLIC_SERVER_URL}mailer/forgotPassword`,
                                     { email }
                                 );
-                                if (response.data === "ok") {
-                                    setconfirmMessage("Un mail vous a été envoyé. S'il n'apparaît pas, vérifiez vos spams");
+
+                                if (response.status === 201 && response.data?.message) {
+                                    setconfirmMessage(response.data.message);
                                 } else {
                                     setError(response.data);
                                 }
