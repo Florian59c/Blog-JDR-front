@@ -17,9 +17,14 @@ export default function CommentList({ id, pageType, refreshComments }: CommentPr
                 { postType: pageType, postId: id }
             )
             setComments(response.data);
+            setError('');
         } catch (error) {
-            console.error(error);
-            setError("Une erreur est survenue lors de l'affichage des commentaires")
+            if (axios.isAxiosError(error)) {
+                setError(error.response?.data?.message || "Une erreur est survenue lors de l'affichage des commentaires");
+            } else {
+                console.error(error);
+                setError("Une erreur inconnue est survenue");
+            }
         }
     }
 
@@ -31,11 +36,15 @@ export default function CommentList({ id, pageType, refreshComments }: CommentPr
                 {
                     withCredentials: true,
                 }
-            )
-            alert(response.data);
+            );
+            alert(response.data.message);
         } catch (error) {
             console.error(error);
-            alert("Une erreur est survenue lors du signalement du commentaire");
+            if (axios.isAxiosError(error)) {
+                alert(error.response?.data?.message || "Une erreur est survenue lors du signalement du commentaire");
+            } else {
+                alert("Une erreur inconnue est survenue");
+            }
         }
     }
 

@@ -76,17 +76,19 @@ export default function UserComments() {
                                                         onSubmit={async (e) => {
                                                             e.preventDefault();
                                                             setError('');
+
                                                             try {
                                                                 const response = await axios.post(
                                                                     `${process.env.NEXT_PUBLIC_SERVER_URL}comment/modifyCommentByUser`,
                                                                     { content: content[comment.id], commentId: comment.id },
                                                                     { withCredentials: true }
                                                                 );
-                                                                if (response.data === "ok") {
+
+                                                                if (response.status === 201 && response.data.message === 'Votre commentaire a bien été modifié') {
                                                                     setCanModify((prev) => ({ ...prev, [comment.id]: false }));
                                                                     getCurrentUserComments(); // Rafraîchi les commentaires
                                                                 } else {
-                                                                    setError(response.data);
+                                                                    setError(response.data?.message || 'Une erreur est survenue');
                                                                 }
                                                             } catch (error) {
                                                                 if (axios.isAxiosError(error)) {

@@ -35,11 +35,16 @@ export default function Profile() {
                     withCredentials: true,
                 }
             )
+
             setPseudo(response.data.pseudo);
             setEmail(response.data.email);
         } catch (error) {
             console.error(error);
-            setError("Une erreur est survenue lors de l'affichage de vos informations personnelles")
+            if (axios.isAxiosError(error)) {
+                setError(error.response?.data?.message || 'Une erreur est survenue lors de l\'affichage de vos informations personnelles');
+            } else {
+                setError('Une erreur inconnue s\'est produite');
+            }
         }
     }
 
@@ -61,9 +66,18 @@ export default function Profile() {
                         <button
                             className="button-style button-color-validate"
                             onClick={async () => {
-                                await axios.post(
-                                    `${process.env.NEXT_PUBLIC_SERVER_URL}auth/logout`, {}, { withCredentials: true });
-                                router.push('/login');
+                                try {
+                                    await axios.post(
+                                        `${process.env.NEXT_PUBLIC_SERVER_URL}auth/logout`,
+                                        {},
+                                        { withCredentials: true }
+                                    );
+
+                                    router.push('/login');
+                                } catch (error) {
+                                    console.error('Erreur lors de la déconnexion :', error);
+                                    alert('Une erreur est survenue lors de la déconnexion. Veuillez réessayer.');
+                                }
                             }}
                         >
                             Se déconnecter
@@ -76,6 +90,7 @@ export default function Profile() {
                                 e.preventDefault(); // Empêche le rechargement de la page
                                 setconfirmMessage('');
                                 setError('');
+
                                 try {
                                     const response = await axios.post(
                                         `${process.env.NEXT_PUBLIC_SERVER_URL}user/updateUser`,
@@ -83,11 +98,12 @@ export default function Profile() {
                                         {
                                             withCredentials: true,
                                         }
-                                    )
-                                    if (response.data === "ok") {
-                                        setconfirmMessage("Votre profil a été modifié");
+                                    );
+
+                                    if (response.status === 201 && response.data.message === 'Votre profil a bien été modifié') {
+                                        setconfirmMessage(response.data.message);
                                     } else {
-                                        setError(response.data);
+                                        setError(response.data.message || 'Une erreur est survenue lors de la modification de votre profil');
                                     }
                                 } catch (error) {
                                     console.error(error);
