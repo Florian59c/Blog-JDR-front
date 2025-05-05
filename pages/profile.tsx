@@ -35,11 +35,16 @@ export default function Profile() {
                     withCredentials: true,
                 }
             )
+
             setPseudo(response.data.pseudo);
             setEmail(response.data.email);
         } catch (error) {
             console.error(error);
-            setError("Une erreur est survenue lors de l'affichage de vos informations personnelles")
+            if (axios.isAxiosError(error)) {
+                setError(error.response?.data?.message || 'Une erreur est survenue lors de l\'affichage de vos informations personnelles');
+            } else {
+                setError('Une erreur inconnue s\'est produite');
+            }
         }
     }
 
