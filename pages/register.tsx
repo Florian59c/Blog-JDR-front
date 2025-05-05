@@ -47,7 +47,7 @@ export default function Register() {
                     `${process.env.NEXT_PUBLIC_SERVER_URL}user/createUser`,
                     { pseudo, email, password, confirmPassword, checkCGU: isChecked }
                   );
-                  if (response.data === 'ok') {
+                  if (response.status === 201 && response.data.message === 'Votre compte a été créé avec succès') {
                     try {
                       await axios.post(
                         `${process.env.NEXT_PUBLIC_SERVER_URL}auth/login`,
@@ -60,7 +60,7 @@ export default function Register() {
                       router.push('/login');
                     }
                   } else {
-                    setError(response.data);
+                    setError(response.data?.message || 'Une réponse inattendue a été reçue');
                   }
                 } catch (error) {
                   console.error(error);
