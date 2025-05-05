@@ -90,6 +90,7 @@ export default function Profile() {
                                 e.preventDefault(); // Empêche le rechargement de la page
                                 setconfirmMessage('');
                                 setError('');
+
                                 try {
                                     const response = await axios.post(
                                         `${process.env.NEXT_PUBLIC_SERVER_URL}user/updateUser`,
@@ -97,11 +98,12 @@ export default function Profile() {
                                         {
                                             withCredentials: true,
                                         }
-                                    )
-                                    if (response.data === "ok") {
-                                        setconfirmMessage("Votre profil a été modifié");
+                                    );
+
+                                    if (response.status === 201 && response.data.message === 'Votre profil a bien été modifié') {
+                                        setconfirmMessage(response.data.message);
                                     } else {
-                                        setError(response.data);
+                                        setError(response.data.message || 'Une erreur est survenue lors de la modification de votre profil');
                                     }
                                 } catch (error) {
                                     console.error(error);
