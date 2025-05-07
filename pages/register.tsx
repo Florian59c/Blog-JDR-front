@@ -47,20 +47,20 @@ export default function Register() {
                     `${process.env.NEXT_PUBLIC_SERVER_URL}user/createUser`,
                     { pseudo, email, password, confirmPassword, checkCGU: isChecked }
                   );
-                  if (response.data === 'ok') {
+                  if (response.status === 201 && response.data.message === 'Votre compte a été créé avec succès') {
                     try {
                       await axios.post(
                         `${process.env.NEXT_PUBLIC_SERVER_URL}auth/login`,
-                        { email, password }, // Corps de la requête
-                        { withCredentials: true } // Nécessaire pour inclure les cookies
+                        { email, password },
+                        { withCredentials: true }
                       );
-                    } catch (error) {
-                      console.error(error);
-                    } finally {
-                      router.push('/');
+                      router.push('/profile');
+                    } catch (loginError) {
+                      console.error('Erreur lors de la connexion automatique', loginError);
+                      router.push('/login');
                     }
                   } else {
-                    setError(response.data);
+                    setError(response.data?.message || 'Une réponse inattendue a été reçue');
                   }
                 } catch (error) {
                   console.error(error);

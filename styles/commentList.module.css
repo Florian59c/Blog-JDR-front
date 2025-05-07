@@ -1,18 +1,3 @@
-.errorMessage {
-    text-align: center;
-    margin-top: 4rem;
-    font-weight: bold;
-}
-
-.commentContainer {
-    margin-top: 1rem;
-    padding: 0.5rem 1rem;
-    border: 1px solid #5F5F5F;
-    border-radius: 10px;
-    background-color: #fcfcfc;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
-}
-
 .commentHeader {
     display: flex;
     justify-content: space-between;
@@ -31,14 +16,6 @@
 
 .content {
     margin-top: 1rem;
-}
-
-/* Tablette */
-@media (min-width: 768px) {
-
-    .commentContainer {
-        margin-top: 2rem;
-    }
 }
 
 /* Petit écran d'ordinateur */

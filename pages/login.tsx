@@ -45,10 +45,11 @@ export default function login(req: NextRequest) {
                     { email, password },
                     { withCredentials: true } // Nécessaire pour inclure les cookies
                   );
-                  if (response.data === 'ok') {
+
+                  if (response.status === 201 && response.data.message === 'Connexion réussie') {
                     router.push('/profile');
                   } else {
-                    setError(response.data);
+                    setError(response.data.message || 'Erreur inconnue');
                   }
                 } catch (error) {
                   if (axios.isAxiosError(error)) {

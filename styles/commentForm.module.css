@@ -2,6 +2,11 @@
     margin-top: 1rem;
 }
 
+.commentForm {
+    display: flex;
+    justify-content: center;
+}
+
 .commentButtonContainer {
     text-align: center;
 }

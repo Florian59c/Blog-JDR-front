@@ -1,0 +1,37 @@
+.header {
+    display: flex;
+    gap: 4px;
+}
+
+.header h1 {
+    background-color: #FFF;
+    width: 50%;
+    text-align: center;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.notSelected {
+    background-color: #D3D3D3 !important;
+    cursor: pointer;
+}
+
+.notSelected:hover {
+    text-shadow: 0 0 10px #FFF;
+}
+
+/* Tablette */
+@media (min-width: 768px) {
+    .header {
+        gap: 10px;
+    }
+
+    .header h1 {
+        font-size: 2rem;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+    }
+}

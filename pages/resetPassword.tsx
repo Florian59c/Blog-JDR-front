@@ -9,7 +9,7 @@ export default function ResetPassword() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
-    const [confirmMessage, setconfirmMessage] = useState('');
+    const [confirmMessage, setConfirmMessage] = useState('');
 
     return (
         <div className="blockContainer">
@@ -18,7 +18,7 @@ export default function ResetPassword() {
                 <form
                     onSubmit={async (e) => {
                         e.preventDefault(); // Empêche le rechargement de la page
-                        setconfirmMessage('');
+                        setConfirmMessage('');
                         setError('');
                         try {
                             if (password !== confirmPassword) {
@@ -28,10 +28,12 @@ export default function ResetPassword() {
                                     `${process.env.NEXT_PUBLIC_SERVER_URL}auth/resetPassword`,
                                     { token, password }
                                 );
-                                if (response.data === "ok") {
+
+                                if (response.status === 201 && response.data.message === 'Mot de passe réinitialisé avec succès') {
+                                    setConfirmMessage(response.data.message);
                                     router.push('/login');
                                 } else {
-                                    setError(response.data);
+                                    throw new Error(response.data.message || 'Une erreur est survenue');
                                 }
                             }
                         } catch (error) {
