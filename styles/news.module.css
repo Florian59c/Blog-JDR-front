@@ -11,6 +11,88 @@
     display: block;
 }
 
+.newsHeader {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.newsHeader :hover {
+    text-decoration: underline;
+}
+
+.newsHeader h1 {
+    flex: 0 0 80%;
+    /* 80% de la largeur */
+    margin: 0;
+    /* Enlève les marges par défaut */
+}
+
+.active {
+    text-decoration: underline;
+}
+
+.newsHeader img {
+    flex: 0 0 20%;
+    /* 20% de la largeur */
+    width: 100%;
+    /* Prend toute la place des 20% */
+    height: auto;
+    /* Garde le ratio */
+    max-width: 3rem;
+    max-height: 3rem;
+    object-fit: contain;
+}
+
+.arrow {
+    transition: transform 0.3s ease-in-out;
+    /* Rotation fluide avec une transition */
+}
+
+.arrowActive {
+    transform: rotate(90deg);
+    /* Rotation de 90° dans le sens horaire */
+}
+
+.newsContent {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.date {
+    text-align: center;
+}
+
+.pdf {
+    display: flex;
+    justify-content: center;
+    margin: 0 2px;
+}
+
+.pdf iframe {
+    width: 100%;
+    height: 400px;
+}
+
+/* Petite Tablette ou grand téléphone */
+@media (min-width: 450px) {
+
+    .pdf iframe {
+        height: 600px;
+    }
+}
+
+/* Tablette */
+@media (min-width: 768px) {
+    .pdf {
+        margin: 0 20px;
+    }
+
+    .pdf iframe {
+        height: 800px;
+    }
+}
+
 @media screen and (min-width: 1280px) {
     .displayPC {
         display: block;
@@ -19,4 +101,12 @@
     .displayMobile {
         display: none;
     }
+
+    /* .pdf {
+        margin: 0;
+    }
+
+    .pdf iframe {
+        width: 50%;
+    } */
 }
