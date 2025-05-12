@@ -82,8 +82,9 @@ export default function News() {
                             );
                         })}
                     </div>
-                    <div className={styles.displayPC}>
-                        <p>vue pc</p>
+                    <div className={classNames(styles.displayPC, styles.PCVue)}>
+                        <div className={classNames('blockContainer', styles.newsHeader)}>header</div>
+                        <div className={classNames('blockContainer', styles.newsContent)}>content</div>
                     </div>
                 </div>
             )

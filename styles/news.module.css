@@ -102,6 +102,32 @@
         display: none;
     }
 
+    .PCVue {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .newsHeader,
+    .newsContent {
+        margin: 2rem 0.5rem 1rem 0.5rem;
+        padding: 1rem 0.5rem;
+    }
+
+    .newsHeader {
+        flex: 0 0 20%;
+        margin-right: 0.1rem;
+        border-radius: 10px 0 0 10px;
+        box-shadow: -1px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .newsContent {
+        flex: 0 0 78%;
+        border-radius: 0 10px 10px 0;
+        box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+
     /* .pdf {
         margin: 0;
     }
