@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { NewsInterface } from "../interfaces/NewsInterface";
 import RightArrow from "../assets/img/right-arrow.png";
+import BottomArrow from "../assets/img/bottom-arrow.png";
 import classNames from 'classnames';
 import CommentForm from '../components/commentForm';
 import CommentList from '../components/commentList';
@@ -12,6 +13,7 @@ export default function News() {
     const [news, setNews] = useState<NewsInterface[]>([]);
     const [activeIds, setActiveIds] = useState<number[]>([]);
     const [refreshComments, setRefreshComments] = useState(0);
+    const [activeId, setActiveId] = useState<number | null>(null);
 
     function handleCommentAdded() {
         setRefreshComments((prev) => prev + 1); // Incrémente l'état pour forcer le rafraîchissement
@@ -22,6 +24,10 @@ export default function News() {
             prev.includes(id) ? prev.filter((activeId) => activeId !== id) : [...prev, id]
         );
     }
+
+    function toggleActivePC(id: number) {
+        setActiveId(prev => (prev === id ? null : id));
+    };
 
     async function getHeroStories() {
         try {
@@ -83,8 +89,52 @@ export default function News() {
                         })}
                     </div>
                     <div className={classNames(styles.displayPC, styles.PCVue)}>
-                        <div className={classNames('blockContainer', styles.newsHeader)}>header</div>
-                        <div className={classNames('blockContainer', styles.newsContent)}>content</div>
+                        <div className={classNames('blockContainer', styles.newsHeader)}>
+                            {news.map((newsItem) => {
+                                const isActive = activeId === newsItem.id;
+                                return (
+                                    <div key={newsItem.id} className={styles.newsItem} onClick={() => toggleActivePC(newsItem.id)}>
+                                        <h1 className={isActive ? styles.active : ''}>{newsItem.title}</h1>
+                                        <img
+                                            src={BottomArrow.src}
+                                            alt="flèche"
+                                            className={classNames(styles.arrowReverse, { [styles.arrowReverseActive]: isActive })}
+                                        />
+                                    </div>
+                                );
+                            })}
+                        </div>
+                        <div className={classNames('blockContainer', styles.newsContent)}>
+                            <div className={styles.scroll}>
+                                {news.map((newsItem) => {
+                                    const isActive = activeId === newsItem.id;
+                                    return (
+                                        <div key={newsItem.id}>
+                                            {isActive && (
+                                                <div>
+                                                    <p className={styles.date}>
+                                                        Ajouté le {new Date(newsItem.date).toLocaleDateString()} à{" "}
+                                                        {new Date(newsItem.date).toLocaleTimeString("fr-FR", {
+                                                            hour: "2-digit",
+                                                            minute: "2-digit",
+                                                        })}
+                                                    </p>
+                                                    <div className={styles.pdf}>
+                                                        <iframe src={formatDriveLink(newsItem.link)} />
+                                                    </div>
+                                                    <div>
+                                                        <CommentForm id={newsItem.id} pageType={pageType} onCommentAdded={handleCommentAdded} />
+                                                        <div className={styles.comments}>
+                                                            <CommentList id={newsItem.id} pageType={pageType} refreshComments={refreshComments} />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
                     </div>
                 </div>
             )

@@ -110,29 +110,60 @@
 
     .newsHeader,
     .newsContent {
-        margin: 2rem 0.5rem 1rem 0.5rem;
+        margin: 1rem 0.5rem;
         padding: 1rem 0.5rem;
+        height: 80vh;
+        overflow-y: auto;
     }
 
     .newsHeader {
-        flex: 0 0 20%;
-        margin-right: 0.1rem;
+        flex: 0 0 25%;
+        margin-right: 2px;
         border-radius: 10px 0 0 10px;
         box-shadow: -1px 4px 4px rgba(0, 0, 0, 0.25);
+        display: block;
+    }
+
+    .newsItem {
+        display: flex;
+    }
+
+    .arrowReverse {
+        transition: transform 0.3s ease-in-out;
+        /* Rotation fluide avec une transition */
+    }
+
+    .arrowReverseActive {
+        transform: rotate(-90deg);
+        /* Rotation de 90° dans le sens horaire */
     }
 
     .newsContent {
-        flex: 0 0 78%;
+        flex: 0 0 73%;
         border-radius: 0 10px 10px 0;
         box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.25);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
     }
 
+    .scroll {
+        flex: 1;
+        overflow-y: auto;
+        padding: 0.5rem;
+    }
 
-    /* .pdf {
-        margin: 0;
+    .date {
+        text-align: end;
+        margin: 0 1rem;
+    }
+
+    .pdf {
+        margin: 1rem 0;
     }
 
     .pdf iframe {
-        width: 50%;
-    } */
+        width: 75%;
+        height: 600px;
+    }
 }
