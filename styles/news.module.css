@@ -1,0 +1,169 @@
+.errorMessage {
+    text-align: center;
+    margin-top: 10rem;
+}
+
+.displayPC {
+    display: none;
+}
+
+.displayMobile {
+    display: block;
+}
+
+.newsHeader {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.newsHeader :hover {
+    text-decoration: underline;
+}
+
+.newsHeader h1 {
+    flex: 0 0 80%;
+    /* 80% de la largeur */
+    margin: 0;
+    /* Enlève les marges par défaut */
+}
+
+.active {
+    text-decoration: underline;
+}
+
+.newsHeader img {
+    flex: 0 0 20%;
+    /* 20% de la largeur */
+    width: 100%;
+    /* Prend toute la place des 20% */
+    height: auto;
+    /* Garde le ratio */
+    max-width: 3rem;
+    max-height: 3rem;
+    object-fit: contain;
+}
+
+.arrow {
+    transition: transform 0.3s ease-in-out;
+    /* Rotation fluide avec une transition */
+}
+
+.arrowActive {
+    transform: rotate(90deg);
+    /* Rotation de 90° dans le sens horaire */
+}
+
+.newsContent {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.date {
+    text-align: center;
+}
+
+.pdf {
+    display: flex;
+    justify-content: center;
+    margin: 0 2px;
+}
+
+.pdf iframe {
+    width: 100%;
+    height: 400px;
+}
+
+/* Petite Tablette ou grand téléphone */
+@media (min-width: 450px) {
+
+    .pdf iframe {
+        height: 600px;
+    }
+}
+
+/* Tablette */
+@media (min-width: 768px) {
+    .pdf {
+        margin: 0 20px;
+    }
+
+    .pdf iframe {
+        height: 800px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .displayPC {
+        display: block;
+    }
+
+    .displayMobile {
+        display: none;
+    }
+
+    .PCVue {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .newsHeader,
+    .newsContent {
+        margin: 1rem 0.5rem;
+        padding: 1rem 0.5rem;
+        height: 80vh;
+        overflow-y: auto;
+    }
+
+    .newsHeader {
+        flex: 0 0 25%;
+        margin-right: 2px;
+        border-radius: 10px 0 0 10px;
+        box-shadow: -1px 4px 4px rgba(0, 0, 0, 0.25);
+        display: block;
+    }
+
+    .newsItem {
+        display: flex;
+    }
+
+    .arrowReverse {
+        transition: transform 0.3s ease-in-out;
+        /* Rotation fluide avec une transition */
+    }
+
+    .arrowReverseActive {
+        transform: rotate(-90deg);
+        /* Rotation de 90° dans le sens horaire */
+    }
+
+    .newsContent {
+        flex: 0 0 73%;
+        border-radius: 0 10px 10px 0;
+        box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.25);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .scroll {
+        flex: 1;
+        overflow-y: auto;
+        padding: 0.5rem;
+    }
+
+    .date {
+        text-align: end;
+        margin: 0 1rem;
+    }
+
+    .pdf {
+        margin: 1rem 0;
+    }
+
+    .pdf iframe {
+        width: 75%;
+        height: 600px;
+    }
+}
