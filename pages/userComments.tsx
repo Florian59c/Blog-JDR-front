@@ -2,10 +2,10 @@ import styles from '../styles/userComment.module.css';
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import Arrow from '../assets/img/return-arrow.png';
 import { CommentsInterface } from '../interfaces/CommentsInterface';
 import DeleteModale from "../modals/deleteModale";
 import { TextField } from '@mui/material';
+import ReturnLink from '../components/returnLink';
 
 export default function UserComments() {
     const [isConnected, setIsConnected] = useState(false);
@@ -49,10 +49,11 @@ export default function UserComments() {
         <div>
             {isConnected ? (
                 <div>
-                    <Link href="/profile" className={styles.return}>
-                        <img src={Arrow.src} alt="flèche" />
-                        <p>retourner sur la page de profil</p>
-                    </Link>
+                    <ReturnLink
+                        links={[
+                            { title: 'retourner sur la page de profil', href: '/profile' }
+                        ]}
+                    />
                     <div className="comments-block">
                         <h1>Mes commentaires</h1>
                         {comments.length === 0 ? (
