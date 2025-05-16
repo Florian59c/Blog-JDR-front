@@ -2,7 +2,6 @@ import styles from '../styles/userComment.module.css';
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import Arrow from '../assets/img/return-arrow.png';
 import { CommentsInterface } from '../interfaces/CommentsInterface';
 import DeleteModale from "../modals/deleteModale";
 import { TextField } from '@mui/material';
@@ -50,9 +49,6 @@ export default function UserComments() {
         <div>
             {isConnected ? (
                 <div>
-                    {/* <ReturnLink title="retourner sur la page de profil" link="/profile" /> */}
-                    {/* <ReturnLink links={[{ title: 'Profil', href: '/profile' }]} /> */}
-
                     <ReturnLink
                         links={[
                             { title: 'retourner sur la page de profil', href: '/profile' }

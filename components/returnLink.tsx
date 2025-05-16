@@ -23,7 +23,6 @@ export default function ReturnLink({ links }: ReturnLinkProps) {
                     {index < links.length - 1 && <span className={styles.separator}> / </span>}
                 </span>
             ))}
-
         </div >
     );
 }
