@@ -1,3 +1,5 @@
+import classNames from 'classnames';
+import styles from '../../styles/MJ/adminPage.module.css';
 import Link from "next/link";
 
 export default function AdminPage() {
@@ -21,16 +23,18 @@ export default function AdminPage() {
   ];
 
   return (
-    <div>
+    <div className={styles.container}>
       <h1>Page d'accueil administrateur</h1>
-      <div>
+      <div className={styles.redirectButtons}>
         {pages.map((page, index) => {
           return (
-            <Link href={`/MJ/${page.link}`} key={index}>
-              <button>
-                {page.title}
-              </button>
-            </Link>
+            <div key={index} className={classNames(styles.buttons, 'buttonContainer')}>
+              <Link href={`/MJ/${page.link}`}>
+                <button className="button-style button-color-validate">
+                  {page.title}
+                </button>
+              </Link>
+            </div>
           );
         })}
       </div>
