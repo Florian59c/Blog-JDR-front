@@ -1,0 +1,27 @@
+.returnGroup {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+}
+
+.returnGroup img {
+    max-height: 1rem;
+    margin-right: 0.5rem;
+}
+
+.linkWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.return {
+    cursor: pointer;
+}
+
+.return p:hover {
+    text-decoration: underline;
+}
+
+.separator {
+    margin: 0 6px;
+}
