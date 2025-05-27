@@ -157,6 +157,10 @@ a {
   width: 100%;
 }
 
+.boldText {
+  font-weight: bold;
+}
+
 /* Tablette */
 @media (min-width: 768px) {
 
