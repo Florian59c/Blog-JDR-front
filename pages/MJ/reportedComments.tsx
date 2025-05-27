@@ -1,7 +1,8 @@
+import styles from '../../styles/MJ/reportedComments.module.css';
 import { useEffect, useState } from "react";
 import ReturnLink from "../../components/returnLink";
 import { CommentsInterface } from "../../interfaces/CommentsInterface";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import DeleteModale from "../../modals/deleteModale";
 
 export default function reportedComments() {
@@ -52,24 +53,25 @@ export default function reportedComments() {
 
     return (
         <div>
+            <ReturnLink links={[{ title: 'Page d\'accueil administrateur', href: '/MJ/adminPage' }]} />
             {comments.length !== 0 ? (
-                <div>
-                    <ReturnLink links={[{ title: 'Page d\'accueil administrateur', href: '/MJ/adminPage' }]} />
+                <div className={styles.container}>
                     <h1>Liste des commentaires signalés :</h1>
                     {comments.map((comment) => {
                         return (
                             <div key={comment.id} className="commentContainer">
                                 <div>
-                                    <p>Commentaire ajouté par @{comment.user.pseudo}, le {new Date(comment.creation_date)
+                                    <p>Commentaire ajouté par <span className="boldText">{comment.user.pseudo}</span>, le {new Date(comment.creation_date)
                                         .toLocaleDateString()} à {new Date(comment.creation_date)
                                             .toLocaleTimeString("fr-FR", {
                                                 hour: "2-digit",
                                                 minute: "2-digit",
                                             })} :
                                     </p>
-                                    <p>{comment.content}</p>
+                                    <hr className={styles.border} />
+                                    <p className={styles.content}>{comment.content}</p>
                                 </div>
-                                <div className="buttonContainer">
+                                <div className={styles.buttons} >
                                     <button
                                         className="button-style button-color-validate"
                                         onClick={() => cancelReportForComment(comment.id)}
@@ -89,13 +91,14 @@ export default function reportedComments() {
                     {isOpen && <DeleteModale setIsOpen={setIsOpen} deleteType="commentAdmin" id={deleteId} />}
                 </div>
             ) : (
-                <div>
-                    {error ?
-                        <p>{error}</p>
-                        :
-                        <p>Aucun commentaire signalé pour le moment ^^</p>
+                <div className={styles.error}>
+                    {
+                        error ?
+                            <p>{error}</p>
+                            :
+                            <p>Aucun commentaire signalé pour le moment ^^</p>
                     }
-                </div>
+                </div >
             )
             }
         </div >

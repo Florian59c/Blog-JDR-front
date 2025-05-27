@@ -63,7 +63,7 @@ export default function CommentList({ id, pageType, refreshComments }: CommentPr
                             <div key={comment.id} className="commentContainer">
                                 <div className={styles.commentHeader}>
                                     <p>
-                                        Créé par <span className={styles.boldText}>{comment.user.pseudo}</span>, le {new Date(comment.creation_date)
+                                        Créé par <span className="boldText">{comment.user.pseudo}</span>, le {new Date(comment.creation_date)
                                             .toLocaleDateString()} à {new Date(comment.creation_date)
                                                 .toLocaleTimeString("fr-FR", {
                                                     hour: "2-digit",
