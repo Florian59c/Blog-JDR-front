@@ -1,11 +1,14 @@
+import styles from '../styles/404.module.css';
+import Link from "next/link";
+
 export default function Custom404() {
     return (
-        <div style={{ textAlign: 'center', padding: '5rem' }}>
+        <div className={`blockContainer ${styles.notFound}`}>
             <h1>404 - Page introuvable</h1>
-            <p>La page que vous cherchez n'existe pas ou a été déplacée.</p>
-            <a href="/" style={{ color: 'blue', textDecoration: 'underline' }}>
-                Retour à l’accueil
-            </a>
+            <p>La page que vous cherchez n'existe pas.</p>
+            <Link href="/" className="buttonContainer">
+                <button className="button-style button-color-validate">Retourner à la page d’accueil</button>
+            </Link>
         </div>
     );
 }
