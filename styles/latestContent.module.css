@@ -1,0 +1,31 @@
+.container {
+    text-align: center;
+    padding: 1rem;
+    background-color: #FFF;
+    border-radius: 10px;
+    min-height: 200px;
+}
+
+.container p {
+    margin-bottom: 1rem;
+}
+
+/* Tablette et pc */
+@media (min-width: 768px) {
+    .container {
+        padding: 2rem;
+    }
+
+    .container {
+        flex: 1;
+        max-width: 33%;
+    }
+}
+
+/* pc */
+@media (min-width: 1280px) {
+    .container {
+        flex: 1;
+        max-width: 25%;
+    }
+}

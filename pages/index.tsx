@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import LatestContent from '../components/latestContent';
 
 export default function Home() {
     const [isAdmin, setIsAdmin] = useState(false);
@@ -29,9 +30,7 @@ export default function Home() {
     return (
         <div className={styles.container}>
             <div className={styles.home}>
-                <div className={styles.news}>
-                    <p>Derniers ajouts :</p>
-                </div>
+                <LatestContent />
                 <div className={styles.desc}>
                     <img src={LogoGreen.src} alt="logo du site" className={styles.logo} />
                     <p>Bienvenue dans l'idearium, le sanctuaire de l'imagination !</p>
