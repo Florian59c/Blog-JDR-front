@@ -1,0 +1,65 @@
+.container {
+    text-align: center;
+    padding: 1rem;
+    background-color: #FFF;
+    border-radius: 10px;
+    min-height: 200px;
+}
+
+.container .title {
+    margin-bottom: 2rem;
+    font-weight: bold;
+}
+
+.container hr {
+    margin: 0.5rem 0;
+}
+
+.singleContent {
+    cursor: pointer;
+}
+
+.contentTitle {
+    font-weight: bold;
+}
+
+.date {
+    text-align: end;
+    font-style: italic;
+    margin-top: 1rem;
+}
+
+.error p {
+    text-align: center;
+    margin-top: 5rem;
+}
+
+/* Tablette et pc */
+@media (min-width: 768px) {
+    .container {
+        flex: 1;
+        max-width: 33%;
+        max-height: 70vh;
+        overflow-y: auto;
+    }
+
+    .container .title {
+        font-size: 1.5rem;
+    }
+}
+
+/* pc */
+@media (min-width: 1280px) {
+    .container {
+        flex: 1;
+        max-width: 25%;
+    }
+
+    .contentTitle {
+        font-size: 1.2rem;
+    }
+
+    .container hr {
+        margin: 1rem 0;
+    }
+}
