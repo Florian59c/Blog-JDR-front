@@ -6,19 +6,45 @@
     min-height: 200px;
 }
 
-.container p {
-    margin-bottom: 1rem;
+.container .title {
+    margin-bottom: 2rem;
+    font-weight: bold;
+}
+
+.container hr {
+    margin: 0.5rem 0;
+}
+
+.singleContent {
+    cursor: pointer;
+}
+
+.contentTitle {
+    font-weight: bold;
+}
+
+.date {
+    text-align: end;
+    font-style: italic;
+    margin-top: 1rem;
+}
+
+.error p {
+    text-align: center;
+    margin-top: 5rem;
 }
 
 /* Tablette et pc */
 @media (min-width: 768px) {
     .container {
-        padding: 2rem;
-    }
-
-    .container {
         flex: 1;
         max-width: 33%;
+        max-height: 70vh;
+        overflow-y: auto;
+    }
+
+    .container .title {
+        font-size: 1.5rem;
     }
 }
 
@@ -27,5 +53,13 @@
     .container {
         flex: 1;
         max-width: 25%;
+    }
+
+    .contentTitle {
+        font-size: 1.2rem;
+    }
+
+    .container hr {
+        margin: 1rem 0;
     }
 }
