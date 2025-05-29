@@ -14,6 +14,15 @@ export default function Banishment() {
     const [error, setError] = useState('');
     const [isOpen, setIsOpen] = useState(false);
     const [deleteId, setDeleteId] = useState<number>(0);
+    const [refreshTrigger, setRefreshTrigger] = useState(0);
+
+    function handleSuccess() {
+        alert("L'utilisateur a bien été banni.");
+        setPseudo('');
+        setUser(null);
+        setDeleteId(0);
+        setIsOpen(false);
+    };
 
     useEffect(() => {
         // Ne fait rien si le champ est vide
@@ -23,7 +32,6 @@ export default function Banishment() {
             return;
         }
 
-        // Déclenche la requête avec un délai (300ms)
         clearTimeout(debounceTimeout);
         debounceTimeout = setTimeout(async () => {
             try {
@@ -44,9 +52,8 @@ export default function Banishment() {
             }
         }, 300);
 
-        // Nettoyage
         return () => clearTimeout(debounceTimeout);
-    }, [pseudo]);
+    }, [pseudo, refreshTrigger]);
 
     return (
         <div>
@@ -82,7 +89,7 @@ export default function Banishment() {
                     </div>
                 }
                 {error && <p className={styles.message}>{error}</p>}
-                {isOpen && <DeleteModale setIsOpen={setIsOpen} deleteType="ban" id={deleteId} />}
+                {isOpen && <DeleteModale setIsOpen={setIsOpen} deleteType="ban" id={deleteId} onSuccess={handleSuccess} />}
             </div>
         </div>
     );
