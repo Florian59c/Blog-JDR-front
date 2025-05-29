@@ -4,6 +4,7 @@ import styles from '../../styles/MJ/Banishment.module.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { PartialUserInterface } from '../../interfaces/PartialUserInterface';
+import DeleteModale from '../../modals/deleteModale';
 
 let debounceTimeout: NodeJS.Timeout;
 
@@ -11,6 +12,8 @@ export default function Banishment() {
     const [pseudo, setPseudo] = useState('');
     const [user, setUser] = useState<PartialUserInterface | null>(null);
     const [error, setError] = useState('');
+    const [isOpen, setIsOpen] = useState(false);
+    const [deleteId, setDeleteId] = useState<number>(0);
 
     useEffect(() => {
         // Ne fait rien si le champ est vide
@@ -59,8 +62,27 @@ export default function Banishment() {
                         fullWidth
                     />
                 </form>
-                {user && <p>Email : {user.email}</p>}
-                {error && <p>{error}</p>}
+                {user &&
+                    <div className='commentContainer comments-block'>
+                        <p className={styles.title}>Utilisateur trouvé : </p>
+                        <div className={styles.userContainer}>
+                            <div>
+                                <p><span className={styles.subTitle}>Email</span> : {user.email}</p>
+                                <p><span className={styles.subTitle}>Pseudo</span> : {user.pseudo}</p>
+                            </div>
+                            <div className='buttonContainer'>
+                                <button
+                                    className="button-style button-color-error"
+                                    onClick={() => { setDeleteId(user.id); setIsOpen(true) }}
+                                >
+                                    Bannir l'utilisateur
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                }
+                {error && <p className={styles.message}>{error}</p>}
+                {isOpen && <DeleteModale setIsOpen={setIsOpen} deleteType="ban" id={deleteId} />}
             </div>
         </div>
     );
