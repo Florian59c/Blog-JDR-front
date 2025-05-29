@@ -5,6 +5,10 @@ import Link from "next/link";
 export default function AdminPage() {
   const pages = [
     {
+      title: 'Bannissement',
+      link: 'banishment'
+    },
+    {
       title: 'Commentaires signalés',
       link: 'reportedComments'
     },

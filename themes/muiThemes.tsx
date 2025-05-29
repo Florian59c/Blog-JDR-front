@@ -54,6 +54,30 @@ const muiThemes = createTheme({
                         },
                     },
                 },
+                {
+                    props: { variant: 'standard', color: 'ban' }, // Ajout d'une variante personnalisée pour le formulaire de bannissement
+                    style: {
+                        marginBottom: '1rem', // Applique une marge par défaut
+                        width: '100%',
+                        // backgroundColor: '#F8F8F8',
+                        // boxShadow: '-1px 1px 5px #EEE',
+                        '& .MuiOutlinedInput-root': {
+                            '& fieldset': {
+                                borderColor: '#000',
+                            },
+                            '&.Mui-focused fieldset': {
+                                borderColor: '#000',
+                            },
+                        },
+                        '& .MuiInputLabel-root': {
+                            color: '#9F9F9F',
+                            paddingLeft: '10px',
+                        },
+                        '& .MuiInputLabel-root.Mui-focused': {
+                            color: '#000',
+                        },
+                    },
+                },
             ]
         },
         MuiCheckbox: {

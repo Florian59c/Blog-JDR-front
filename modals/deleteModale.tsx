@@ -4,7 +4,7 @@ import { DeleteModaleInterface } from '../interfaces/DeleteModaleInterface';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 
-export default function DeleteModale({ id, deleteType, setIsOpen }: DeleteModaleInterface) {
+export default function DeleteModale({ id, deleteType, setIsOpen, onSuccess }: DeleteModaleInterface) {
     const router = useRouter();
 
     async function handleDelete(id: number, deleteType: string) {
@@ -23,13 +23,20 @@ export default function DeleteModale({ id, deleteType, setIsOpen }: DeleteModale
                 return;
             }
 
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}${route}`,
+            const response = await axios.post(
+                `${process.env.NEXT_PUBLIC_SERVER_URL}${route}`,
                 deleteType === "user" ? {} : { id },
                 { withCredentials: true }
             );
 
             if (response.status === 201) {
                 setIsOpen(false);
+
+                // Appel de la fonction de succès si elle est fournie
+                if (onSuccess) {
+                    onSuccess();
+                }
+
                 if (deleteType === "user") {
                     router.push('/');
                 }
