@@ -116,7 +116,7 @@ export default function UserComments() {
                                                             }
                                                         />
                                                         <div className="btn">
-                                                            <Button variant="outlined" color="success" endIcon={<SendIcon />}>
+                                                            <Button type='submit' variant="outlined" color="success" endIcon={<SendIcon />}>
                                                                 Modifier le commentaire
                                                             </Button>
                                                         </div>

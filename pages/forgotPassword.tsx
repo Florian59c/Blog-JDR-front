@@ -1,4 +1,5 @@
-import { TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import axios from "axios";
 import { useEffect, useState } from "react";
 import IsConnectedError from "../components/isConnectedError";
@@ -66,8 +67,8 @@ export default function ForgotPassword() {
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
-                        <div className="buttonContainer">
-                            <button type="submit" className="button-style button-color-validate">Envoyer le mail</button>
+                        <div className="btn">
+                            <Button type="submit" variant="outlined" color="success" endIcon={<EmailOutlinedIcon />}>Envoyer le mail</Button>
                         </div>
                     </form>
                     {error && <p className="error-message">{error}</p>}

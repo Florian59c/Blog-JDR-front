@@ -1,5 +1,5 @@
 import { Button, TextField } from "@mui/material";
-import SendIcon from "@mui/icons-material/Send";
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import axios from "axios";
 import { useState } from "react";
 
@@ -67,7 +67,7 @@ export default function Contact() {
                         />
                     </div>
                     <div className="btn">
-                        <Button variant="outlined" color="success" endIcon={<SendIcon />}>Envoyer l'email</Button>
+                        <Button type="submit" variant="outlined" color="success" endIcon={<EmailOutlinedIcon />}>Envoyer l'email</Button>
                     </div>
                 </form>
                 {error && <p className="error-message">{error}</p>}

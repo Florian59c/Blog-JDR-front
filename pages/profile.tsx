@@ -139,7 +139,7 @@ export default function Profile() {
                                 />
                             </div>
                             <div className="btn">
-                                <Button variant="outlined" color="success" endIcon={<SendIcon />}>Modifier mon profil</Button>
+                                <Button type='submit' variant="outlined" color="success" endIcon={<SendIcon />}>Modifier mon profil</Button>
                             </div>
                         </form>
                         {error && <p className="error-message">{error}</p>}

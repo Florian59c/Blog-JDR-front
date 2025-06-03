@@ -1,4 +1,5 @@
-import { TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -77,8 +78,8 @@ export default function login(req: NextRequest) {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              <div className="buttonContainer">
-                <button type="submit" className="button-style button-color-validate">Se connecter</button>
+              <div className="btn">
+                <Button type="submit" variant="outlined" color="success" endIcon={<SendIcon />}>Se connecter</Button>
               </div>
             </form>
             {error && <p className="error-message">{error}</p>}

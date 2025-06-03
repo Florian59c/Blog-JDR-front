@@ -1,4 +1,5 @@
-import { TextField } from '@mui/material';
+import { Button, TextField } from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -60,8 +61,8 @@ export default function ResetPassword() {
                             onChange={(e) => setConfirmPassword(e.target.value)}
                         />
                     </div>
-                    <div className="buttonContainer">
-                        <button type="submit" className="button-style button-color-validate">Réinitialiser le mot de passe</button>
+                    <div className="btn">
+                        <Button type="submit" variant="outlined" color="success" endIcon={<SendIcon />}>Réinitialiser le mot de passe</Button>
                     </div>
                 </form>
                 {error && <p className="error-message">{error}</p>}

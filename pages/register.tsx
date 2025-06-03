@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import TextField from '@mui/material/TextField';
+import { Button, TextField } from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
 import Link from "next/link";
 import IsConnectedError from "../components/isConnectedError";
 import { Checkbox } from "@mui/material";
@@ -107,8 +108,8 @@ export default function Register() {
                   >Conditions Générales d'Utilisation</a>*</p>
                 </div>
               </div>
-              <div className="buttonContainer">
-                <button type="submit" className="button-style button-color-validate">Se créer un compte</button>
+              <div className="btn">
+                <Button type="submit" variant="outlined" color="success" endIcon={<SendIcon />}>Se créer un compte</Button>
               </div>
             </form>
           </div>
