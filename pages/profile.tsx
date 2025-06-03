@@ -4,12 +4,12 @@ import SendIcon from "@mui/icons-material/Send";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SpeakerNotesOutlinedIcon from '@mui/icons-material/SpeakerNotesOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
-import KeyboardReturnOutlinedIcon from '@mui/icons-material/KeyboardReturnOutlined';
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import DeleteModale from "../modals/deleteModale";
+import NotConnectedError from '../components/notConnectedError';
 
 export default function Profile() {
     const [isConnected, setIsConnected] = useState(false);
@@ -158,19 +158,7 @@ export default function Profile() {
                     {isOpen && <DeleteModale setIsOpen={setIsOpen} deleteType="user" id={0} />}
                 </div>
             ) : (
-                <div className="blockContainer">
-                    <h1>Vous ne pouvez pas accéder à cette page si vous n'êtes pas connecté</h1>
-                    <div className="btn">
-                        <Link href="/login">
-                            <Button
-                                variant="outlined"
-                                color="success"
-                                endIcon={<KeyboardReturnOutlinedIcon />}>
-                                Retourner à la page de connexion
-                            </Button>
-                        </Link>
-                    </div>
-                </div>
+                <NotConnectedError />
             )}
         </div>
     );

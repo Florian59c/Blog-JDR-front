@@ -163,7 +163,7 @@ const muiThemes = createTheme({
                         backgroundColor: "#0D3C36", // vert
                         color: "#FCF5C9", // texte en jaune
                         border: "none",
-                        borderRadius: "12px",
+                        borderRadius: "30px",
                         whiteSpace: "normal",
                         maxWidth: "20rem",
                         textAlign: "center",

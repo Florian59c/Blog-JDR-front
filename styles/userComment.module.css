@@ -9,16 +9,12 @@
     align-items: center;
 }
 
-.modifyButton {
-    display: flex;
-    justify-content: center;
-}
-
 .buttons {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 1rem;
+    margin-top: 2rem;
+    gap: 1rem;
 }
 
 /* Tablette */
@@ -39,7 +35,7 @@
 
     .buttons {
         margin-top: 0;
-        margin-left: 2rem;
+        margin-left: 1rem;
         align-self: center;
     }
 }
