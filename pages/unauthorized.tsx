@@ -10,7 +10,7 @@ export default function Unauthorized() {
         <h1>Accès non autorisé</h1>
         <p>Vous n'avez pas les permissions nécessaires pour accéder à cette page !</p>
       </div>
-      <div className="btn">
+      <div className="button-container">
         <Link href="/">
           <Button variant="outlined" color="success" endIcon={<KeyboardReturnOutlinedIcon />}>Retourner à la page d’accueil</Button>
         </Link>

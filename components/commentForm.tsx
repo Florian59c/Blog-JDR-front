@@ -51,7 +51,7 @@ export default function CommentForm({ id, pageType, onCommentAdded }: CommentPro
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
                     />
-                    <div className="btn">
+                    <div className="button-container">
                         <Button type="submit" variant="outlined" color="success" endIcon={<SendIcon />}>Ajouter un commentaire</Button>
                     </div>
                 </form>

@@ -67,7 +67,7 @@ export default function ForgotPassword() {
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
-                        <div className="btn">
+                        <div className="button-container">
                             <Button type="submit" variant="outlined" color="success" endIcon={<EmailOutlinedIcon />}>Envoyer le mail</Button>
                         </div>
                     </form>

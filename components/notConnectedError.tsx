@@ -6,7 +6,7 @@ export default function NotConnectedError() {
     return (
         <div className="blockContainer">
             <h1>Vous ne pouvez pas accéder à cette page si vous n'êtes pas connecté</h1>
-            <div className="btn">
+            <div className="button-container">
                 <Link href="/login">
                     <Button
                         variant="outlined"

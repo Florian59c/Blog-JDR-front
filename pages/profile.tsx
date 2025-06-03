@@ -138,7 +138,7 @@ export default function Profile() {
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
                             </div>
-                            <div className="btn">
+                            <div className="button-container">
                                 <Button type='submit' variant="outlined" color="success" endIcon={<SendIcon />}>Modifier mon profil</Button>
                             </div>
                         </form>

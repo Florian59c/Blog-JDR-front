@@ -8,7 +8,7 @@ export default function Custom404() {
         <div className={`blockContainer ${styles.notFound}`}>
             <h1>404 - Page introuvable</h1>
             <p>La page que vous cherchez n'existe pas.</p>
-            <div className="btn">
+            <div className="button-container">
                 <Link href="/">
                     <Button variant="outlined" color="success" endIcon={<KeyboardReturnOutlinedIcon />}>Retourner à la page d’accueil</Button>
                 </Link>

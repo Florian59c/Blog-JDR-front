@@ -79,7 +79,7 @@ export default function Banishment() {
                                 <p><span className={styles.subTitle}>Email</span> : {user.email}</p>
                                 <p><span className={styles.subTitle}>Pseudo</span> : {user.pseudo}</p>
                             </div>
-                            <div className='btn'>
+                            <div className='button-container'>
                                 <Button
                                     variant="outlined"
                                     color="error"

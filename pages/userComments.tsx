@@ -115,7 +115,7 @@ export default function UserComments() {
                                                                 setContent({ ...content, [comment.id]: e.target.value })
                                                             }
                                                         />
-                                                        <div className="btn">
+                                                        <div className="button-container">
                                                             <Button type='submit' variant="outlined" color="success" endIcon={<SendIcon />}>
                                                                 Modifier le commentaire
                                                             </Button>

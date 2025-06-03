@@ -66,7 +66,7 @@ export default function Contact() {
                             onChange={(e) => setContent(e.target.value)}
                         />
                     </div>
-                    <div className="btn">
+                    <div className="button-container">
                         <Button type="submit" variant="outlined" color="success" endIcon={<EmailOutlinedIcon />}>Envoyer l'email</Button>
                     </div>
                 </form>

@@ -44,7 +44,7 @@ export default function Home() {
                 </div>
             </div>
             {isAdmin &&
-                <div className="btn">
+                <div className="button-container">
                     <Link href="/MJ/adminPage">
                         <Button variant="outlined" color="success" endIcon={<SendIcon />}>Accès Administrateur</Button>
                     </Link>

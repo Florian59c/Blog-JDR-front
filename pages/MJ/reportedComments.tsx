@@ -75,13 +75,18 @@ export default function reportedComments() {
                                     <p className={styles.content}>{comment.content}</p>
                                 </div>
                                 <div className={styles.buttons} >
-                                    <Button variant="outlined" color="success" endIcon={<SendIcon />}
+                                    <Button
+                                        variant="outlined"
+                                        color="success"
+                                        endIcon={<SendIcon />}
                                         onClick={() => cancelReportForComment(comment.id)}
                                     >
                                         Annuler le signalement
                                     </Button>
-                                    <Button variant="outlined" color="error" startIcon={<DeleteIcon />}
-                                        className="button-style button-color-error"
+                                    <Button
+                                        variant="outlined"
+                                        color="error"
+                                        startIcon={<DeleteIcon />}
                                         onClick={() => { setDeleteId(comment.id); setIsOpen(true) }}
                                     >
                                         Supprimer le commentaire

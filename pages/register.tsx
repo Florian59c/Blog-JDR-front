@@ -108,7 +108,7 @@ export default function Register() {
                   >Conditions Générales d'Utilisation</a>*</p>
                 </div>
               </div>
-              <div className="btn">
+              <div className="button-container">
                 <Button type="submit" variant="outlined" color="success" endIcon={<SendIcon />}>Se créer un compte</Button>
               </div>
             </form>

@@ -41,7 +41,7 @@ export default function AdminPage() {
       <div className={styles.redirectButtons}>
         {pages.map((page, index) => {
           return (
-            <div key={index} className={classNames(styles.buttons, 'btn')}>
+            <div key={index} className={classNames(styles.buttons, 'button-container')}>
               <Link href={`/MJ/${page.link}`}>
                 <Button variant="outlined" color="success" sx={{ width: "100%" }} endIcon={page.icon}>
                   {page.title}

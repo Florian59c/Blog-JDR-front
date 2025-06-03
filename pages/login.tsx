@@ -78,7 +78,7 @@ export default function login(req: NextRequest) {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              <div className="btn">
+              <div className="button-container">
                 <Button type="submit" variant="outlined" color="success" endIcon={<SendIcon />}>Se connecter</Button>
               </div>
             </form>

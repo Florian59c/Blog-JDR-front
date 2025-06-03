@@ -73,12 +73,6 @@ a {
   align-items: center;
 }
 
-.buttonContainer {
-  display: flex;
-  justify-content: center;
-  margin-top: 2rem;
-}
-
 .link {
   color: #0D3C36;
   font-weight: bold;
@@ -100,35 +94,9 @@ a {
 
 /* styles des bouttons */
 
-.btn {
+.button-container {
   text-align: center;
   margin-top: 1rem;
-}
-
-.button-style {
-  padding: 1rem;
-  border: 2px solid #FFF;
-  border-radius: 2rem;
-  width: 15rem;
-  cursor: pointer;
-}
-
-.button-color-validate {
-  color: #FCF5C9;
-  background-color: #0D3C36;
-}
-
-.button-color-validate:hover {
-  border-color: #0D3C36;
-}
-
-.button-color-error {
-  color: #FFF;
-  background-color: #AF1E22;
-}
-
-.button-color-error:hover {
-  border-color: #AF1E22;
 }
 
 /* gestion de message et d'erreurs */
@@ -214,12 +182,6 @@ a {
 
   .checkbox p {
     padding-left: 0.5rem;
-  }
-
-  /* styles des bouttons */
-
-  .button-style {
-    width: 20rem;
   }
 
   /* affichage des commentaires */

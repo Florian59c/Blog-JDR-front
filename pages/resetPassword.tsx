@@ -61,7 +61,7 @@ export default function ResetPassword() {
                             onChange={(e) => setConfirmPassword(e.target.value)}
                         />
                     </div>
-                    <div className="btn">
+                    <div className="button-container">
                         <Button type="submit" variant="outlined" color="success" endIcon={<SendIcon />}>Réinitialiser le mot de passe</Button>
                     </div>
                 </form>
