@@ -3,6 +3,8 @@ import Cancel from '../assets/img/cancel.png';
 import { DeleteModaleInterface } from '../interfaces/DeleteModaleInterface';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import { Button } from '@mui/material';
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function DeleteModale({ id, deleteType, setIsOpen, onSuccess }: DeleteModaleInterface) {
     const router = useRouter();
@@ -63,12 +65,15 @@ export default function DeleteModale({ id, deleteType, setIsOpen, onSuccess }: D
                     <p>Etes vous sûr de vouloir effectuer la suppression ?</p>
                     <p className={styles.alert}>Attention ! La suppression est définitive !!</p>
                 </div>
-                <button
-                    className="button-style button-color-error"
+                <Button
+                    variant="outlined"
+                    color="error"
+                    sx={{ width: '15rem' }}
+                    startIcon={<DeleteIcon />}
                     onClick={() => handleDelete(id, deleteType)}
                 >
                     Supprimer
-                </button>
+                </Button>
             </div>
         </div>
     );

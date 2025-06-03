@@ -1,10 +1,11 @@
 import styles from '../styles/home.module.css';
 import LogoGreen from '../assets/img/logoGreen.jpg';
-import classNames from 'classnames';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import LatestContent from '../components/latestContent';
+import SendIcon from "@mui/icons-material/Send";
+import { Button } from '@mui/material';
 
 export default function Home() {
     const [isAdmin, setIsAdmin] = useState(false);
@@ -43,9 +44,9 @@ export default function Home() {
                 </div>
             </div>
             {isAdmin &&
-                <div className={classNames("buttonContainer", styles.admin)}>
+                <div className={styles.admin}>
                     <Link href="/MJ/adminPage">
-                        <button className="button-style button-color-validate">Accès Administrateur</button>
+                        <Button variant="outlined" color="success" endIcon={<SendIcon />}>Accès Administrateur</Button>
                     </Link>
                 </div>
             }

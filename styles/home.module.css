@@ -24,6 +24,8 @@
 
 .admin {
     margin-top: 2rem;
+    display: flex;
+    justify-content: center;
 }
 
 /* Tablette et pc */

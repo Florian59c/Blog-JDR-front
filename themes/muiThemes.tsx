@@ -132,6 +132,56 @@ const muiThemes = createTheme({
                 },
             },
         },
+        MuiButton: {
+            variants: [
+                {
+                    props: { variant: "outlined", color: "error" },
+                    style: {
+                        backgroundColor: "#AF1E22", // rouge
+                        color: "#ffffff", // texte et icône en blanc
+                        border: "none",
+                        borderRadius: "30px",
+                        whiteSpace: "normal",
+                        maxWidth: "20rem",
+                        textAlign: "center",
+                        textTransform: "none",
+                        boxShadow: "0 4px 6px rgba(0, 0, 0, 0.3)", // ombre portée
+                        "& .MuiButton-startIcon": {
+                            color: "#ffffff", // icône en blanc
+                        },
+                        "&:hover": {
+                            backgroundColor: "#8C181B", // rouge plus foncé
+                            // backgroundColor: "#D43B3E", // rouge plus claire
+                            border: "none",
+                            boxShadow: "0 6px 8px rgba(0, 0, 0, 0.5)", // ombre plus marquée au hover
+                        },
+                    },
+                },
+                {
+                    props: { variant: "outlined", color: "success" },
+                    style: {
+                        backgroundColor: "#0D3C36", // vert
+                        color: "#FCF5C9", // texte en jaune
+                        border: "none",
+                        borderRadius: "12px",
+                        whiteSpace: "normal",
+                        maxWidth: "20rem",
+                        textAlign: "center",
+                        textTransform: "none",
+                        boxShadow: "0 4px 6px rgba(0, 0, 0, 0.3)", // ombre portée
+                        "& .MuiButton-startIcon": {
+                            // color: "#ffffff", // icône en blanc
+                            color: "#FCF5C9", // icône en jaune
+                        },
+                        "&:hover": {
+                            backgroundColor: "#0A2B27", // rouge plus foncé
+                            border: "none",
+                            boxShadow: "0 6px 8px rgba(0, 0, 0, 0.5)", // ombre plus marquée au hover
+                        },
+                    },
+                },
+            ],
+        },
     },
 });
 
