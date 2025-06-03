@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { PartialUserInterface } from '../../interfaces/PartialUserInterface';
 import DeleteModale from '../../modals/deleteModale';
+import { Button } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 let debounceTimeout: NodeJS.Timeout;
 
@@ -77,13 +79,15 @@ export default function Banishment() {
                                 <p><span className={styles.subTitle}>Email</span> : {user.email}</p>
                                 <p><span className={styles.subTitle}>Pseudo</span> : {user.pseudo}</p>
                             </div>
-                            <div className='buttonContainer'>
-                                <button
-                                    className="button-style button-color-error"
+                            <div className='button-container'>
+                                <Button
+                                    variant="outlined"
+                                    color="error"
+                                    startIcon={<DeleteIcon />}
                                     onClick={() => { setDeleteId(user.id); setIsOpen(true) }}
                                 >
                                     Bannir l'utilisateur
-                                </button>
+                                </Button>
                             </div>
                         </div>
                     </div>

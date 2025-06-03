@@ -22,10 +22,6 @@
     text-align: justify;
 }
 
-.admin {
-    margin-top: 2rem;
-}
-
 /* Tablette et pc */
 @media (min-width: 768px) {
     .container {

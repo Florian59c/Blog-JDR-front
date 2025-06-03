@@ -1,11 +1,15 @@
 import styles from '../styles/userComment.module.css';
 import axios from "axios";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { CommentsInterface } from '../interfaces/CommentsInterface';
 import DeleteModale from "../modals/deleteModale";
-import { TextField } from '@mui/material';
+import { Button, TextField } from '@mui/material';
+import SendIcon from "@mui/icons-material/Send";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import EditOffOutlinedIcon from '@mui/icons-material/EditOffOutlined';
 import ReturnLink from '../components/returnLink';
+import NotConnectedError from '../components/notConnectedError';
 
 export default function UserComments() {
     const [isConnected, setIsConnected] = useState(false);
@@ -111,10 +115,10 @@ export default function UserComments() {
                                                                 setContent({ ...content, [comment.id]: e.target.value })
                                                             }
                                                         />
-                                                        <div className={styles.modifyButton}>
-                                                            <button type="submit" className="button-style button-color-validate">
+                                                        <div className="button-container">
+                                                            <Button type='submit' variant="outlined" color="success" endIcon={<SendIcon />}>
                                                                 Modifier le commentaire
-                                                            </button>
+                                                            </Button>
                                                         </div>
                                                         {error && <p className="error-message">{error}</p>}
                                                     </form>
@@ -123,8 +127,11 @@ export default function UserComments() {
                                                 )}
                                             </div>
                                             <div className={styles.buttons}>
-                                                <button
-                                                    className="button-style button-color-validate"
+                                                <Button
+                                                    variant="outlined"
+                                                    color="success"
+                                                    sx={{ width: '18rem' }}
+                                                    startIcon={isEditing ? <EditOffOutlinedIcon /> : <EditOutlinedIcon />}
                                                     onClick={() =>
                                                         setCanModify((prev) => ({
                                                             ...prev,
@@ -133,13 +140,16 @@ export default function UserComments() {
                                                     }
                                                 >
                                                     {isEditing ? "Ne plus modifier" : "Modifier"}
-                                                </button>
-                                                <button
-                                                    className="button-style button-color-error"
+                                                </Button>
+                                                <Button
+                                                    variant="outlined"
+                                                    color="error"
+                                                    sx={{ width: '18rem' }}
+                                                    startIcon={<DeleteIcon />}
                                                     onClick={() => { setDeleteId(comment.id); setIsOpen(true) }}
                                                 >
-                                                    Supprimer
-                                                </button>
+                                                    Supprimer mon commentaire
+                                                </Button>
                                             </div>
                                         </div>
                                     );
@@ -150,15 +160,9 @@ export default function UserComments() {
                     {isOpen && <DeleteModale setIsOpen={setIsOpen} deleteType="comment" id={deleteId} />}
                 </div>
             ) : (
-                <div className="blockContainer">
-                    <h1>Vous ne pouvez pas accéder à cette page si vous n'êtes pas connecté</h1>
-                    <div className="buttonContainer">
-                        <Link href="/login">
-                            <button className="button-style button-color-validate">Se connecter</button>
-                        </Link>
-                    </div>
-                </div>
-            )}
-        </div>
+                <NotConnectedError />
+            )
+            }
+        </div >
     );
 }

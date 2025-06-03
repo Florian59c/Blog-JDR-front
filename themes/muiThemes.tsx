@@ -132,6 +132,54 @@ const muiThemes = createTheme({
                 },
             },
         },
+        MuiButton: {
+            variants: [
+                {
+                    props: { variant: "outlined", color: "success" },
+                    style: {
+                        backgroundColor: "#0D3C36", // fond vert
+                        color: "#FCF5C9", // texte en jaune
+                        border: "none",
+                        borderRadius: "30px",
+                        whiteSpace: "normal",
+                        maxWidth: "20rem",
+                        textAlign: "center",
+                        textTransform: "none",
+                        boxShadow: "0 4px 6px rgba(0, 0, 0, 0.3)", // ombre portée
+                        "& .MuiButton-startIcon": {
+                            color: "#FCF5C9", // icône en jaune
+                        },
+                        "&:hover": {
+                            backgroundColor: "#0A2B27", // vert plus foncé au survol
+                            border: "none",
+                            boxShadow: "0 6px 8px rgba(0, 0, 0, 0.5)", // ombre plus marquée au survol
+                        },
+                    },
+                },
+                {
+                    props: { variant: "outlined", color: "error" },
+                    style: {
+                        backgroundColor: "#AF1E22", // fond rouge
+                        color: "#ffffff", // texte en blanc
+                        border: "none",
+                        borderRadius: "30px",
+                        whiteSpace: "normal",
+                        maxWidth: "20rem",
+                        textAlign: "center",
+                        textTransform: "none",
+                        boxShadow: "0 4px 6px rgba(0, 0, 0, 0.3)",
+                        "& .MuiButton-startIcon": {
+                            color: "#ffffff", // icône en blanc
+                        },
+                        "&:hover": {
+                            backgroundColor: "#8C181B", // rouge plus foncé au survol
+                            border: "none",
+                            boxShadow: "0 6px 8px rgba(0, 0, 0, 0.5)",
+                        },
+                    },
+                },
+            ],
+        },
     },
 });
 

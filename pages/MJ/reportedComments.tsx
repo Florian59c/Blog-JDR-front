@@ -4,6 +4,9 @@ import ReturnLink from "../../components/returnLink";
 import { CommentsInterface } from "../../interfaces/CommentsInterface";
 import axios from "axios";
 import DeleteModale from "../../modals/deleteModale";
+import { Button } from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function reportedComments() {
     const [comments, setComments] = useState<CommentsInterface[]>([]);
@@ -72,18 +75,22 @@ export default function reportedComments() {
                                     <p className={styles.content}>{comment.content}</p>
                                 </div>
                                 <div className={styles.buttons} >
-                                    <button
-                                        className="button-style button-color-validate"
+                                    <Button
+                                        variant="outlined"
+                                        color="success"
+                                        endIcon={<SendIcon />}
                                         onClick={() => cancelReportForComment(comment.id)}
                                     >
                                         Annuler le signalement
-                                    </button>
-                                    <button
-                                        className="button-style button-color-error"
+                                    </Button>
+                                    <Button
+                                        variant="outlined"
+                                        color="error"
+                                        startIcon={<DeleteIcon />}
                                         onClick={() => { setDeleteId(comment.id); setIsOpen(true) }}
                                     >
                                         Supprimer le commentaire
-                                    </button>
+                                    </Button>
                                 </div>
                             </div>
                         )

@@ -1,12 +1,11 @@
-.btn {
+.btnDouble {
     display: flex;
     justify-content: center;
-}
-
-.btnLogout {
+    gap: 5rem;
     margin-bottom: 5rem;
 }
 
 .btnDelete {
+    text-align: center;
     margin-top: 5rem;
 }

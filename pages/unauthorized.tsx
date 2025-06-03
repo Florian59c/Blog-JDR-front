@@ -1,5 +1,7 @@
 import styles from '../styles/unauthorized.module.css';
 import Link from "next/link";
+import { Button } from '@mui/material';
+import KeyboardReturnOutlinedIcon from '@mui/icons-material/KeyboardReturnOutlined';
 
 export default function Unauthorized() {
   return (
@@ -8,9 +10,9 @@ export default function Unauthorized() {
         <h1>Accès non autorisé</h1>
         <p>Vous n'avez pas les permissions nécessaires pour accéder à cette page !</p>
       </div>
-      <div className="buttonContainer">
+      <div className="button-container">
         <Link href="/">
-          <button className="button-style button-color-validate">Retourner à la page d'accueil</button>
+          <Button variant="outlined" color="success" endIcon={<KeyboardReturnOutlinedIcon />}>Retourner à la page d’accueil</Button>
         </Link>
       </div>
     </div>
