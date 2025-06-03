@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "@mui/material";
-import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import KeyboardReturnOutlinedIcon from '@mui/icons-material/KeyboardReturnOutlined';
 
 export default function IsConnectedError() {
     return (
@@ -11,7 +11,7 @@ export default function IsConnectedError() {
                     <Button
                         variant="outlined"
                         color="success"
-                        endIcon={<LogoutOutlinedIcon />}
+                        endIcon={<KeyboardReturnOutlinedIcon />}
                     >
                         Retourner à la page d'accueil
                     </Button>
