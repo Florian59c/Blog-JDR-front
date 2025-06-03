@@ -6,7 +6,6 @@ import SpeakerNotesOutlinedIcon from '@mui/icons-material/SpeakerNotesOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import KeyboardReturnOutlinedIcon from '@mui/icons-material/KeyboardReturnOutlined';
 import axios from "axios";
-import classNames from 'classnames';
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -62,7 +61,7 @@ export default function Profile() {
         <div>
             {isConnected ? (
                 <div className="blockContainer">
-                    <div className={classNames(styles.btn, styles.btnLogout)}>
+                    <div className={styles.btnDouble}>
                         <Link href="/userComments">
                             <Button variant="outlined" color="success" sx={{ width: '18rem' }} endIcon={<SpeakerNotesOutlinedIcon />}>
                                 Voir mes commentaires
@@ -139,7 +138,7 @@ export default function Profile() {
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
                             </div>
-                            <div className={styles.btnModify}>
+                            <div className="btn">
                                 <Button variant="outlined" color="success" endIcon={<SendIcon />}>Modifier mon profil</Button>
                             </div>
                         </form>
@@ -161,7 +160,7 @@ export default function Profile() {
             ) : (
                 <div className="blockContainer">
                     <h1>Vous ne pouvez pas accéder à cette page si vous n'êtes pas connecté</h1>
-                    <div className={styles.test}>
+                    <div className="btn">
                         <Link href="/login">
                             <Button
                                 variant="outlined"

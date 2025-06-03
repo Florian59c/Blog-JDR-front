@@ -100,6 +100,11 @@ a {
 
 /* styles des bouttons */
 
+.btn {
+  text-align: center;
+  margin-top: 1rem;
+}
+
 .button-style {
   padding: 1rem;
   border: 2px solid #FFF;

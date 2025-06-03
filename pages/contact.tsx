@@ -1,4 +1,5 @@
-import { TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
 import axios from "axios";
 import { useState } from "react";
 
@@ -65,8 +66,8 @@ export default function Contact() {
                             onChange={(e) => setContent(e.target.value)}
                         />
                     </div>
-                    <div className="buttonContainer">
-                        <button type="submit" className="button-style button-color-validate">Envoyer l'email</button>
+                    <div className="btn">
+                        <Button variant="outlined" color="success" endIcon={<SendIcon />}>Envoyer l'email</Button>
                     </div>
                 </form>
                 {error && <p className="error-message">{error}</p>}
