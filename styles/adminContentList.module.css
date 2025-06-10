@@ -1,0 +1,18 @@
+.title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.date {
+    font-weight: normal;
+    text-align: end;
+}
+
+.buttons {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
