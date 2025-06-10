@@ -16,3 +16,12 @@
     align-items: center;
     gap: 0.5rem;
 }
+
+.error p {
+    text-align: center;
+    margin-top: 5rem;
+}
+
+.errorMessage {
+    color: #AF1E22;
+}

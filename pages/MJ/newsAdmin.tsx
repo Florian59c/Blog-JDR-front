@@ -25,7 +25,7 @@ export default function newsAdmin() {
                 />
                 {isListVisible && (
                     <div>
-                        <AdminContentList />
+                        <AdminContentList api_url="news/getAllNewsWithNewDate" />
                     </div>
                 )}
             </div>

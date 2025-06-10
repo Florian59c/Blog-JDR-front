@@ -25,7 +25,7 @@ export default function yourHeroStoriesAdmin() {
                 />
                 {isListVisible && (
                     <div>
-                        <AdminContentList />
+                        <AdminContentList api_url="hero/getAllHeroWithNewDate" />
                     </div>
                 )}
             </div>
