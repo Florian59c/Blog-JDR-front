@@ -6,7 +6,7 @@ export default function jdrCreate() {
             <ReturnLink
                 links={[
                     { title: 'Page d\'accueil administrateur', href: '/MJ/adminPage' },
-                    { title: 'Liste des JDR', href: '/MJ/newsAdmin' },
+                    { title: 'Liste des JDR', href: '/MJ/jdrAdmin' },
                 ]}
             />
             <div className="blockContainer">
