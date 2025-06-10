@@ -10,7 +10,7 @@ type AdminDisplayListProps = {
 export default function AdminDisplayList({ message, isOpen, onToggle }: AdminDisplayListProps) {
     return (
         <div className={styles.container} onClick={onToggle}>
-            <p>Afficher/masquer La liste des {message}</p>
+            <p>Afficher/Masquer la liste des {message}</p>
             <img
                 src={RightArrow.src}
                 alt="flèche"
