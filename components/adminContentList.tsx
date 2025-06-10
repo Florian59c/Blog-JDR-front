@@ -6,14 +6,19 @@ import { Button } from "@mui/material";
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteIcon from "@mui/icons-material/Delete";
 import { NewsInterface } from '../interfaces/NewsInterface';
+import { JdrInterface } from '../interfaces/JdrInterface';
 
 interface AdminContentListProps {
     api_url: string;
 }
 
 export default function AdminContentList({ api_url }: AdminContentListProps) {
-    const [contents, setContents] = useState<(HeroStoryInterface | NewsInterface)[]>([]);
+    const [contents, setContents] = useState<(HeroStoryInterface | NewsInterface | JdrInterface)[]>([]);
     const [error, setError] = useState('');
+
+    function isJdrInterface(content: any): content is JdrInterface {
+        return 'is_scenario' in content;
+    }
 
     async function getHeroStories() {
         setError('');
@@ -49,6 +54,10 @@ export default function AdminContentList({ api_url }: AdminContentListProps) {
                                             })}
                                 </p>
                                 <p className={styles.title}>{content.title}</p>
+                                <p className={styles.jdrType}>{api_url === "jdr/findAllJdrWithNewDate" && isJdrInterface(content) && (
+                                    content.is_scenario ? "(Scénario)" : "(Aide de jeu)"
+                                )}
+                                </p>
                                 <div className={styles.buttons}>
                                     <Button
                                         variant="outlined"

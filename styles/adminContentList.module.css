@@ -1,12 +1,16 @@
-.title {
-    font-size: 1.4rem;
-    font-weight: bold;
-    text-align: center;
-}
-
 .date {
     font-weight: normal;
     text-align: end;
+}
+
+.title {
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.title,
+.jdrType {
+    text-align: center;
 }
 
 .buttons {
