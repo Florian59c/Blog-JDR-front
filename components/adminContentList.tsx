@@ -6,13 +6,14 @@ import { Button } from "@mui/material";
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteIcon from "@mui/icons-material/Delete";
 import { NewsInterface } from '../interfaces/NewsInterface';
+import { JdrInterface } from '../interfaces/JdrInterface';
 
 interface AdminContentListProps {
     api_url: string;
 }
 
 export default function AdminContentList({ api_url }: AdminContentListProps) {
-    const [contents, setContents] = useState<(HeroStoryInterface | NewsInterface)[]>([]);
+    const [contents, setContents] = useState<(HeroStoryInterface | NewsInterface | JdrInterface)[]>([]);
     const [error, setError] = useState('');
 
     async function getHeroStories() {
