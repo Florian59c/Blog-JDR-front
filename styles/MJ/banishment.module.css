@@ -1,0 +1,24 @@
+.container {
+    margin-top: 5rem;
+}
+
+.form {
+    text-align: center;
+}
+
+.title {
+    font-weight: bold;
+}
+
+.userContainer {
+    margin: 1rem 2rem 0 2rem;
+}
+
+.subTitle {
+    text-decoration: underline;
+}
+
+.message {
+    margin-top: 2rem;
+    text-align: center;
+}

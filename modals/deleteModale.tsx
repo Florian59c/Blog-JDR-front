@@ -3,8 +3,10 @@ import Cancel from '../assets/img/cancel.png';
 import { DeleteModaleInterface } from '../interfaces/DeleteModaleInterface';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import { Button } from '@mui/material';
+import DeleteIcon from "@mui/icons-material/Delete";
 
-export default function DeleteModale({ id, deleteType, setIsOpen }: DeleteModaleInterface) {
+export default function DeleteModale({ id, deleteType, setIsOpen, onSuccess }: DeleteModaleInterface) {
     const router = useRouter();
 
     async function handleDelete(id: number, deleteType: string) {
@@ -23,13 +25,20 @@ export default function DeleteModale({ id, deleteType, setIsOpen }: DeleteModale
                 return;
             }
 
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}${route}`,
+            const response = await axios.post(
+                `${process.env.NEXT_PUBLIC_SERVER_URL}${route}`,
                 deleteType === "user" ? {} : { id },
                 { withCredentials: true }
             );
 
             if (response.status === 201) {
                 setIsOpen(false);
+
+                // Appel de la fonction de succès si elle est fournie
+                if (onSuccess) {
+                    onSuccess();
+                }
+
                 if (deleteType === "user") {
                     router.push('/');
                 }
@@ -56,12 +65,15 @@ export default function DeleteModale({ id, deleteType, setIsOpen }: DeleteModale
                     <p>Etes vous sûr de vouloir effectuer la suppression ?</p>
                     <p className={styles.alert}>Attention ! La suppression est définitive !!</p>
                 </div>
-                <button
-                    className="button-style button-color-error"
+                <Button
+                    variant="outlined"
+                    color="error"
+                    sx={{ width: '15rem' }}
+                    startIcon={<DeleteIcon />}
                     onClick={() => handleDelete(id, deleteType)}
                 >
                     Supprimer
-                </button>
+                </Button>
             </div>
         </div>
     );

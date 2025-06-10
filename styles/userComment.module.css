@@ -1,29 +1,20 @@
-.return {
+.content {
+    flex: 1;
+    width: 100%;
+}
+
+.content form {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    margin-left: 0.5rem;
-    cursor: pointer;
-}
-
-.return img {
-    max-height: 1rem;
-    margin-right: 0.5rem;
-}
-
-.return p {
-    text-decoration: underline;
-}
-
-.modifyButton {
-    display: flex;
-    justify-content: center;
 }
 
 .buttons {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 1rem;
+    margin-top: 2rem;
+    gap: 1rem;
 }
 
 /* Tablette */
@@ -42,16 +33,9 @@
         justify-content: space-between;
     }
 
-    .content {
-        width: 100%;
-    }
-
     .buttons {
         margin-top: 0;
-        margin-left: 2rem;
+        margin-left: 1rem;
         align-self: center;
     }
 }
-
-/* Grand écran d'ordinateur */
-@media (min-width: 1920px) {}

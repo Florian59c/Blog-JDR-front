@@ -1,3 +1,24 @@
+@font-face {
+  font-family: 'GeistSans';
+  src: url('/fonts/GeistVF.woff') format('woff');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GeistMono';
+  src: url('/fonts/GeistMonoVF.woff') format('woff');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-geist-sans: 'GeistSans', sans-serif;
+  --font-geist-mono: 'GeistMono', monospace;
+}
+
 html,
 body {
   max-width: 100vw;
@@ -52,12 +73,6 @@ a {
   align-items: center;
 }
 
-.buttonContainer {
-  display: flex;
-  justify-content: center;
-  margin-top: 2rem;
-}
-
 .link {
   color: #0D3C36;
   font-weight: bold;
@@ -79,30 +94,9 @@ a {
 
 /* styles des bouttons */
 
-.button-style {
-  padding: 1rem;
-  border: 2px solid #FFF;
-  border-radius: 2rem;
-  width: 15rem;
-  cursor: pointer;
-}
-
-.button-color-validate {
-  color: #FCF5C9;
-  background-color: #0D3C36;
-}
-
-.button-color-validate:hover {
-  border-color: #0D3C36;
-}
-
-.button-color-error {
-  color: #FFF;
-  background-color: #AF1E22;
-}
-
-.button-color-error:hover {
-  border-color: #AF1E22;
+.button-container {
+  text-align: center;
+  margin-top: 1rem;
 }
 
 /* gestion de message et d'erreurs */
@@ -149,6 +143,18 @@ a {
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
+.commentContainer form {
+  width: 100%;
+}
+
+.commentContainer .MuiTextField-root {
+  width: 100%;
+}
+
+.boldText {
+  font-weight: bold;
+}
+
 /* Tablette */
 @media (min-width: 768px) {
 
@@ -176,12 +182,6 @@ a {
 
   .checkbox p {
     padding-left: 0.5rem;
-  }
-
-  /* styles des bouttons */
-
-  .button-style {
-    width: 20rem;
   }
 
   /* affichage des commentaires */

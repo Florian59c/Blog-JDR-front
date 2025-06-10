@@ -1,11 +1,15 @@
 import styles from '../styles/profile.module.css';
-import { TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
+import DeleteIcon from "@mui/icons-material/Delete";
+import SpeakerNotesOutlinedIcon from '@mui/icons-material/SpeakerNotesOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import axios from "axios";
-import classNames from 'classnames';
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import DeleteModale from "../modals/deleteModale";
+import NotConnectedError from '../components/notConnectedError';
 
 export default function Profile() {
     const [isConnected, setIsConnected] = useState(false);
@@ -57,14 +61,17 @@ export default function Profile() {
         <div>
             {isConnected ? (
                 <div className="blockContainer">
-                    <div className={classNames(styles.btn, styles.btnLogout)}>
+                    <div className={styles.btnDouble}>
                         <Link href="/userComments">
-                            <button className="button-style button-color-validate">
+                            <Button variant="outlined" color="success" sx={{ width: '18rem' }} endIcon={<SpeakerNotesOutlinedIcon />}>
                                 Voir mes commentaires
-                            </button>
+                            </Button>
                         </Link>
-                        <button
-                            className="button-style button-color-validate"
+                        <Button
+                            variant="outlined"
+                            color="success"
+                            sx={{ width: '18rem' }}
+                            endIcon={<LogoutOutlinedIcon />}
                             onClick={async () => {
                                 try {
                                     await axios.post(
@@ -81,7 +88,7 @@ export default function Profile() {
                             }}
                         >
                             Se déconnecter
-                        </button>
+                        </Button>
                     </div>
                     <h1>Mon profil</h1>
                     <div>
@@ -131,32 +138,27 @@ export default function Profile() {
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
                             </div>
-                            <div className="buttonContainer">
-                                <button type="submit" className="button-style button-color-validate">Modifier mon profil</button>
+                            <div className="button-container">
+                                <Button type='submit' variant="outlined" color="success" endIcon={<SendIcon />}>Modifier mon profil</Button>
                             </div>
                         </form>
                         {error && <p className="error-message">{error}</p>}
                         <p className="confirmMessage">{confirmMessage}</p>
                     </div>
-                    <div className={classNames(styles.btn, styles.btnDelete)}>
-                        <button
-                            className="button-style button-color-error"
+                    <div className={styles.btnDelete}>
+                        <Button
+                            variant="outlined"
+                            color="error"
+                            startIcon={<DeleteIcon />}
                             onClick={() => setIsOpen(true)}
                         >
                             Supprimer mon compte
-                        </button>
+                        </Button>
                     </div>
                     {isOpen && <DeleteModale setIsOpen={setIsOpen} deleteType="user" id={0} />}
                 </div>
             ) : (
-                <div className="blockContainer">
-                    <h1>Vous ne pouvez pas accéder à cette page si vous n'êtes pas connecté</h1>
-                    <div className="buttonContainer">
-                        <Link href="/login">
-                            <button className="button-style button-color-validate">Se connecter</button>
-                        </Link>
-                    </div>
-                </div>
+                <NotConnectedError />
             )}
         </div>
     );

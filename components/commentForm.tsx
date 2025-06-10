@@ -2,7 +2,9 @@ import styles from '../styles/commentForm.module.css';
 import { useState } from "react";
 import { CommentPropsInterface } from "../interfaces/CommentPropsInterface";
 import axios from "axios";
-import { TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
+
 
 export default function CommentForm({ id, pageType, onCommentAdded }: CommentPropsInterface & { onCommentAdded: () => void }) {
     const [content, setContent] = useState('');
@@ -49,8 +51,8 @@ export default function CommentForm({ id, pageType, onCommentAdded }: CommentPro
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
                     />
-                    <div className={styles.commentButtonContainer}>
-                        <button type="submit" className="button-style button-color-validate">Ajouter un commentaire</button>
+                    <div className="button-container">
+                        <Button type="submit" variant="outlined" color="success" endIcon={<SendIcon />}>Ajouter un commentaire</Button>
                     </div>
                 </form>
             </div>

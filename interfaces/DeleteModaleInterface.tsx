@@ -1,5 +1,6 @@
 export interface DeleteModaleInterface {
     id: number;
     deleteType: string;
-    setIsOpen: (value: boolean) => void;
+    setIsOpen: (open: boolean) => void;
+    onSuccess?: () => void;
 }

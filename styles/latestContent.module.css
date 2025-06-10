@@ -1,0 +1,79 @@
+.container {
+    text-align: center;
+    padding: 1rem;
+    background-color: #FFF;
+    border-radius: 10px;
+    min-height: 200px;
+    box-shadow:
+        inset 0 4px 10px rgba(0, 0, 0, 0.15),
+        inset 0 -4px 10px rgba(0, 0, 0, 0.08),
+        0 2px 8px rgba(0, 0, 0, 0.05);
+    /* petite ombre externe pour un léger effet 3D */
+}
+
+.container .title {
+    margin-bottom: 2rem;
+    font-weight: bold;
+}
+
+.container hr {
+    margin: 0.5rem 0;
+}
+
+.singleContent {
+    cursor: pointer;
+}
+
+.contentTitle {
+    font-weight: bold;
+}
+
+.date {
+    text-align: end;
+    font-style: italic;
+    margin-top: 1rem;
+}
+
+.error p {
+    text-align: center;
+    margin-top: 5rem;
+}
+
+/* Tablette et pc */
+@media (min-width: 768px) {
+    .container {
+        flex: 1;
+        max-width: 33%;
+        max-height: 70vh;
+        overflow-y: auto;
+        scrollbar-width: none;
+        /* masquer le scrollbar dans Firefox */
+        -ms-overflow-style: none;
+        /* masquer le scrollbar dans IE/Edge */
+    }
+
+    .container::-webkit-scrollbar {
+        display: none;
+        /* masquer le scrollbar dans Chrome/Safari */
+    }
+
+    .container .title {
+        font-size: 1.5rem;
+    }
+}
+
+/* pc */
+@media (min-width: 1280px) {
+    .container {
+        flex: 1;
+        max-width: 25%;
+    }
+
+    .contentTitle {
+        font-size: 1.2rem;
+    }
+
+    .container hr {
+        margin: 1rem 0;
+    }
+}

@@ -7,20 +7,9 @@
     flex-direction: column-reverse;
 }
 
-.news,
 .desc {
     text-align: center;
     padding: 1rem;
-}
-
-.news {
-    background-color: #FFF;
-    border-radius: 10px;
-    min-height: 200px;
-}
-
-.news :global(p) {
-    margin-bottom: 1rem;
 }
 
 .logo {
@@ -29,12 +18,8 @@
     margin-bottom: 2rem;
 }
 
-.desc :global(p) {
+.desc p {
     text-align: justify;
-}
-
-.admin {
-    margin-top: 5rem;
 }
 
 /* Tablette et pc */
@@ -47,17 +32,8 @@
         flex-direction: row;
     }
 
-    .news,
     .desc {
         padding: 2rem;
-    }
-
-    .news {
-        flex: 1;
-        max-width: 33%;
-    }
-
-    .desc {
         flex: 2;
         max-width: 67%;
     }
@@ -70,17 +46,12 @@
 
 /* pc */
 @media (min-width: 1280px) {
-    .news {
-        flex: 1;
-        max-width: 25%;
-    }
-
     .desc {
         flex: 3;
         max-width: 75%;
     }
 
     .admin {
-        margin-top: 10rem;
+        margin-top: 4rem;
     }
 }
