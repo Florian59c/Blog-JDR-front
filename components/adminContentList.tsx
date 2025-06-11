@@ -22,7 +22,11 @@ export default function AdminContentList({ api_url }: AdminContentListProps) {
     const [deleteId, setDeleteId] = useState<number>(0);
     const [isOpenModify, setIsOpenModify] = useState(false);
     const [isOpenDelete, setIsOpenDelete] = useState(false);
-    const modaleType = "hero";
+    const modaleType =
+        api_url === "hero/getAllHeroWithNewDate" ? "hero" :
+            api_url === "news/getAllNewsWithNewDate" ? "news" :
+                api_url === "jdr/findAllJdrWithNewDate" ? "jdr" :
+                    "";
 
     function isJdrInterface(content: any): content is JdrInterface {
         return 'is_scenario' in content;

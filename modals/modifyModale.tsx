@@ -3,13 +3,22 @@ import Cancel from '../assets/img/cancel.png';
 import { ModifyModaleInterface } from '../interfaces/ModifyModaleInterface';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { Button } from '@mui/material';
-import DeleteIcon from "@mui/icons-material/Delete";
+import { Button, TextField } from '@mui/material';
+import SendIcon from "@mui/icons-material/Send";
+import { useEffect, useState } from 'react';
+import { modifyDataInterface } from '../interfaces/modifyDataInterface';
 
 export default function ModifyModale({ data, modifyType, setIsOpenModify, onSuccess }: ModifyModaleInterface) {
     const router = useRouter();
+    const [formData, setFormData] = useState(data);
+    const [message, setMessage] = useState('');
+    const [error, setError] = useState('');
 
-    if (!data) {
+    useEffect(() => {
+        setFormData(data);
+    }, [data]);
+
+    if (!data || !modifyType) {
         return (
             <div className="modalContainer" onClick={() => setIsOpenModify(false)}>
                 <div className={`modal ${styles.modalModify}`} onClick={(e) => e.stopPropagation()}>
@@ -17,55 +26,58 @@ export default function ModifyModale({ data, modifyType, setIsOpenModify, onSucc
                         <img src={Cancel.src} alt="Croix permettant de fermer la fenêtre" onClick={() => setIsOpenModify(false)} />
                     </div>
                     <p className="modalText modalAlert">
-                        Une erreur est survenue ! Aucune donnée n'a été trouver pour effectuer la modification !!
+                        {!data ?
+                            "Une erreur est survenue ! Aucune donnée n'a été trouver pour effectuer la modification !!"
+                            :
+                            "Le type de modification est invalide."
+                        }
                     </p>
                 </div>
             </div>
         );
     }
 
-    // async function handleDelete(id: number, modifyType: string) {
-    //     try {
-    //         const deleteRoutes: Record<string, string> = {
-    //             hero: "hero/updateHero",
-    //         };
+    function handleChange(field: keyof modifyDataInterface, value: string) {
+        if (formData) {
+            setFormData(prev => ({
+                ...prev!,
+                [field]: value,
+            }));
+        }
+    }
 
-    //         const route = deleteRoutes[modifyType];
+    const handleModify = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setMessage("");
+        setError("");
+        try {
+            const capitalizeFirst = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
+            const response = await axios.post(
+                `${process.env.NEXT_PUBLIC_SERVER_URL}${modifyType}/update${capitalizeFirst(modifyType)}`,
+                {
+                    id: formData?.id,
+                    title: formData?.title,
+                    link: formData?.link,
+                    tag: formData?.tag
+                },
+                { withCredentials: true }
+            );
+            console.log(response);
 
-    //         if (!route) {
-    //             alert("Type de modification invalide !");
-    //             return;
-    //         }
-
-    //         const response = await axios.post(
-    //             `${process.env.NEXT_PUBLIC_SERVER_URL}${route}`,
-    //             modifyType === "user" ? {} : { id },
-    //             { withCredentials: true }
-    //         );
-
-    //         if (response.status === 201) {
-    //             setIsOpenModify(false);
-
-    //             // Appel de la fonction de succès si elle est fournie
-    //             if (onSuccess) {
-    //                 onSuccess();
-    //             }
-
-    //             if (modifyType === "user") {
-    //                 router.push('/');
-    //             }
-    //         } else {
-    //             alert(response.data.message || 'Erreur inconnue');
-    //         }
-    //     } catch (error) {
-    //         if (axios.isAxiosError(error)) {
-    //             alert(error.response?.data?.message || "Une erreur s'est produite lors de la suppression");
-    //         } else {
-    //             alert("Une erreur inconnue s'est produite");
-    //         }
-    //         console.error("Erreur lors de la suppression :", error);
-    //     }
-    // }
+            if (response.status === 201) {
+                setMessage(response.data.message);
+            } else {
+                setError(response.data.message || 'Une erreur est survenue lors de la modification');
+            }
+        } catch (error) {
+            console.error(error);
+            if (axios.isAxiosError(error)) {
+                setError(error.response?.data?.message || 'Une erreur est survenue lors de la modification');
+            } else {
+                setError('Une erreur inconnue s\'est produite');
+            }
+        }
+    };
 
     return (
         <div className="modalContainer" onClick={() => setIsOpenModify(false)}>
@@ -73,20 +85,46 @@ export default function ModifyModale({ data, modifyType, setIsOpenModify, onSucc
                 <div className="modalImgContainer">
                     <img src={Cancel.src} alt="Croix permettant de fermer la fenêtre" onClick={() => setIsOpenModify(false)} />
                 </div>
-                formulaires ici
-                {/* <div className={styles.text}>
-                    <p>Etes vous sûr de vouloir effectuer la suppression ?</p>
-                    <p className={styles.alert}>Attention ! La suppression est définitive !!</p>
+                <div>
+                    {modifyType !== "jdr" ? (
+                        <div>
+                            <form onSubmit={handleModify}>
+                                <div className="inputs">
+                                    <TextField
+                                        label="Titre"
+                                        type="text"
+                                        value={formData?.title || ''}
+                                        onChange={(e) => handleChange('title', e.target.value)}
+                                    />
+                                    <TextField
+                                        label="Lien"
+                                        type="text"
+                                        value={formData?.link || ''}
+                                        onChange={(e) => handleChange('link', e.target.value)}
+                                    />
+                                    <TextField
+                                        label="tag"
+                                        type="text"
+                                        value={formData?.tag || ''}
+                                        onChange={(e) => handleChange('tag', e.target.value)}
+                                    />
+                                </div>
+                                <div className="button-container">
+                                    <Button type='submit' variant="outlined" color="success" endIcon={<SendIcon />}>
+                                        {modifyType === "hero" ? "Modifier l'histoire dont vous êtes le héros" : "Modifier la nouvelle"}
+                                    </Button>
+                                </div>
+                            </form>
+                            {error && <p className="error-message">{error}</p>}
+                            <p className="confirmMessage">{message}</p>
+                        </div>
+                    ) : (
+                        <div>
+                            {modifyType}
+                            jdr form
+                        </div>
+                    )}
                 </div>
-                <Button
-                    variant="outlined"
-                    color="error"
-                    sx={{ width: '15rem' }}
-                    startIcon={<DeleteIcon />}
-                // onClick={() => handleDelete(id, modifyType)}
-                >
-                    salut tout le monde
-                </Button> */}
             </div>
         </div>
     );
