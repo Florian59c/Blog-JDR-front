@@ -11,12 +11,12 @@ export default function ModifyModale({ data, modifyType, setIsOpenModify, onSucc
 
     if (!data) {
         return (
-            <div className={styles.container} onClick={() => setIsOpenModify(false)}>
-                <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-                    <div className={styles.imgContainer}>
+            <div className="modalContainer" onClick={() => setIsOpenModify(false)}>
+                <div className={`modal ${styles.modalModify}`} onClick={(e) => e.stopPropagation()}>
+                    <div className="modalImgContainer">
                         <img src={Cancel.src} alt="Croix permettant de fermer la fenêtre" onClick={() => setIsOpenModify(false)} />
                     </div>
-                    <p className={`${styles.text} ${styles.alert}`}>
+                    <p className="modalText modalAlert">
                         Une erreur est survenue ! Aucune donnée n'a été trouver pour effectuer la modification !!
                     </p>
                 </div>
@@ -68,9 +68,9 @@ export default function ModifyModale({ data, modifyType, setIsOpenModify, onSucc
     // }
 
     return (
-        <div className={styles.container} onClick={() => setIsOpenModify(false)}>
-            <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-                <div className={styles.imgContainer}>
+        <div className="modalContainer" onClick={() => setIsOpenModify(false)}>
+            <div className={`modal ${styles.modalModify}`} onClick={(e) => e.stopPropagation()}>
+                <div className="modalImgContainer">
                     <img src={Cancel.src} alt="Croix permettant de fermer la fenêtre" onClick={() => setIsOpenModify(false)} />
                 </div>
                 formulaires ici
