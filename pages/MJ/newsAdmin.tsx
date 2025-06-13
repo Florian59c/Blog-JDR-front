@@ -19,7 +19,8 @@ export default function newsAdmin() {
                     </Button>
                 </Link>
                 <AdminDisplayList
-                    message="nouvelles"
+                    postStyles={true}
+                    message="Afficher/Masquer la liste des nouvelles"
                     isOpen={isListVisible}
                     onToggle={() => setIsListVisible(!isListVisible)}
                 />

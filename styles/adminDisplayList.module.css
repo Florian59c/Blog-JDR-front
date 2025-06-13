@@ -12,6 +12,12 @@
     cursor: pointer;
 }
 
+.jdrListContainer .green {
+    color: #0D3C36;
+    text-decoration: underline;
+
+}
+
 .container img {
     width: 30px;
     height: 30px;
@@ -23,7 +29,7 @@
 }
 
 @media (min-width: 768px) {
-    .container p {
+    .postContainer p {
         font-size: 1.6rem;
     }
 }

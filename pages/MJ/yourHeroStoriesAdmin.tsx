@@ -19,7 +19,8 @@ export default function yourHeroStoriesAdmin() {
                     </Button>
                 </Link>
                 <AdminDisplayList
-                    message="hitstoires dont vous êtes le héros"
+                    postStyles={true}
+                    message="Afficher/Masquer la liste des hitstoires dont vous êtes le héros"
                     isOpen={isListVisible}
                     onToggle={() => setIsListVisible(!isListVisible)}
                 />

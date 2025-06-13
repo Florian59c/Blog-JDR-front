@@ -19,7 +19,8 @@ export default function newsAdmin() {
                     </Button>
                 </Link>
                 <AdminDisplayList
-                    message="JDR"
+                    postStyles={true}
+                    message="Afficher/Masquer la liste des JDR"
                     isOpen={isListVisible}
                     onToggle={() => setIsListVisible(!isListVisible)}
                 />

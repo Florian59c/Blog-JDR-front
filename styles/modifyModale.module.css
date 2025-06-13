@@ -2,6 +2,14 @@
     width: 800px;
 }
 
+.modalModifyContent {
+    min-height: 50vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 /* Petit écran d'ordinateur */
 @media (min-width: 1280px) {
     .modalModify {

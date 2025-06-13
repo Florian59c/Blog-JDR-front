@@ -59,7 +59,11 @@ export default function JdrDetails({ is_scenario }: JdrDetailsProps) {
 
     return (
         <div className={styles.container}>
-            <DropDownJdr onSelectedJdrChange={handleSelectedJdrChange} />
+            <DropDownJdr
+                selectedJdr={selectedJdr}
+                onSelectedJdrChange={handleSelectedJdrChange}
+                showNoneOption={true}
+            />
             {sortedJdr.length === 0 ? (
                 <p className={styles.unexist}>Il n'y a pas de contenu {selectedJdr === 'none' ? '' : `pour "${selectedJdr}"`}</p>
             ) : (

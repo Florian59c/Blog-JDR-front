@@ -82,6 +82,10 @@ export default function AdminContentList({ api_url }: AdminContentListProps) {
                                                 title: content.title,
                                                 link: content.link,
                                                 tag: 'tag' in content ? content.tag ?? '' : '',
+                                                ...(isJdrInterface(content) && {
+                                                    is_scenario: content.is_scenario,
+                                                    jdr_list: content.jdr_list
+                                                })
                                             });
                                             setIsOpenModify(true);
                                         }}
