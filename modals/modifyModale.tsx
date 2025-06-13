@@ -62,10 +62,10 @@ export default function ModifyModale({ data, modifyType, setIsOpenModify, onSucc
                 },
                 { withCredentials: true }
             );
-            console.log(response);
 
             if (response.status === 201) {
                 setMessage(response.data.message);
+                // timer ici
             } else {
                 setError(response.data.message || 'Une erreur est survenue lors de la modification');
             }

@@ -48,7 +48,7 @@ export default function AdminContentList({ api_url }: AdminContentListProps) {
 
     useEffect(() => {
         getHeroStories();
-    }, [isOpenDelete]);
+    }, [isOpenDelete, isOpenModify]);
 
     return (
         <div>
