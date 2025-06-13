@@ -1,0 +1,10 @@
+.modalModify {
+    width: 800px;
+}
+
+/* Petit écran d'ordinateur */
+@media (min-width: 1280px) {
+    .modalModify {
+        width: 1200px;
+    }
+}

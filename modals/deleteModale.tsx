@@ -16,6 +16,7 @@ export default function DeleteModale({ id, deleteType, setIsOpen, onSuccess }: D
                 ban: "user/deleteUserByAdmin",
                 comment: "comment/deleteCommentByUser",
                 commentAdmin: "comment/deleteCommentByAdmin",
+                hero: "hero/deleteHero",
             };
 
             const route = deleteRoutes[deleteType];
@@ -56,14 +57,14 @@ export default function DeleteModale({ id, deleteType, setIsOpen, onSuccess }: D
     }
 
     return (
-        <div className={styles.container} onClick={() => setIsOpen(false)}>
-            <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-                <div className={styles.imgContainer}>
+        <div className="modalContainer" onClick={() => setIsOpen(false)}>
+            <div className={`modal ${styles.modalDelete}`} onClick={(e) => e.stopPropagation()}>
+                <div className="modalImgContainer">
                     <img src={Cancel.src} alt="Croix permettant de fermer la fenêtre" onClick={() => setIsOpen(false)} />
                 </div>
-                <div className={styles.text}>
+                <div className="modalText">
                     <p>Etes vous sûr de vouloir effectuer la suppression ?</p>
-                    <p className={styles.alert}>Attention ! La suppression est définitive !!</p>
+                    <p className="modalAlert">Attention ! La suppression est définitive !!</p>
                 </div>
                 <Button
                     variant="outlined"

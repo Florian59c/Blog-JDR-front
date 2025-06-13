@@ -7,6 +7,9 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteIcon from "@mui/icons-material/Delete";
 import { NewsInterface } from '../interfaces/NewsInterface';
 import { JdrInterface } from '../interfaces/JdrInterface';
+import DeleteModale from '../modals/deleteModale';
+import ModifyModale from '../modals/modifyModale';
+import { modifyDataInterface } from '../interfaces/modifyDataInterface';
 
 interface AdminContentListProps {
     api_url: string;
@@ -15,6 +18,15 @@ interface AdminContentListProps {
 export default function AdminContentList({ api_url }: AdminContentListProps) {
     const [contents, setContents] = useState<(HeroStoryInterface | NewsInterface | JdrInterface)[]>([]);
     const [error, setError] = useState('');
+    const [data, setData] = useState<modifyDataInterface | null>(null);
+    const [deleteId, setDeleteId] = useState<number>(0);
+    const [isOpenModify, setIsOpenModify] = useState(false);
+    const [isOpenDelete, setIsOpenDelete] = useState(false);
+    const modaleType =
+        api_url === "hero/getAllHeroWithNewDate" ? "hero" :
+            api_url === "news/getAllNewsWithNewDate" ? "news" :
+                api_url === "jdr/findAllJdrWithNewDate" ? "jdr" :
+                    "";
 
     function isJdrInterface(content: any): content is JdrInterface {
         return 'is_scenario' in content;
@@ -36,7 +48,7 @@ export default function AdminContentList({ api_url }: AdminContentListProps) {
 
     useEffect(() => {
         getHeroStories();
-    }, []);
+    }, [isOpenDelete, isOpenModify]);
 
     return (
         <div>
@@ -64,6 +76,15 @@ export default function AdminContentList({ api_url }: AdminContentListProps) {
                                         color="success"
                                         sx={{ width: '100%' }}
                                         startIcon={<EditOutlinedIcon />}
+                                        onClick={() => {
+                                            setData({
+                                                id: content.id,
+                                                title: content.title,
+                                                link: content.link,
+                                                tag: 'tag' in content ? content.tag ?? '' : '',
+                                            });
+                                            setIsOpenModify(true);
+                                        }}
                                     >
                                         Modifier
                                     </Button>
@@ -72,6 +93,7 @@ export default function AdminContentList({ api_url }: AdminContentListProps) {
                                         color="error"
                                         sx={{ width: '100%' }}
                                         startIcon={<DeleteIcon />}
+                                        onClick={() => { setDeleteId(content.id); setIsOpenDelete(true) }}
                                     >
                                         Supprimer
                                     </Button>
@@ -79,6 +101,8 @@ export default function AdminContentList({ api_url }: AdminContentListProps) {
                             </div>
                         );
                     })}
+                    {isOpenModify && <ModifyModale setIsOpenModify={setIsOpenModify} modifyType={modaleType} data={data} />}
+                    {isOpenDelete && <DeleteModale setIsOpen={setIsOpenDelete} deleteType={modaleType} id={deleteId} />}
                 </div>
             ) : (
                 <div className={styles.error}>
@@ -89,7 +113,8 @@ export default function AdminContentList({ api_url }: AdminContentListProps) {
                             <p>Il n'y a aucun contenu</p>
                     }
                 </div >
-            )}
-        </div>
+            )
+            }
+        </div >
     );
 }
