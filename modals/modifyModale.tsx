@@ -2,14 +2,12 @@ import styles from '../styles/modifyModale.module.css';
 import Cancel from '../assets/img/cancel.png';
 import { ModifyModaleInterface } from '../interfaces/ModifyModaleInterface';
 import axios from 'axios';
-import { useRouter } from 'next/router';
 import { Button, TextField } from '@mui/material';
 import SendIcon from "@mui/icons-material/Send";
 import { useEffect, useState } from 'react';
 import { modifyDataInterface } from '../interfaces/modifyDataInterface';
 
-export default function ModifyModale({ data, modifyType, setIsOpenModify, onSuccess }: ModifyModaleInterface) {
-    const router = useRouter();
+export default function ModifyModale({ data, modifyType, setIsOpenModify }: ModifyModaleInterface) {
     const [formData, setFormData] = useState(data);
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
@@ -65,7 +63,6 @@ export default function ModifyModale({ data, modifyType, setIsOpenModify, onSucc
 
             if (response.status === 201) {
                 setMessage(response.data.message);
-                // timer ici
             } else {
                 setError(response.data.message || 'Une erreur est survenue lors de la modification');
             }

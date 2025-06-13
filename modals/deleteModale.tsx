@@ -17,6 +17,7 @@ export default function DeleteModale({ id, deleteType, setIsOpen, onSuccess }: D
                 comment: "comment/deleteCommentByUser",
                 commentAdmin: "comment/deleteCommentByAdmin",
                 hero: "hero/deleteHero",
+                news: "news/deleteNews",
             };
 
             const route = deleteRoutes[deleteType];
