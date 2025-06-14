@@ -203,7 +203,7 @@ export default function ModifyModale({ data, modifyType, setIsOpenModify }: Modi
                         </div>
                     )}
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 }
