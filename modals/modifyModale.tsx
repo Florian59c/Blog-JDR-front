@@ -127,7 +127,7 @@ export default function ModifyModale({ data, modifyType, setIsOpenModify }: Modi
                                         onChange={(e) => handleChange('link', e.target.value)}
                                     />
                                 </div>
-                                <div style={{ display: "flex", alignItems: "center", gap: 1 }} >
+                                <div className={styles.switch} >
                                     <p>Aide de jeu</p>
                                     <Switch
                                         checked={formData?.is_scenario || false}

@@ -10,6 +10,12 @@
     justify-content: center;
 }
 
+.switch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /* Petit écran d'ordinateur */
 @media (min-width: 1280px) {
     .modalModify {
