@@ -12,13 +12,13 @@ interface JdrDetailsProps {
 
 export default function JdrDetails({ is_scenario }: JdrDetailsProps) {
     const pageType = "jdr";
-    const [selectedJdr, setSelectedJdr] = useState<string>("none");
+    const [selectedJdr, setSelectedJdr] = useState<{ id?: number; name: string }>({ name: "none" });
     const [sortedJdr, setSortedJdr] = useState<JdrInterface[]>([]);
     const [displayedJdrIds, setDisplayedJdrIds] = useState<number[]>([]); // Utiliser un tableau d'IDs
     const [error, setError] = useState('');
     const [refreshComments, setRefreshComments] = useState(0);
 
-    const handleSelectedJdrChange = (newSelectedJdr: string) => {
+    const handleSelectedJdrChange = (newSelectedJdr: { id?: number; name: string }) => {
         setSelectedJdr(newSelectedJdr);
     };
 
@@ -30,7 +30,7 @@ export default function JdrDetails({ is_scenario }: JdrDetailsProps) {
         try {
             const response = await axios.post(
                 `${process.env.NEXT_PUBLIC_SERVER_URL}jdr/getsortedJdr`,
-                { is_scenario: currentIsScenario, jdrName: selectedJdr === 'none' ? 'default' : selectedJdr }
+                { is_scenario: currentIsScenario, jdrName: selectedJdr.name === 'none' ? 'default' : selectedJdr.name }
             );
             setSortedJdr(response.data);
         } catch (error) {
@@ -59,9 +59,13 @@ export default function JdrDetails({ is_scenario }: JdrDetailsProps) {
 
     return (
         <div className={styles.container}>
-            <DropDownJdr onSelectedJdrChange={handleSelectedJdrChange} />
+            <DropDownJdr
+                selectedJdr={selectedJdr}
+                onSelectedJdrChange={handleSelectedJdrChange}
+                showNoneOption={true}
+            />
             {sortedJdr.length === 0 ? (
-                <p className={styles.unexist}>Il n'y a pas de contenu {selectedJdr === 'none' ? '' : `pour "${selectedJdr}"`}</p>
+                <p className={styles.unexist}>Il n'y a pas de contenu {selectedJdr.name === 'none' ? '' : `pour "${selectedJdr.name}"`}</p>
             ) : (
                 error === '' ? (
                     sortedJdr.map((jdr) => (

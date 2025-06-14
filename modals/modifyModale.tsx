@@ -2,18 +2,43 @@ import styles from '../styles/modifyModale.module.css';
 import Cancel from '../assets/img/cancel.png';
 import { ModifyModaleInterface } from '../interfaces/ModifyModaleInterface';
 import axios from 'axios';
-import { Button, TextField } from '@mui/material';
+import { Button, TextField, Switch, Box, Typography } from '@mui/material';
 import SendIcon from "@mui/icons-material/Send";
 import { useEffect, useState } from 'react';
 import { modifyDataInterface } from '../interfaces/modifyDataInterface';
+import DropDownJdr from '../components/dropDownJdr';
+import AdminDisplayList from '../components/adminDisplayList';
 
 export default function ModifyModale({ data, modifyType, setIsOpenModify }: ModifyModaleInterface) {
     const [formData, setFormData] = useState(data);
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
+    const [selectedJdr, setSelectedJdr] = useState<{ id?: number, name: string }>({ name: '' });
+    const [isListVisible, setIsListVisible] = useState(false);
+
+    const handleSelectedJdrChange = (newJdr: { id: number; name: string }) => {
+        setSelectedJdr(newJdr);
+        setFormData((prev) => {
+            if (!prev) return prev;
+
+            return {
+                ...prev,
+                jdr_list: {
+                    ...prev.jdr_list!,
+                    id: newJdr.id,
+                    name: newJdr.name,
+                },
+            };
+        });
+    };
+
 
     useEffect(() => {
         setFormData(data);
+        setSelectedJdr({
+            id: data?.jdr_list?.id,
+            name: data?.jdr_list?.name || ''
+        });
     }, [data]);
 
     if (!data || !modifyType) {
@@ -56,7 +81,9 @@ export default function ModifyModale({ data, modifyType, setIsOpenModify }: Modi
                     id: formData?.id,
                     title: formData?.title,
                     link: formData?.link,
-                    tag: formData?.tag
+                    ...(modifyType !== "jdr" && { tag: formData?.tag }),
+                    ...(modifyType === "jdr" && { is_scenario: formData?.is_scenario }),
+                    ...(modifyType === "jdr" && { jdr_list_id: formData?.jdr_list?.id }),
                 },
                 { withCredentials: true }
             );
@@ -82,8 +109,67 @@ export default function ModifyModale({ data, modifyType, setIsOpenModify }: Modi
                 <div className="modalImgContainer">
                     <img src={Cancel.src} alt="Croix permettant de fermer la fenêtre" onClick={() => setIsOpenModify(false)} />
                 </div>
-                <div>
-                    {modifyType !== "jdr" ? (
+                <div className={styles.modalModifyContent}>
+                    {modifyType === "jdr" ? (
+                        <div>
+                            <form onSubmit={handleModify}>
+                                <div className="inputs">
+                                    <TextField
+                                        label="Titre"
+                                        type="text"
+                                        value={formData?.title || ''}
+                                        onChange={(e) => handleChange('title', e.target.value)}
+                                    />
+                                    <TextField
+                                        label="Lien"
+                                        type="text"
+                                        value={formData?.link || ''}
+                                        onChange={(e) => handleChange('link', e.target.value)}
+                                    />
+                                </div>
+                                <div className={styles.switch} >
+                                    <p>Aide de jeu</p>
+                                    <Switch
+                                        checked={formData?.is_scenario || false}
+                                        onChange={(e) =>
+                                            setFormData((prev) => ({
+                                                ...prev!,
+                                                is_scenario: e.target.checked,
+                                            }))
+                                        }
+                                    />
+                                    <p>Scénario</p>
+                                </div>
+                                <div>
+                                    <DropDownJdr
+                                        selectedJdr={selectedJdr}
+                                        onSelectedJdrChange={handleSelectedJdrChange}
+                                        showNoneOption={false}
+                                    />
+                                </div>
+                                <div>
+                                    <AdminDisplayList
+                                        postStyles={false}
+                                        message="Ajouter un nouveau nom de JDR à la liste"
+                                        isOpen={isListVisible}
+                                        onToggle={() => setIsListVisible(!isListVisible)}
+                                    />
+                                    {isListVisible &&
+                                        <div>
+                                            formulaire de création ici !!!
+                                        </div>
+                                    }
+                                </div>
+                                <div className="button-container">
+                                    <Button type='submit' variant="outlined" color="success" endIcon={<SendIcon />}>
+                                        Modifier le JDR
+                                    </Button>
+                                </div>
+                            </form>
+                            {error && <p className="error-message">{error}</p>}
+                            <p className="confirmMessage">{message}</p>
+                        </div>
+                    ) : (
                         <div>
                             <form onSubmit={handleModify}>
                                 <div className="inputs">
@@ -115,14 +201,9 @@ export default function ModifyModale({ data, modifyType, setIsOpenModify }: Modi
                             {error && <p className="error-message">{error}</p>}
                             <p className="confirmMessage">{message}</p>
                         </div>
-                    ) : (
-                        <div>
-                            {modifyType}
-                            jdr form
-                        </div>
                     )}
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 }

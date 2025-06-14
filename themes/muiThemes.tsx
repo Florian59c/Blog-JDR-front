@@ -180,6 +180,25 @@ const muiThemes = createTheme({
                 },
             ],
         },
+        MuiSwitch: {
+            styleOverrides: {
+                track: {
+                    backgroundColor: '#0D3C36', // Vert même quand désactivé, mais
+                    opacity: 0.8, // avec la couleur plus claire
+                },
+                switchBase: {
+                    color: '#0D3C36', // Vert pour le cercle au repos (non coché)
+
+                    '&.Mui-checked': {
+                        color: '#0D3C36', // Vert pour le cercle coché
+                        '& + .MuiSwitch-track': {
+                            backgroundColor: '#0D3C36', // Vert même quand désactivé, mais
+                            opacity: 0.8, // avec la couleur plus claire
+                        },
+                    },
+                },
+            },
+        },
     },
 });
 

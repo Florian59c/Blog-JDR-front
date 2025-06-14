@@ -9,12 +9,13 @@ import axios from 'axios';
 import { JdrNamesInterface } from '../interfaces/JdrNamesInterface';
 
 interface DropDownJdrProps {
-    onSelectedJdrChange: (selectedJdr: string) => void;
+    selectedJdr: { id?: number; name: string };
+    onSelectedJdrChange: (selectedJdr: { id: number; name: string }) => void;
+    showNoneOption?: boolean;
 }
 
-export default function DropDownJdr({ onSelectedJdrChange }: DropDownJdrProps) {
+export default function DropDownJdr({ selectedJdr, onSelectedJdrChange, showNoneOption = false }: DropDownJdrProps) {
     const [jdrNames, setJdrNames] = useState<JdrNamesInterface[]>([]);
-    const [selectedJdr, setSelectedJdr] = useState<string>("none");
     const [error, setError] = useState('');
 
     async function getAllJdrNames() {
@@ -32,31 +33,46 @@ export default function DropDownJdr({ onSelectedJdrChange }: DropDownJdrProps) {
     }, []);
 
     const handleChange = (event: SelectChangeEvent<string>) => {
-        const newSelectedJdr = event.target.value;
-        setSelectedJdr(newSelectedJdr);
-        onSelectedJdrChange(newSelectedJdr);  // Appeler la fonction du parent pour mettre à jour l'état
+        const selectedName = event.target.value;
+        const found = jdrNames.find(jdr => jdr.name === selectedName);
+
+        if (found) {
+            onSelectedJdrChange({
+                id: found.id,
+                name: selectedName,
+            });
+        } else if (selectedName === "none") {
+            onSelectedJdrChange({
+                id: 0,
+                name: "none",
+            });
+        } else {
+            console.warn("JDR sélectionné introuvable");
+        }
     };
 
     return (
         <div className={styles.container}>
             <FormControl>
                 <Select
-                    labelId="jdr-select-label"
                     id="jdr-select"
-                    value={selectedJdr}
+                    value={selectedJdr.name}
                     onChange={handleChange}
-                    input={<OutlinedInput label="" />}
+                    input={<OutlinedInput />}
                     renderValue={(value) => value === "none" ? "Sélectionnez un JDR" : value}
                     MenuProps={{
+                        disableScrollLock: true,
                         PaperProps: {
                             style: {
-                                maxHeight: 300,  // Limite la hauteur du menu à 300px
-                                overflow: 'auto',  // Active la barre de défilement
+                                maxHeight: 300,
+                                overflow: 'auto',
                             },
                         },
                     }}
                 >
-                    <MenuItem value="none">tous les JDR</MenuItem>
+                    {showNoneOption && (
+                        <MenuItem value="none">Tous les JDR</MenuItem>
+                    )}
                     {jdrNames.map((jdr) => (
                         <MenuItem key={jdr.id} value={jdr.name}>
                             {jdr.name}
