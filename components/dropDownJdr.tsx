@@ -61,6 +61,7 @@ export default function DropDownJdr({ selectedJdr, onSelectedJdrChange, showNone
                     input={<OutlinedInput />}
                     renderValue={(value) => value === "none" ? "Sélectionnez un JDR" : value}
                     MenuProps={{
+                        disableScrollLock: true,
                         PaperProps: {
                             style: {
                                 maxHeight: 300,
