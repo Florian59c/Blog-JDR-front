@@ -9,8 +9,8 @@ import axios from 'axios';
 import { JdrNamesInterface } from '../interfaces/JdrNamesInterface';
 
 interface DropDownJdrProps {
-    selectedJdr: string;
-    onSelectedJdrChange: (selectedJdr: string) => void;
+    selectedJdr: { id?: number; name: string };
+    onSelectedJdrChange: (selectedJdr: { id: number; name: string }) => void;
     showNoneOption?: boolean;
 }
 
@@ -33,8 +33,22 @@ export default function DropDownJdr({ selectedJdr, onSelectedJdrChange, showNone
     }, []);
 
     const handleChange = (event: SelectChangeEvent<string>) => {
-        const newSelectedJdr = event.target.value;
-        onSelectedJdrChange(newSelectedJdr); // Met à jour le parent
+        const selectedName = event.target.value;
+        const found = jdrNames.find(jdr => jdr.name === selectedName);
+
+        if (found) {
+            onSelectedJdrChange({
+                id: found.id,
+                name: selectedName,
+            });
+        } else if (selectedName === "none") {
+            onSelectedJdrChange({
+                id: 0,
+                name: "none",
+            });
+        } else {
+            console.warn("JDR sélectionné introuvable");
+        }
     };
 
     return (
@@ -42,7 +56,7 @@ export default function DropDownJdr({ selectedJdr, onSelectedJdrChange, showNone
             <FormControl>
                 <Select
                     id="jdr-select"
-                    value={selectedJdr}
+                    value={selectedJdr.name}
                     onChange={handleChange}
                     input={<OutlinedInput />}
                     renderValue={(value) => value === "none" ? "Sélectionnez un JDR" : value}

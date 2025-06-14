@@ -13,12 +13,11 @@ export default function ModifyModale({ data, modifyType, setIsOpenModify }: Modi
     const [formData, setFormData] = useState(data);
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
-    const [selectedJdr, setSelectedJdr] = useState<string>('');
+    const [selectedJdr, setSelectedJdr] = useState<{ id?: number, name: string }>({ name: '' });
     const [isListVisible, setIsListVisible] = useState(false);
 
-    const handleSelectedJdrChange = (newName: string) => {
-        setSelectedJdr(newName);
-
+    const handleSelectedJdrChange = (newJdr: { id: number; name: string }) => {
+        setSelectedJdr(newJdr);
         setFormData((prev) => {
             if (!prev) return prev;
 
@@ -26,15 +25,20 @@ export default function ModifyModale({ data, modifyType, setIsOpenModify }: Modi
                 ...prev,
                 jdr_list: {
                     ...prev.jdr_list!,
-                    name: newName,
-                }
+                    id: newJdr.id,
+                    name: newJdr.name,
+                },
             };
         });
     };
 
+
     useEffect(() => {
         setFormData(data);
-        setSelectedJdr(data?.jdr_list?.name || '');
+        setSelectedJdr({
+            id: data?.jdr_list?.id,
+            name: data?.jdr_list?.name || ''
+        });
     }, [data]);
 
     if (!data || !modifyType) {
@@ -108,7 +112,7 @@ export default function ModifyModale({ data, modifyType, setIsOpenModify }: Modi
                 <div className={styles.modalModifyContent}>
                     {modifyType === "jdr" ? (
                         <div>
-                            <form>
+                            <form onSubmit={handleModify}>
                                 <div className="inputs">
                                     <TextField
                                         label="Titre"
@@ -140,6 +144,7 @@ export default function ModifyModale({ data, modifyType, setIsOpenModify }: Modi
                                     <DropDownJdr
                                         selectedJdr={selectedJdr}
                                         onSelectedJdrChange={handleSelectedJdrChange}
+                                        showNoneOption={false}
                                     />
                                 </div>
                                 <div>
