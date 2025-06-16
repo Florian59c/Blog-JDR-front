@@ -4,7 +4,7 @@ import SendIcon from "@mui/icons-material/Send";
 import axios from "axios";
 
 type Props = {
-    api_url: "hero/createHero" | "news/createHero";
+    api_url: "hero/createHero" | "news/createNews";
 };
 
 export default function AdminCreateHeroAndNews({ api_url }: Props) {
