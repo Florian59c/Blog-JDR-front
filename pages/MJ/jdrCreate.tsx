@@ -73,8 +73,7 @@ export default function jdrCreate() {
                             value={link}
                             onChange={(e) => setLink(e.target.value)}
                         />
-                        {/* <div className={styles.switch} > */}
-                        <div>
+                        <div className="switch-container" >
                             <p>Aide de jeu</p>
                             <Switch
                                 checked={is_scenario}
