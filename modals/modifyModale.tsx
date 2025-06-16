@@ -2,7 +2,7 @@ import styles from '../styles/modifyModale.module.css';
 import Cancel from '../assets/img/cancel.png';
 import { ModifyModaleInterface } from '../interfaces/ModifyModaleInterface';
 import axios from 'axios';
-import { Button, TextField, Switch, Box, Typography } from '@mui/material';
+import { Button, TextField, Switch } from '@mui/material';
 import SendIcon from "@mui/icons-material/Send";
 import { useEffect, useState } from 'react';
 import { modifyDataInterface } from '../interfaces/modifyDataInterface';
@@ -127,7 +127,7 @@ export default function ModifyModale({ data, modifyType, setIsOpenModify }: Modi
                                         onChange={(e) => handleChange('link', e.target.value)}
                                     />
                                 </div>
-                                <div className={styles.switch} >
+                                <div className="switch-container" >
                                     <p>Aide de jeu</p>
                                     <Switch
                                         checked={formData?.is_scenario || false}

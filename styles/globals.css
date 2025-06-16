@@ -99,6 +99,14 @@ a {
   margin-top: 1rem;
 }
 
+/* styles des switchs */
+
+.switch-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* gestion de message et d'erreurs */
 
 .confirmMessage {
