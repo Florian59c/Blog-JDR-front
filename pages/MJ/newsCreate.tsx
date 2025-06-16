@@ -1,3 +1,4 @@
+import AdminCreateHeroAndNews from "../../components/adminCreateHeroAndNews";
 import ReturnLink from "../../components/returnLink";
 
 export default function newsCreate() {
@@ -9,9 +10,7 @@ export default function newsCreate() {
                     { title: 'Liste des nouvelles', href: '/MJ/newsAdmin' },
                 ]}
             />
-            <div className="blockContainer">
-                formulaire ici
-            </div>
+            <AdminCreateHeroAndNews api_url="news/createNews" />
         </div>
     );
 }
