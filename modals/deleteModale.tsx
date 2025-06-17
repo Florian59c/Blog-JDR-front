@@ -19,6 +19,7 @@ export default function DeleteModale({ id, deleteType, setIsOpen, onSuccess }: D
                 hero: "hero/deleteHero",
                 news: "news/deleteNews",
                 jdr: "jdr/deleteJdr",
+                jdrName: "jdr-list/deleteJdrName",
             };
 
             const route = deleteRoutes[deleteType];

@@ -12,9 +12,10 @@ interface DropDownJdrProps {
     selectedJdr: { id?: number; name: string };
     onSelectedJdrChange: (selectedJdr: { id: number; name: string }) => void;
     showNoneOption?: boolean;
+    refreshTrigger?: any;
 }
 
-export default function DropDownJdr({ selectedJdr, onSelectedJdrChange, showNoneOption = false }: DropDownJdrProps) {
+export default function DropDownJdr({ selectedJdr, onSelectedJdrChange, showNoneOption = false, refreshTrigger }: DropDownJdrProps) {
     const [jdrNames, setJdrNames] = useState<JdrNamesInterface[]>([]);
     const [error, setError] = useState('');
 
@@ -30,7 +31,7 @@ export default function DropDownJdr({ selectedJdr, onSelectedJdrChange, showNone
 
     useEffect(() => {
         getAllJdrNames();
-    }, []);
+    }, [refreshTrigger]);
 
     const handleChange = (event: SelectChangeEvent<string>) => {
         const selectedName = event.target.value;
