@@ -1,0 +1,26 @@
+.container hr {
+    margin: 2rem 0;
+    border: 1px solid #000;
+}
+
+.updateContainer {
+    padding: 1rem;
+}
+
+.buttons {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Tablette */
+@media (min-width: 768px) {
+    .buttons {
+        margin-top: 1rem;
+        flex-direction: row;
+        gap: 0.5rem;
+    }
+}

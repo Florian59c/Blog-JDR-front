@@ -32,6 +32,11 @@ export default function AdminPage() {
       title: 'JDR',
       link: 'jdrAdmin',
       icon: <NoteAddOutlinedIcon />
+    },
+    {
+      title: 'Liste de nom de JDR',
+      link: 'jdrName',
+      icon: <NoteAddOutlinedIcon />
     }
   ];
 
