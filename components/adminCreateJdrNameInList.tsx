@@ -11,38 +11,7 @@ export default function AdminCreateJdrNameInList({ onSuccess }: { onSuccess?: ()
 
     return (
         <div>
-            <form
-                className={styles.form}
-                onSubmit={async (e) => {
-                    e.preventDefault();
-                    setMessage("");
-                    setError("");
-
-                    try {
-                        const response = await axios.post(
-                            `${process.env.NEXT_PUBLIC_SERVER_URL}jdr-list/createJdrNameInList`,
-                            { name },
-                            { withCredentials: true }
-                        );
-                        if (response.status === 201) {
-                            setMessage(response.data.message);
-                            setName("");
-                            setTimeout(() => {
-                                if (onSuccess) onSuccess();
-                            }, 500);
-                        } else {
-                            setError(response.data.message || 'Une erreur est survenue lors de la création');
-                        }
-                    } catch (error) {
-                        console.error(error);
-                        if (axios.isAxiosError(error)) {
-                            setError(error.response?.data?.message || 'Une erreur est survenue lors de la création');
-                        } else {
-                            setError('Une erreur inconnue s\'est produite');
-                        }
-                    }
-                }}
-            >
+            <div className={styles.form}>
                 <TextField
                     type="text"
                     label="Nom du JDR"
@@ -51,7 +20,34 @@ export default function AdminCreateJdrNameInList({ onSuccess }: { onSuccess?: ()
                     onChange={(e) => setName(e.target.value)}
                 />
                 <Button
-                    type="submit"
+                    onClick={async () => {
+                        setMessage("");
+                        setError("");
+
+                        try {
+                            const response = await axios.post(
+                                `${process.env.NEXT_PUBLIC_SERVER_URL}jdr-list/createJdrNameInList`,
+                                { name },
+                                { withCredentials: true }
+                            );
+                            if (response.status === 201) {
+                                setMessage(response.data.message);
+                                setName("");
+                                setTimeout(() => {
+                                    if (onSuccess) onSuccess();
+                                }, 500);
+                            } else {
+                                setError(response.data.message || 'Une erreur est survenue lors de la création');
+                            }
+                        } catch (error) {
+                            console.error(error);
+                            if (axios.isAxiosError(error)) {
+                                setError(error.response?.data?.message || 'Une erreur est survenue lors de la création');
+                            } else {
+                                setError('Une erreur inconnue s\'est produite');
+                            }
+                        }
+                    }}
                     variant="outlined"
                     color="success"
                     sx={{ width: '100%' }}
@@ -59,7 +55,7 @@ export default function AdminCreateJdrNameInList({ onSuccess }: { onSuccess?: ()
                 >
                     Ajouté un JDR à la liste
                 </Button>
-            </form >
+            </div>
             {error && <p className="error-message">{error}</p>}
             <p className="confirmMessage">{message}</p>
         </div >

@@ -147,6 +147,7 @@ export default function ModifyModale({ data, modifyType, setIsOpenModify }: Modi
                                         selectedJdr={selectedJdr}
                                         onSelectedJdrChange={handleSelectedJdrChange}
                                         showNoneOption={false}
+                                        refreshTrigger={refreshDropdownTrigger}
                                     />
                                 </div>
                                 <div>
