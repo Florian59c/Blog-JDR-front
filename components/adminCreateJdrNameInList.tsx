@@ -1,3 +1,4 @@
+import styles from '../styles/MJ/adminCreateJdrNameInList.module.css';
 import { Button, TextField } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useState } from "react";
@@ -9,7 +10,7 @@ export default function AdminCreateJdrNameInList({ onSuccess }: { onSuccess?: ()
     const [error, setError] = useState('');
 
     return (
-        <div>
+        <div className={styles.container}>
             <form
                 onSubmit={async (e) => {
                     e.preventDefault();
