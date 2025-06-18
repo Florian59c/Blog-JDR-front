@@ -5,6 +5,7 @@ import SendIcon from "@mui/icons-material/Send";
 import axios from "axios";
 import DropDownJdr from "../../components/dropDownJdr";
 import AdminDisplayList from "../../components/adminDisplayList";
+import AdminCreateJdrNameInList from "../../components/adminCreateJdrNameInList";
 
 export default function jdrCreate() {
     const [title, setTitle] = useState("");
@@ -15,6 +16,7 @@ export default function jdrCreate() {
     const [isListVisible, setIsListVisible] = useState(false);
     const [message, setMessage] = useState("");
     const [error, setError] = useState("");
+    const [refreshDropdownTrigger, setRefreshDropdownTrigger] = useState(0);
 
     function handleSelectedJdrChange(jdr: { id: number; name: string }) {
         setSelectedJdr(jdr);
@@ -86,6 +88,7 @@ export default function jdrCreate() {
                                 selectedJdr={selectedJdr}
                                 onSelectedJdrChange={handleSelectedJdrChange}
                                 showNoneOption={true}
+                                refreshTrigger={refreshDropdownTrigger}
                             />
                         </div>
                         <div>
@@ -97,7 +100,12 @@ export default function jdrCreate() {
                             />
                             {isListVisible &&
                                 <div>
-                                    formulaire de création ici !!!
+                                    <AdminCreateJdrNameInList
+                                        onSuccess={() => {
+                                            setSelectedJdr({ name: 'none' });
+                                            setRefreshDropdownTrigger(prev => prev + 1);
+                                        }}
+                                    />
                                 </div>
                             }
                         </div>
