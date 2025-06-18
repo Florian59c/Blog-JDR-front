@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { modifyDataInterface } from '../interfaces/modifyDataInterface';
 import DropDownJdr from '../components/dropDownJdr';
 import AdminDisplayList from '../components/adminDisplayList';
+import AdminCreateJdrNameInList from '../components/adminCreateJdrNameInList';
 
 export default function ModifyModale({ data, modifyType, setIsOpenModify }: ModifyModaleInterface) {
     const [formData, setFormData] = useState(data);
@@ -15,6 +16,7 @@ export default function ModifyModale({ data, modifyType, setIsOpenModify }: Modi
     const [error, setError] = useState('');
     const [selectedJdr, setSelectedJdr] = useState<{ id?: number, name: string }>({ name: '' });
     const [isListVisible, setIsListVisible] = useState(false);
+    const [refreshDropdownTrigger, setRefreshDropdownTrigger] = useState(0);
 
     const handleSelectedJdrChange = (newJdr: { id: number; name: string }) => {
         setSelectedJdr(newJdr);
@@ -156,7 +158,12 @@ export default function ModifyModale({ data, modifyType, setIsOpenModify }: Modi
                                     />
                                     {isListVisible &&
                                         <div>
-                                            formulaire de création ici !!!
+                                            <AdminCreateJdrNameInList
+                                                onSuccess={() => {
+                                                    setSelectedJdr({ name: 'none' });
+                                                    setRefreshDropdownTrigger(prev => prev + 1);
+                                                }}
+                                            />
                                         </div>
                                     }
                                 </div>

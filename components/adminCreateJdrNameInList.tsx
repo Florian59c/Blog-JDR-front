@@ -10,8 +10,9 @@ export default function AdminCreateJdrNameInList({ onSuccess }: { onSuccess?: ()
     const [error, setError] = useState('');
 
     return (
-        <div className={styles.container}>
+        <div>
             <form
+                className={styles.form}
                 onSubmit={async (e) => {
                     e.preventDefault();
                     setMessage("");
