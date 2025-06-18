@@ -45,7 +45,7 @@ export default function JdrName() {
                 setRefreshDropdownTrigger(prev => prev + 1); // permet de détecter le changement et de refresh le composant DropDown après la réussite
                 setSelectedJdr(prev => ({
                     ...prev,
-                    name
+                    name: name.toLowerCase()
                 })); // permet de changer la selection dans le dropdown / sans ça, le nouveau nom apparait dans la liste, mais celui affiché reste le nom avant la modification
             } else {
                 setError(response.data.message || 'Une erreur est survenue lors de la modification');
