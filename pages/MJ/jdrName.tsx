@@ -73,7 +73,12 @@ export default function JdrName() {
                 links={[{ title: 'Page d\'accueil administrateur', href: '/MJ/adminPage' },]}
             />
             <div className={`blockContainer ${styles.container}`}>
-                <AdminCreateJdrNameInList />
+                <AdminCreateJdrNameInList
+                    onSuccess={() => {
+                        setSelectedJdr({ name: 'none' });
+                        setRefreshDropdownTrigger(prev => prev + 1);
+                    }}
+                />
                 <hr />
                 <div>
                     <DropDownJdr
