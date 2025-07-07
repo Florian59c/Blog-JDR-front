@@ -7,7 +7,7 @@ export default function Menu() {
     const [isConnected, setIsConnected] = useState(false);
     const router = useRouter();
 
-    const checkConnection = async () => {
+    async function checkConnection() {
         try {
             const response = await axios.get('/api/checkIsConnected'); // Appeler l'API route
             setIsConnected(response.data.isConnected);

@@ -15,7 +15,7 @@ export default function JdrDetails({ is_scenario }: JdrDetailsPropsInterface) {
     const [error, setError] = useState('');
     const [refreshComments, setRefreshComments] = useState(0);
 
-    const handleSelectedJdrChange = (newSelectedJdr: { id?: number; name: string }) => {
+    function handleSelectedJdrChange(newSelectedJdr: { id?: number; name: string }) {
         setSelectedJdr(newSelectedJdr);
     };
 
@@ -36,11 +36,7 @@ export default function JdrDetails({ is_scenario }: JdrDetailsPropsInterface) {
         }
     }
 
-    useEffect(() => {
-        getsortedJdr(is_scenario);
-    }, [selectedJdr, is_scenario]);
-
-    const handleTitleClick = (id: number) => {
+    function handleTitleClick(id: number) {
         setDisplayedJdrIds((prevIds) => {
             if (prevIds.includes(id)) {
                 return prevIds.filter((prevId) => prevId !== id); // Si l'ID existe déjà, on le retire
@@ -50,9 +46,13 @@ export default function JdrDetails({ is_scenario }: JdrDetailsPropsInterface) {
         });
     };
 
-    const formatDriveLink = (link: string) => {
+    function formatDriveLink(link: string) {
         return link.replace(/\/view\?.*$/, "/preview");
     };
+
+    useEffect(() => {
+        getsortedJdr(is_scenario);
+    }, [selectedJdr, is_scenario]);
 
     return (
         <div className={styles.container}>
