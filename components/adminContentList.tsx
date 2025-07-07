@@ -94,7 +94,10 @@ export default function AdminContentList({ api_url }: AdminContentApiUrlInterfac
                                         color="error"
                                         sx={{ width: '100%' }}
                                         startIcon={<DeleteIcon />}
-                                        onClick={() => { setDeleteId(content.id); setIsOpenDelete(true) }}
+                                        onClick={() => {
+                                            setDeleteId(content.id);
+                                            setIsOpenDelete(true)
+                                        }}
                                     >
                                         Supprimer
                                     </Button>

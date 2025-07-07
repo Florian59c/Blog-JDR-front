@@ -87,7 +87,10 @@ export default function reportedComments() {
                                         variant="outlined"
                                         color="error"
                                         startIcon={<DeleteIcon />}
-                                        onClick={() => { setDeleteId(comment.id); setIsOpen(true) }}
+                                        onClick={() => {
+                                            setDeleteId(comment.id)
+                                            setIsOpen(true)
+                                        }}
                                     >
                                         Supprimer le commentaire
                                     </Button>

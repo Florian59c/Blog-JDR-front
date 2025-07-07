@@ -27,6 +27,41 @@ export default function Register() {
     }
   };
 
+  async function handleRegister(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setError('');
+
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}user/createUser`,
+        { pseudo, email, password, confirmPassword, checkCGU: isChecked }
+      );
+
+      if (response.status === 201 && response.data.message === 'Votre compte a été créé avec succès') {
+        try {
+          await axios.post(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}auth/login`,
+            { email, password },
+            { withCredentials: true }
+          );
+          router.push('/profile');
+        } catch (loginError) {
+          console.error('Erreur lors de la connexion automatique', loginError);
+          router.push('/login');
+        }
+      } else {
+        setError(response.data?.message || 'Une réponse inattendue a été reçue');
+      }
+    } catch (error) {
+      console.error(error);
+      if (axios.isAxiosError(error)) {
+        setError(error.response?.data?.message || 'Une erreur est survenue lors de la création du compte');
+      } else {
+        setError('Une erreur inconnue s\'est produite');
+      }
+    }
+  }
+
   useEffect(() => {
     checkConnection();
   }, []);
@@ -39,40 +74,7 @@ export default function Register() {
         <div className="blockContainer">
           <h1>Formulaire de création de compte</h1>
           <div>
-            <form
-              onSubmit={async (e) => {
-                e.preventDefault();
-                setError('');
-                try {
-                  const response = await axios.post(
-                    `${process.env.NEXT_PUBLIC_SERVER_URL}user/createUser`,
-                    { pseudo, email, password, confirmPassword, checkCGU: isChecked }
-                  );
-                  if (response.status === 201 && response.data.message === 'Votre compte a été créé avec succès') {
-                    try {
-                      await axios.post(
-                        `${process.env.NEXT_PUBLIC_SERVER_URL}auth/login`,
-                        { email, password },
-                        { withCredentials: true }
-                      );
-                      router.push('/profile');
-                    } catch (loginError) {
-                      console.error('Erreur lors de la connexion automatique', loginError);
-                      router.push('/login');
-                    }
-                  } else {
-                    setError(response.data?.message || 'Une réponse inattendue a été reçue');
-                  }
-                } catch (error) {
-                  console.error(error);
-                  if (axios.isAxiosError(error)) {
-                    setError(error.response?.data?.message || 'Une erreur est survenue lors de la création du compte');
-                  } else {
-                    setError('Une erreur inconnue s\'est produite');
-                  }
-                }
-              }}
-            >
+            <form onSubmit={handleRegister}>
               <div className="inputs">
                 <TextField
                   label="Pseudo"

@@ -52,6 +52,49 @@ export default function Profile() {
         }
     }
 
+    async function handleLogout() {
+        try {
+            await axios.post(
+                `${process.env.NEXT_PUBLIC_SERVER_URL}auth/logout`,
+                {},
+                { withCredentials: true }
+            );
+            router.push('/login');
+        } catch (error) {
+            console.error('Erreur lors de la déconnexion :', error);
+            alert('Une erreur est survenue lors de la déconnexion. Veuillez réessayer.');
+        }
+    }
+
+    async function handleProfileUpdate(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        setconfirmMessage('');
+        setError('');
+
+        try {
+            const response = await axios.post(
+                `${process.env.NEXT_PUBLIC_SERVER_URL}user/updateUser`,
+                { pseudo, email },
+                {
+                    withCredentials: true,
+                }
+            );
+
+            if (response.status === 201 && response.data.message === 'Votre profil a bien été modifié') {
+                setconfirmMessage(response.data.message);
+            } else {
+                setError(response.data.message || 'Une erreur est survenue lors de la modification de votre profil');
+            }
+        } catch (error) {
+            console.error(error);
+            if (axios.isAxiosError(error)) {
+                setError(error.response?.data?.message || 'Une erreur est survenue lors de la modification de votre profil');
+            } else {
+                setError('Une erreur inconnue s\'est produite');
+            }
+        }
+    }
+
     useEffect(() => {
         checkConnection();
         getCurrentUser();
@@ -72,56 +115,14 @@ export default function Profile() {
                             color="success"
                             sx={{ width: '18rem' }}
                             endIcon={<LogoutOutlinedIcon />}
-                            onClick={async () => {
-                                try {
-                                    await axios.post(
-                                        `${process.env.NEXT_PUBLIC_SERVER_URL}auth/logout`,
-                                        {},
-                                        { withCredentials: true }
-                                    );
-
-                                    router.push('/login');
-                                } catch (error) {
-                                    console.error('Erreur lors de la déconnexion :', error);
-                                    alert('Une erreur est survenue lors de la déconnexion. Veuillez réessayer.');
-                                }
-                            }}
+                            onClick={handleLogout}
                         >
                             Se déconnecter
                         </Button>
                     </div>
                     <h1>Mon profil</h1>
                     <div>
-                        <form
-                            onSubmit={async (e) => {
-                                e.preventDefault(); // Empêche le rechargement de la page
-                                setconfirmMessage('');
-                                setError('');
-
-                                try {
-                                    const response = await axios.post(
-                                        `${process.env.NEXT_PUBLIC_SERVER_URL}user/updateUser`,
-                                        { pseudo, email },
-                                        {
-                                            withCredentials: true,
-                                        }
-                                    );
-
-                                    if (response.status === 201 && response.data.message === 'Votre profil a bien été modifié') {
-                                        setconfirmMessage(response.data.message);
-                                    } else {
-                                        setError(response.data.message || 'Une erreur est survenue lors de la modification de votre profil');
-                                    }
-                                } catch (error) {
-                                    console.error(error);
-                                    if (axios.isAxiosError(error)) {
-                                        setError(error.response?.data?.message || 'Une erreur est survenue lors de la modification de votre profil');
-                                    } else {
-                                        setError('Une erreur inconnue s\'est produite');
-                                    }
-                                }
-                            }}
-                        >
+                        <form onSubmit={handleProfileUpdate}>
                             <div className="inputs">
                                 <TextField
                                     label="Pseudo"
