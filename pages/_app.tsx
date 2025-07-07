@@ -4,7 +4,7 @@ import muiThemes from '../themes/muiThemes'; // Ajuste le chemin selon l'emplace
 import '../styles/globals.css'; // Import du fichier global.css
 import Layout from '../components/Layout';
 
-function MyApp({ Component, pageProps }: any) {
+export default function MyApp({ Component, pageProps }: any) {
     return (
         <ThemeProvider theme={muiThemes}>
             <CssBaseline /> {/* Reset les styles par défaut du navigateur */}
@@ -14,5 +14,3 @@ function MyApp({ Component, pageProps }: any) {
         </ThemeProvider>
     );
 }
-
-export default MyApp;

@@ -3,7 +3,6 @@ import type { NextRequest } from 'next/server';
 import axios from 'axios';
 
 export async function middleware(req: NextRequest) {
-
   const authToken = req.cookies.get('auth-token'); // Récupère le token dans les cookies
 
   if (!authToken) {
