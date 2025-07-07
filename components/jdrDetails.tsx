@@ -5,12 +5,9 @@ import axios from 'axios';
 import { JdrInterface } from '../interfaces/JdrInterface';
 import CommentForm from './commentForm';
 import CommentList from './commentList';
+import { JdrDetailsPropsInterface } from '../interfaces/JdrDetailsPropsInterface';
 
-interface JdrDetailsProps {
-    is_scenario: boolean;
-}
-
-export default function JdrDetails({ is_scenario }: JdrDetailsProps) {
+export default function JdrDetails({ is_scenario }: JdrDetailsPropsInterface) {
     const pageType = "jdr";
     const [selectedJdr, setSelectedJdr] = useState<{ id?: number; name: string }>({ name: "none" });
     const [sortedJdr, setSortedJdr] = useState<JdrInterface[]>([]);
