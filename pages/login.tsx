@@ -14,7 +14,7 @@ export default function login(req: NextRequest) {
   const [error, setError] = useState('');
   const router = useRouter();
 
-  const checkConnection = async () => {
+  async function checkConnection() {
     try {
       const response = await axios.get('/api/checkIsConnected'); // Appeler l'API route
       setIsConnected(response.data.isConnected);
