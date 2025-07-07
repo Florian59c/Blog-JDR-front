@@ -10,12 +10,9 @@ import { JdrInterface } from '../interfaces/JdrInterface';
 import DeleteModale from '../modals/deleteModale';
 import ModifyModale from '../modals/modifyModale';
 import { modifyDataInterface } from '../interfaces/modifyDataInterface';
+import { AdminContentApiUrlInterface } from '../interfaces/AdminContentApiUrlInterface';
 
-interface AdminContentListProps {
-    api_url: string;
-}
-
-export default function AdminContentList({ api_url }: AdminContentListProps) {
+export default function AdminContentList({ api_url }: AdminContentApiUrlInterface) {
     const [contents, setContents] = useState<(HeroStoryInterface | NewsInterface | JdrInterface)[]>([]);
     const [error, setError] = useState('');
     const [data, setData] = useState<modifyDataInterface | null>(null);
@@ -97,7 +94,10 @@ export default function AdminContentList({ api_url }: AdminContentListProps) {
                                         color="error"
                                         sx={{ width: '100%' }}
                                         startIcon={<DeleteIcon />}
-                                        onClick={() => { setDeleteId(content.id); setIsOpenDelete(true) }}
+                                        onClick={() => {
+                                            setDeleteId(content.id);
+                                            setIsOpenDelete(true)
+                                        }}
                                     >
                                         Supprimer
                                     </Button>

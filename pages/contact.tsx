@@ -10,35 +10,38 @@ export default function Contact() {
     const [error, setError] = useState('');
     const [confirmMessage, setconfirmMessage] = useState('');
 
+    async function handleSendEmail(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        setconfirmMessage('');
+        setError('');
+
+        try {
+            const response = await axios.post(
+                `${process.env.NEXT_PUBLIC_SERVER_URL}mailer/send`,
+                { from, subject, content }
+            );
+
+            if (response.data) {
+                setconfirmMessage('Le mail a bien été envoyé');
+            } else {
+                setError("Une erreur est survenue lors de l'envoi du mail");
+            }
+
+        } catch (error) {
+            console.error(error);
+            if (axios.isAxiosError(error)) {
+                setError(error.response?.data?.message || "Une erreur est survenue lors de l'envoi du mail");
+            } else {
+                setError("Une erreur inconnue s'est produite");
+            }
+        }
+    };
+
     return (
         <div className="blockContainer">
             <h1>Me contacter</h1>
             <div>
-                <form
-                    onSubmit={async (e) => {
-                        e.preventDefault();
-                        setconfirmMessage('');
-                        setError('');
-                        try {
-                            const response = await axios.post(
-                                `${process.env.NEXT_PUBLIC_SERVER_URL}mailer/send`,
-                                { from, subject, content }
-                            );
-                            if (response.data) {
-                                setconfirmMessage('Le mail a bien été envoyé');
-                            } else {
-                                setError("Une erreur est survenue lors de l'envoi du mail");
-                            }
-                        } catch (error) {
-                            console.error(error);
-                            if (axios.isAxiosError(error)) {
-                                setError(error.response?.data?.message || 'Une erreur est survenue lors de l\'envoi du mail');
-                            } else {
-                                setError('Une erreur inconnue s\'est produite');
-                            }
-                        }
-                    }}
-                >
+                <form onSubmit={handleSendEmail}>
                     <div className="inputs">
                         <TextField
                             label="Adresse Email"

@@ -3,7 +3,6 @@ import type { NextRequest } from 'next/server';
 import axios from 'axios';
 
 export async function middleware(req: NextRequest) {
-
   const authToken = req.cookies.get('auth-token'); // Récupère le token dans les cookies
 
   if (!authToken) {
@@ -30,8 +29,8 @@ export async function middleware(req: NextRequest) {
 
     return NextResponse.next(); // Autorise l'accès à la page demandée
   } catch (error) {
-    console.log(error);
-    // console.error('Error fetching user role:', error.response?.data || error.message);
+    console.error('Error fetching user role:',
+      error instanceof Error ? error.message : String(error));
   }
 }
 

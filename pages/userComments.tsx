@@ -44,6 +44,32 @@ export default function UserComments() {
         }
     }
 
+    async function handleModifyComment(e: React.FormEvent<HTMLFormElement>, commentId: number) {
+        e.preventDefault();
+        setError('');
+
+        try {
+            const response = await axios.post(
+                `${process.env.NEXT_PUBLIC_SERVER_URL}comment/modifyCommentByUser`,
+                { content: content[commentId], commentId },
+                { withCredentials: true }
+            );
+
+            if (response.status === 201 && response.data.message === 'Votre commentaire a bien été modifié') {
+                setCanModify((prev) => ({ ...prev, [commentId]: false }));
+                getCurrentUserComments(); // Rafraîchir les commentaires
+            } else {
+                setError(response.data?.message || 'Une erreur est survenue');
+            }
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                setError(error.response?.data?.message || 'Une erreur est survenue lors de la modification du commentaire');
+            } else {
+                setError('Une erreur inconnue s\'est produite');
+            }
+        }
+    }
+
     useEffect(() => {
         checkConnection();
         getCurrentUserComments();
@@ -77,33 +103,7 @@ export default function UserComments() {
                                                         })} :
                                                 </p>
                                                 {isEditing ? (
-                                                    <form
-                                                        onSubmit={async (e) => {
-                                                            e.preventDefault();
-                                                            setError('');
-
-                                                            try {
-                                                                const response = await axios.post(
-                                                                    `${process.env.NEXT_PUBLIC_SERVER_URL}comment/modifyCommentByUser`,
-                                                                    { content: content[comment.id], commentId: comment.id },
-                                                                    { withCredentials: true }
-                                                                );
-
-                                                                if (response.status === 201 && response.data.message === 'Votre commentaire a bien été modifié') {
-                                                                    setCanModify((prev) => ({ ...prev, [comment.id]: false }));
-                                                                    getCurrentUserComments(); // Rafraîchi les commentaires
-                                                                } else {
-                                                                    setError(response.data?.message || 'Une erreur est survenue');
-                                                                }
-                                                            } catch (error) {
-                                                                if (axios.isAxiosError(error)) {
-                                                                    setError(error.response?.data?.message || 'Une erreur est survenue lors de la création du commentaire');
-                                                                } else {
-                                                                    setError('Une erreur inconnue s\'est produite');
-                                                                }
-                                                            }
-                                                        }}
-                                                    >
+                                                    <form onSubmit={(e) => handleModifyComment(e, comment.id)}>
                                                         <TextField
                                                             id="outlined-multiline-static"
                                                             multiline
@@ -146,7 +146,10 @@ export default function UserComments() {
                                                     color="error"
                                                     sx={{ width: '18rem' }}
                                                     startIcon={<DeleteIcon />}
-                                                    onClick={() => { setDeleteId(comment.id); setIsOpen(true) }}
+                                                    onClick={() => {
+                                                        setDeleteId(comment.id)
+                                                        setIsOpen(true)
+                                                    }}
                                                 >
                                                     Supprimer mon commentaire
                                                 </Button>

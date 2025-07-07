@@ -5,7 +5,6 @@ import axios from "axios";
 import { Button, TextField } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 
-
 export default function CommentForm({ id, pageType, onCommentAdded }: CommentPropsInterface & { onCommentAdded: () => void }) {
     const [content, setContent] = useState('');
     const [error, setError] = useState('');

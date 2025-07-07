@@ -84,7 +84,10 @@ export default function Banishment() {
                                     variant="outlined"
                                     color="error"
                                     startIcon={<DeleteIcon />}
-                                    onClick={() => { setDeleteId(user.id); setIsOpen(true) }}
+                                    onClick={() => {
+                                        setDeleteId(user.id)
+                                        setIsOpen(true)
+                                    }}
                                 >
                                     Bannir l'utilisateur
                                 </Button>

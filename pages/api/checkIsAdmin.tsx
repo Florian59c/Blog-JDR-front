@@ -19,6 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 },
             }
         );
+
         if (response.data.role === "admin") {
             res.status(200).json(true);
         } else {
