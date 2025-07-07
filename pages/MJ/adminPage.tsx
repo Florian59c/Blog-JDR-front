@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import styles from '../../styles/MJ/adminPage.module.css';
 import Link from "next/link";
 import { Button } from '@mui/material';
@@ -46,7 +45,7 @@ export default function AdminPage() {
       <div className={styles.redirectButtons}>
         {pages.map((page, index) => {
           return (
-            <div key={index} className={classNames(styles.buttons, 'button-container')}>
+            <div key={index} className={`button-container ${styles.buttons}`}>
               <Link href={`/MJ/${page.link}`}>
                 <Button variant="outlined" color="success" sx={{ width: "100%" }} endIcon={page.icon}>
                   {page.title}

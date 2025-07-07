@@ -3,7 +3,6 @@ import Logo from "../assets/img/logo.png";
 import BurgerBar from "../assets/img/burger-bar.png";
 import Link from 'next/link';
 import { useState } from 'react';
-import classNames from 'classnames';
 import Menu from "../components/menu";
 
 export default function Header() {
@@ -20,15 +19,15 @@ export default function Header() {
                 <img
                     src={BurgerBar.src}
                     alt="Menu"
-                    className={classNames(styles.displayMobile, styles.menu)}
+                    className={`${styles.displayMobile} ${styles.menu}`}
                     onClick={() => { setDisplayHeader(!displayHeader) }}
                 />
-                <div className={classNames(styles.buttons, styles.displayPC)}>
+                <div className={`${styles.buttons} ${styles.displayPC}`}>
                     <Menu />
                 </div>
             </div >
             {displayHeader && (
-                <div className={classNames(styles.buttons, styles.displayMobile)}>
+                <div className={`${styles.buttons} ${styles.displayMobile}`}>
                     <Menu />
                 </div>
             )}

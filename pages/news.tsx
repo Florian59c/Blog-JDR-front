@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { NewsInterface } from "../interfaces/NewsInterface";
 import RightArrow from "../assets/img/right-arrow.png";
 import BottomArrow from "../assets/img/bottom-arrow.png";
-import classNames from 'classnames';
 import CommentForm from '../components/commentForm';
 import CommentList from '../components/commentList';
 
@@ -52,14 +51,18 @@ export default function News() {
                 <p className={styles.errorMessage}>Nous n'avons trouvé aucune nouvelle</p>
             ) : (
                 <div>
-                    <div className={classNames(styles.displayMobile, 'blockContainer')}>
+                    <div className={`blockContainer ${styles.displayMobile}`}>
                         {news.map((newsItem) => {
                             const isActive = activeIds.includes(newsItem.id);
                             return (
                                 <div key={newsItem.id}>
                                     <div className={styles.newsHeader} onClick={() => toggleActive(newsItem.id)}>
                                         <h1 className={isActive ? styles.active : ''}>{newsItem.title}</h1>
-                                        <img src={RightArrow.src} alt="flèche" className={classNames(styles.arrow, { [styles.arrowActive]: isActive })} />
+                                        <img
+                                            src={RightArrow.src}
+                                            alt="flèche"
+                                            className={[styles.arrow, isActive && styles.arrowActive].filter(Boolean).join(' ')}
+                                        />
                                     </div>
                                     {isActive && (
                                         <div className={styles.newsContent}>
@@ -88,8 +91,8 @@ export default function News() {
                             );
                         })}
                     </div>
-                    <div className={classNames(styles.displayPC, styles.PCVue)}>
-                        <div className={classNames('blockContainer', styles.newsHeader)}>
+                    <div className={`${styles.displayPC} ${styles.PCVue}`}>
+                        <div className={`blockContainer ${styles.newsHeader}`}>
                             {news.map((newsItem) => {
                                 const isActive = activeId === newsItem.id;
                                 return (
@@ -98,13 +101,13 @@ export default function News() {
                                         <img
                                             src={BottomArrow.src}
                                             alt="flèche"
-                                            className={classNames(styles.arrowReverse, { [styles.arrowReverseActive]: isActive })}
+                                            className={[styles.arrowReverse, isActive && styles.arrowReverseActive].filter(Boolean).join(' ')}
                                         />
                                     </div>
                                 );
                             })}
                         </div>
-                        <div className={classNames('blockContainer', styles.newsContent)}>
+                        <div className={`blockContainer ${styles.newsContent}`}>
                             <div className={styles.scroll}>
                                 {news.map((newsItem) => {
                                     const isActive = activeId === newsItem.id;
