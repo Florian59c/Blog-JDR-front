@@ -3,9 +3,11 @@ import axios from 'axios';
 
 export default async function checkIsConnected(req: NextApiRequest, res: NextApiResponse) {
     const authToken = req.cookies['auth-token']; // Récupérer le cookie HttpOnly
+
     if (!authToken) {
         return res.status(200).json({ isConnected: false });
     }
+
     try {
         // Appeler ton backend pour vérifier le rôle utilisateur
         const userRole = await axios.post(
@@ -17,6 +19,7 @@ export default async function checkIsConnected(req: NextApiRequest, res: NextApi
                 },
             }
         );
+
         if (userRole.data.role === 'none') {
             return res.status(200).json({ isConnected: false });
         } else {

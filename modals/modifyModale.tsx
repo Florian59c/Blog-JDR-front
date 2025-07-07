@@ -18,7 +18,7 @@ export default function ModifyModale({ data, modifyType, setIsOpenModify }: Modi
     const [isListVisible, setIsListVisible] = useState(false);
     const [refreshDropdownTrigger, setRefreshDropdownTrigger] = useState(0);
 
-    const handleSelectedJdrChange = (newJdr: { id: number; name: string }) => {
+    function handleSelectedJdrChange(newJdr: { id: number; name: string }) {
         setSelectedJdr(newJdr);
         setFormData((prev) => {
             if (!prev) return prev;
